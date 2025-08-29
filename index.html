@@ -107,8 +107,10 @@
       border-radius: 9999px; /* 角を丸く */
       font-size: 0.75rem; /* 文字サイズ */
       font-weight: bold;
-      color: white;
+      color: white; /* デフォルトは白 */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer; /* クリック可能であることを示す */
+      z-index: 10; /* カードの他の要素より手前に表示 */
     }
   </style>
 
@@ -123,14 +125,18 @@
   <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
     <!-- タイトル -->
     <h1 class="text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">✨ ICTコンテンツハブ</h1>
-    <p class="text-xl text-gray-700 mb-12 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
+    <p class="text-xl text-gray-700 mb-6 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
+
+    <!-- 全て表示ボタン -->
+    <button onclick="filterContent('all')" class="mb-8 px-6 py-2 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-lg shadow-md transition-colors duration-200">全て表示</button>
 
     <!-- リンクのグリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="content-grid">
       <!-- アプリフォルダ -->
       <div onclick="openAppsFolder()"
-        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden">
-        <span class="category-tag bg-blue-700">教育アプリ</span>
+        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden"
+        data-categories="教育アプリ">
+        <span class="category-tag bg-blue-700" onclick="event.stopPropagation(); filterContent('教育アプリ')">教育アプリ</span>
         <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
         <div class="text-3xl mb-2">📱</div>
         <div class="text-lg">アプリ</div>
@@ -143,8 +149,9 @@
 
       <!-- ICTインフォグラフィック -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
-        class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden">
-        <span class="category-tag bg-purple-700">教育改革</span>
+        class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+        data-categories="教育改革">
+        <span class="category-tag bg-purple-700" onclick="event.stopPropagation(); filterContent('教育改革')">教育改革</span>
         <div class="text-2xl mb-2">🚀</div>
         <div class="text-lg">教育ICT環境改革</div>
         <div class="text-sm opacity-80">未来の教育提案</div>
@@ -152,9 +159,10 @@
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
-        class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden">
-        <span class="category-tag bg-green-700">問題提起</span>
-        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;">言語教育</span>
+        class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+        data-categories="問題提起,言語教育">
+        <span class="category-tag bg-green-700" onclick="event.stopPropagation(); filterContent('問題提起')">問題提起</span>
+        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;" onclick="event.stopPropagation(); filterContent('言語教育')">言語教育</span>
         <div class="text-2xl mb-2">🔤</div>
         <div class="text-lg">ローマ字表記の課題</div>
         <div class="text-sm opacity-80">言語教育の改善</div>
@@ -162,8 +170,9 @@
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
-        class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden">
-        <span class="category-tag bg-yellow-700">プログラミング</span>
+        class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+        data-categories="プログラミング">
+        <span class="category-tag bg-yellow-700" onclick="event.stopPropagation(); filterContent('プログラミング')">プログラミング</span>
         <div class="text-2xl mb-2">🤖</div>
         <div class="text-lg">micro:bit購入プラン</div>
         <div class="text-sm opacity-80">プログラミング教育</div>
@@ -171,8 +180,9 @@
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
-        class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden">
-        <span class="category-tag bg-red-700">AI教育</span>
+        class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+        data-categories="AI教育">
+        <span class="category-tag bg-red-700" onclick="event.stopPropagation(); filterContent('AI教育')">AI教育</span>
         <div class="text-2xl mb-2">🧠</div>
         <div class="text-lg">AI教育コンテンツハブ</div>
         <div class="text-sm opacity-80">人工知能との学び</div>
@@ -180,8 +190,9 @@
 
       <!-- ビスケット授業計画 -->
       <div onclick="openBisquitModal()"
-        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden">
-        <span class="category-tag bg-pink-700">授業計画</span>
+        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden"
+        data-categories="授業計画">
+        <span class="category-tag bg-pink-700" onclick="event.stopPropagation(); filterContent('授業計画')">授業計画</span>
         <div class="text-2xl mb-2">📝</div>
         <div class="text-lg">ビスケット授業計画</div>
         <div class="text-sm opacity-80">プログラミング入門</div>
@@ -201,13 +212,18 @@
           <h2 class="text-3xl font-bold text-gray-800">📱 学習アプリ</h2>
           <button onclick="closeAppsFolder()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
         </div>
+        <!-- モーダル内の全て表示ボタン -->
+        <div class="text-center mb-4">
+          <button onclick="filterModalApps('all')" class="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm shadow-md transition-colors duration-200">全て表示</button>
+        </div>
         <div class="p-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="modal-apps-grid">
             <!-- 百マス計算アプリ -->
             <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
               target="_blank"
-              class="block bg-gradient-to-br from-blue-100 to-blue-200 hover:from-blue-200 hover:to-blue-300 text-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden">
-              <span class="category-tag bg-blue-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
+              class="block bg-gradient-to-br from-blue-100 to-blue-200 hover:from-blue-200 hover:to-blue-300 text-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
+              data-categories="算数,百マス">
+              <span class="category-tag bg-blue-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🔢</div>
                 <h3 class="text-lg font-bold mb-2">百マス計算</h3>
@@ -221,8 +237,9 @@
             </a>
 
             <!-- 将来追加予定のアプリスロット -->
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden">
-              <span class="category-tag bg-purple-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
+              data-categories="算数,九九">
+              <span class="category-tag bg-purple-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">九九練習</h3>
@@ -231,8 +248,9 @@
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden">
-              <span class="category-tag bg-green-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">国語</span>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
+              data-categories="国語,漢字">
+              <span class="category-tag bg-green-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('国語')">国語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">漢字練習</h3>
@@ -241,8 +259,9 @@
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden">
-              <span class="category-tag bg-red-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">英語</span>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
+              data-categories="英語,英単語">
+              <span class="category-tag bg-red-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('英語')">英語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">英単語学習</h3>
@@ -251,8 +270,9 @@
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden">
-              <span class="category-tag bg-yellow-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">生活</span>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
+              data-categories="生活,時計">
+              <span class="category-tag bg-yellow-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('生活')">生活</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
@@ -261,8 +281,9 @@
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden">
-              <span class="category-tag bg-indigo-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
+              data-categories="算数,分数">
+              <span class="category-tag bg-indigo-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">分数計算</h3>
@@ -353,6 +374,7 @@
     function openAppsFolder() {
       document.getElementById('appsModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden'; // 背景のスクロールを無効にする
+      filterModalApps('all'); // モーダルを開くときにすべてのアプリを表示
     }
 
     // アプリフォルダのモーダルを閉じる関数
@@ -372,6 +394,41 @@
       document.getElementById('bisquitModal').classList.add('hidden');
       document.body.style.overflow = ''; // 背景のスクロールを有効にする
     }
+
+    // メインコンテンツのカテゴリでコンテンツをフィルタリングする関数
+    function filterContent(category) {
+      const contentGrid = document.getElementById('content-grid');
+      const contentItems = contentGrid.querySelectorAll('.block'); // すべてのコンテンツアイテムを取得
+
+      contentItems.forEach(item => {
+        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        if (category === 'all' || categories.includes(category)) {
+          item.style.display = 'block'; // 表示
+        } else {
+          item.style.display = 'none'; // 非表示
+        }
+      });
+    }
+
+    // モーダル内のアプリをカテゴリでフィルタリングする関数
+    function filterModalApps(category) {
+      const modalAppsGrid = document.getElementById('modal-apps-grid');
+      const appItems = modalAppsGrid.querySelectorAll('.block'); // すべてのアプリアイテムを取得
+
+      appItems.forEach(item => {
+        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        if (category === 'all' || categories.includes(category)) {
+          item.style.display = 'block'; // 表示
+        } else {
+          item.style.display = 'none'; // 非表示
+        }
+      });
+    }
+
+    // ページロード時にすべてのメインコンテンツを表示
+    document.addEventListener('DOMContentLoaded', () => {
+      filterContent('all');
+    });
   </script>
 </body>
 
