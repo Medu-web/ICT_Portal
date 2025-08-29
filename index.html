@@ -1,355 +1,291 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
+  data-a11y-animated-images="system" data-a11y-link-underlines="true">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICTコンテンツ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .hover-glow {
-            transition: all 0.3s ease;
-        }
-        .hover-glow:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-        }
-    </style>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://github.githubassets.com">
+  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
+  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
+  <link rel="preconnect" href="https://github.githubassets.com" crossorigin>
+  <link rel="preconnect" href="https://avatars.githubusercontent.com">
+
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-6448649c7147.css" />
+  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/dark-d17b946fc2c5.css" />
+
+  <style>
+    :root {
+      --fontStack-monospace: "Monaspace Neon", ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+    }
+
+    /* カスタムスタイル */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1a202c; /* ダークな背景色 */
+      color: #e2e8f0; /* 明るいテキスト色 */
+    }
+
+    .glass-effect {
+      background-color: rgba(255, 255, 255, 0.1); /* 半透明の白色 */
+      backdrop-filter: blur(10px); /* 背景をぼかす */
+      border: 1px solid rgba(255, 255, 255, 0.2); /* わずかな境界線 */
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* 影 */
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4); /* ホバー時の緑色の光 */
+    }
+  </style>
+
+  <title>ICTコンテンツハブ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="p-8 flex flex-col items-center min-h-screen">
 
-    <!-- メインコンテンツのコンテナ -->
-    <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
-        <!-- タイトル -->
-        <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">✨ ICTコンテンツハブ</h1>
-        <p class="text-xl text-white/90 mb-12 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
+  <!-- メインコンテンツのコンテナ -->
+  <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
+    <!-- タイトル -->
+    <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">✨ ICTコンテンツハブ</h1>
+    <p class="text-xl text-white/90 mb-12 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
 
-        <!-- リンクのグリッド -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- アプリフォルダ -->
-            <div onclick="openAppsFolder()" class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden">
-                <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
-                <div class="text-3xl mb-2">📱</div>
-                <div class="text-lg">アプリ</div>
-                <div class="text-sm opacity-80">学習アプリ集</div>
-                <div class="flex -space-x-2 mt-3">
-                    <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
-                    <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
-                <!-- アプリフォルダ用のモーダル -->
-    <div id="appsModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="glass-effect rounded-3xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-                <div class="flex justify-between items-center p-6 border-b border-white/20">
-                    <h2 class="text-3xl font-bold text-white">📱 学習アプリ</h2>
-                    <button onclick="closeAppsFolder()" class="text-white hover:text-red-300 text-3xl">&times;</button>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- 百マス計算アプリ -->
-                        <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/" target="_blank" class="block bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🔢</div>
-                                <h3 class="text-lg font-bold mb-2">百マス計算</h3>
-                                <p class="text-sm opacity-80 mb-3">一桁の足し算・引き算を素早く計算練習</p>
-                                <div class="flex justify-center space-x-2 mb-3">
-                                    <span class="bg-white/20 px-2 py-1 rounded text-xs">足し算</span>
-                                    <span class="bg-white/20 px-2 py-1 rounded text-xs">引き算</span>
-                                </div>
-                                <div class="text-xs opacity-70">難易度: ⭐⭐⭐</div>
-                            </div>
-                        </a>
-
-                        <!-- 将来追加予定のアプリスロット -->
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">九九練習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">漢字練習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">英単語学習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">分数計算</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 text-center">
-                        <p class="text-white/70 text-sm">🔄 新しいアプリを随時追加予定です</p>
-                    </div>
-                </div>
-            </div>
+    <!-- リンクのグリッド -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- アプリフォルダ -->
+      <div onclick="openAppsFolder()"
+        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden">
+        <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
+        <div class="text-3xl mb-2">📱</div>
+        <div class="text-lg">アプリ</div>
+        <div class="text-sm opacity-80">学習アプリ集</div>
+        <div class="flex -space-x-2 mt-3">
+          <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
+          <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
         </div>
+      </div>
+
+      <!-- ICTインフォグラフィック -->
+      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
+        class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
+        <div class="text-2xl mb-2">🚀</div>
+        <div class="text-lg">教育ICT環境改革</div>
+        <div class="text-sm opacity-80">未来の教育提案</div>
+      </a>
+
+      <!-- ローマ字表記の課題 -->
+      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
+        class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
+        <div class="text-2xl mb-2">🔤</div>
+        <div class="text-lg">ローマ字表記の課題</div>
+        <div class="text-sm opacity-80">言語教育の改善</div>
+      </a>
+
+      <!-- micro:bit購入プラン -->
+      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
+        class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
+        <div class="text-2xl mb-2">🤖</div>
+        <div class="text-lg">micro:bit購入プラン</div>
+        <div class="text-sm opacity-80">プログラミング教育</div>
+      </a>
+
+      <!-- AI教育コンテンツハブ -->
+      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
+        class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
+        <div class="text-2xl mb-2">🧠</div>
+        <div class="text-lg">AI教育コンテンツハブ</div>
+        <div class="text-sm opacity-80">人工知能との学び</div>
+      </a>
+
+      <!-- ビスケット授業計画 -->
+      <div onclick="openBisquitModal()"
+        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer">
+        <div class="text-2xl mb-2">📝</div>
+        <div class="text-lg">ビスケット授業計画</div>
+        <div class="text-sm opacity-80">プログラミング入門</div>
+      </div>
     </div>
 
+    <div class="mt-12 text-center">
+      <p class="text-white/70 text-sm">© 2025 ICTコンテンツハブ. All rights reserved.</p>
     </div>
-            </div>
-            
-            <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
-                <div class="text-2xl mb-2">🚀</div>
-                <div class="text-lg">教育ICT環境改革</div>
-                <div class="text-sm opacity-80">未来の教育提案</div>
-            </a>
-            
-            <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
-                <div class="text-2xl mb-2">🔤</div>
-                <div class="text-lg">ローマ字表記の課題</div>
-                <div class="text-sm opacity-80">言語教育の改善</div>
-            </a>
-            
-            <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
-                <div class="text-2xl mb-2">🤖</div>
-                <div class="text-lg">micro:bit購入プラン</div>
-                <div class="text-sm opacity-80">プログラミング教育</div>
-            </a>
-            
-            <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
-                <div class="text-2xl mb-2">🧠</div>
-                <div class="text-lg">AI教育コンテンツハブ</div>
-                <div class="text-sm opacity-80">人工知能との学び</div>
-            </a>
-            
-            <!-- ビスケット授業計画 -->
-            <a href="https://medu-web.github.io/Vicuit-A-tool-for-enjoying-programming/" target="_blank" class="block bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow">
-                <div class="text-2xl mb-2">🎨</div>
-                <div class="text-lg">ビスケット授業計画</div>
-                <div class="text-sm opacity-80">プログラミング導入ガイド</div>
-            </a>
-        </div>
+  </div>
 
-        <!-- 統計情報 -->
-        <div class="mt-12 grid grid-cols-3 gap-4 text-white">
-            <div class="glass-effect rounded-xl p-4">
-                <div class="text-2xl font-bold">6</div>
-                <div class="text-sm opacity-80">教育コンテンツ</div>
-            </div>
-            <div class="glass-effect rounded-xl p-4">
-                <div class="text-2xl font-bold">∞</div>
-                <div class="text-sm opacity-80">学習の可能性</div>
-            </div>
-            <div class="glass-effect rounded-xl p-4">
-                <div class="text-2xl font-bold">📈</div>
-                <div class="text-sm opacity-80">継続的更新</div>
-            </div>
+  <!-- アプリフォルダ用のモーダル -->
+  <div id="appsModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-effect rounded-3xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+        <div class="flex justify-between items-center p-6 border-b border-white/20">
+          <h2 class="text-3xl font-bold text-white">📱 学習アプリ</h2>
+          <button onclick="closeAppsFolder()" class="text-white hover:text-red-300 text-3xl">&times;</button>
         </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- 百マス計算アプリ -->
+            <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
+              target="_blank"
+              class="block bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🔢</div>
+                <h3 class="text-lg font-bold mb-2">百マス計算</h3>
+                <p class="text-sm opacity-80 mb-3">一桁の足し算・引き算を素早く計算練習</p>
+                <div class="flex justify-center space-x-2 mb-3">
+                  <span class="bg-white/20 px-2 py-1 rounded text-xs">足し算</span>
+                  <span class="bg-white/20 px-2 py-1 rounded text-xs">引き算</span>
+                </div>
+                <div class="text-xs opacity-70">難易度: ⭐⭐⭐</div>
+              </div>
+            </a>
+
+            <!-- 将来追加予定のアプリスロット -->
+            <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🚧</div>
+                <h3 class="text-lg font-bold mb-2">九九練習</h3>
+                <p class="text-sm opacity-80 mb-3">準備中...</p>
+                <div class="text-xs opacity-70">Coming Soon</div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🚧</div>
+                <h3 class="text-lg font-bold mb-2">漢字練習</h3>
+                <p class="text-sm opacity-80 mb-3">準備中...</p>
+                <div class="text-xs opacity-70">Coming Soon</div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🚧</div>
+                <h3 class="text-lg font-bold mb-2">英単語学習</h3>
+                <p class="text-sm opacity-80 mb-3">準備中...</p>
+                <div class="text-xs opacity-70">Coming Soon</div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🚧</div>
+                <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
+                <p class="text-sm opacity-80 mb-3">準備中...</p>
+                <div class="text-xs opacity-70">Coming Soon</div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🚧</div>
+                <h3 class="text-lg font-bold mb-2">分数計算</h3>
+                <p class="text-sm opacity-80 mb-3">準備中...</p>
+                <div class="text-xs opacity-70">Coming Soon</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <p class="text-white/70 text-sm">🔄 新しいアプリを随時追加予定です</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- アプリフォルダ用のモーダル -->
-    <div id="appsModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="glass-effect rounded-3xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-                <div class="flex justify-between items-center p-6 border-b border-white/20">
-                    <h2 class="text-3xl font-bold text-white">📱 学習アプリ</h2>
-                    <button onclick="closeAppsFolder()" class="text-white hover:text-red-300 text-3xl">&times;</button>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <!-- 百マス計算アプリ -->
-                        <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/" target="_blank" class="block bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🔢</div>
-                                <h3 class="text-lg font-bold mb-2">百マス計算</h3>
-                                <p class="text-sm opacity-80 mb-3">一桁の足し算・引き算を素早く計算練習</p>
-                                <div class="flex justify-center space-x-2 mb-3">
-                                    <span class="bg-white/20 px-2 py-1 rounded text-xs">足し算</span>
-                                    <span class="bg-white/20 px-2 py-1 rounded text-xs">引き算</span>
-                                </div>
-                                <div class="text-xs opacity-70">難易度: ⭐⭐⭐</div>
-                            </div>
-                        </a>
-
-                        <!-- 将来追加予定のアプリスロット -->
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">九九練習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">漢字練習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">英単語学習</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gradient-to-br from-gray-400 to-gray-600 text-white rounded-2xl p-6 shadow-xl opacity-60">
-                            <div class="text-center">
-                                <div class="text-4xl mb-3">🚧</div>
-                                <h3 class="text-lg font-bold mb-2">分数計算</h3>
-                                <p class="text-sm opacity-80 mb-3">準備中...</p>
-                                <div class="text-xs opacity-70">Coming Soon</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 text-center">
-                        <p class="text-white/70 text-sm">🔄 新しいアプリを随時追加予定です</p>
-                    </div>
-                </div>
-            </div>
+  <!-- ビスケット授業計画用のモーダル -->
+  <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-effect rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center p-6 border-b border-white/20">
+          <h2 class="text-2xl font-bold text-white">ビスケット授業計画ガイド</h2>
+          <button onclick="closeBisquitModal()" class="text-white hover:text-red-300 text-3xl">&times;</button>
         </div>
-    </div>
+        <div id="bisquitContent" class="p-6 text-white">
+          <div class="text-center mb-8">
+            <h3 class="text-3xl font-bold text-pink-300 mb-4">🎨 プログラミングの魔法を体験！</h3>
+            <p class="text-lg">小学2年生がビスケットを使ってプログラミングの基礎から創造的な表現まで、段階的に楽しく学べる授業計画です。</p>
+          </div>
 
-    <!-- ビスケット授業計画用のモーダル -->
-    <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="glass-effect rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="flex justify-between items-center p-6 border-b border-white/20">
-                    <h2 class="text-2xl font-bold text-white">ビスケット授業計画ガイド</h2>
-                    <button onclick="closeBisquitLesson()" class="text-white hover:text-red-300 text-3xl">&times;</button>
-                </div>
-                <div id="bisquitContent" class="p-6 text-white">
-                    <div class="text-center mb-8">
-                        <h3 class="text-3xl font-bold text-pink-300 mb-4">🎨 プログラミングの魔法を体験！</h3>
-                        <p class="text-lg">小学2年生がビスケットを使ってプログラミングの基礎から創造的な表現まで、段階的に楽しく学べる授業計画です。</p>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-red-500/20 rounded-xl p-6 border border-red-300/30">
-                            <h4 class="text-xl font-bold text-red-300 mb-3">ステップ1：10分授業</h4>
-                            <div class="text-4xl mb-3">🎯</div>
-                            <p class="mb-3"><strong>「動いた！」体験</strong></p>
-                            <ul class="text-sm space-y-1">
-                                <li>• 絵を描く（3分）</li>
-                                <li>• ルールを作る（4分）</li>
-                                <li>• 動かして感動（2分）</li>
-                                <li>• まとめ（1分）</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="bg-yellow-500/20 rounded-xl p-6 border border-yellow-300/30">
-                            <h4 class="text-xl font-bold text-yellow-300 mb-3">ステップ2：20分授業</h4>
-                            <div class="text-4xl mb-3">🧠</div>
-                            <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
-                            <ul class="text-sm space-y-1">
-                                <li>• 条件分岐の概念</li>
-                                <li>• キャラクター同士の相互作用</li>
-                                <li>• 論理的思考の第一歩</li>
-                                <li>• インタラクティブな作品作り</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="bg-green-500/20 rounded-xl p-6 border border-green-300/30">
-                            <h4 class="text-xl font-bold text-green-300 mb-3">ステップ3：30分授業</h4>
-                            <div class="text-4xl mb-3">✨</div>
-                            <p class="mb-3"><strong>自分だけの物語を創造</strong></p>
-                            <ul class="text-sm space-y-1">
-                                <li>• 複数ルールの組み合わせ</li>
-                                <li>• 創造性の発揮</li>
-                                <li>• グループでのアイデア出し</li>
-                                <li>• 問題解決能力の向上</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-blue-500/20 rounded-xl p-6 border border-blue-300/30 text-center">
-                        <h4 class="text-2xl font-bold text-blue-300 mb-4">🌟 期待される成果</h4>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
-                            <div>
-                                <div class="text-2xl mb-2">🎨</div>
-                                <div class="font-bold">創造力</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl mb-2">🤔</div>
-                                <div class="font-bold">論理的思考</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl mb-2">🔧</div>
-                                <div class="font-bold">問題解決</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl mb-2">🤝</div>
-                                <div class="font-bold">協調性</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl mb-2">💻</div>
-                                <div class="font-bold">技術スキル</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-red-500/20 rounded-xl p-6 border border-red-300/30">
+              <h4 class="text-xl font-bold text-red-300 mb-3">ステップ1：10分授業</h4>
+              <div class="text-4xl mb-3">🎯</div>
+              <p class="mb-3"><strong>「動いた！」体験</strong></p>
+              <ul class="text-sm space-y-1">
+                <li>• 絵を描く（3分）</li>
+                <li>• ルールを作る（4分）</li>
+                <li>• 動かして感動（2分）</li>
+                <li>• まとめ（1分）</li>
+              </ul>
             </div>
+
+            <div class="bg-yellow-500/20 rounded-xl p-6 border border-yellow-300/30">
+              <h4 class="text-xl font-bold text-yellow-300 mb-3">ステップ2：20分授業</h4>
+              <div class="text-4xl mb-3">🧠</div>
+              <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
+              <ul class="text-sm space-y-1">
+                <li>• 条件分岐の概念</li>
+                <li>• キャラクター同士の相互作用</li>
+                <li>• 論理的思考の第一歩</li>
+                <li>• インタラクティブな作品作り</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-500/20 rounded-xl p-6 border border-green-300/30">
+              <h4 class="text-xl font-bold text-green-300 mb-3">ステップ3：45分授業</h4>
+              <div class="text-4xl mb-3">💡</div>
+              <p class="mb-3"><strong>創造的表現と発展</strong></p>
+              <ul class="text-sm space-y-1">
+                <li>• 自由な発想で作品制作</li>
+                <li>• 発表とフィードバック</li>
+                <li>• 友達の作品から学ぶ</li>
+                <li>• プログラミング的思考の深化</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <h4 class="text-2xl font-bold text-blue-300 mb-4">🌟 ビスケットで育む力</h4>
+            <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto">
+              <li>創造力：自分でアイデアを形にする楽しさ</li>
+              <li>論理的思考力：どうすれば動くか考える力</li>
+              <li>問題解決能力：エラーを自分で見つけて直す力</li>
+              <li>表現力：自分の考えをプログラミングで伝える力</li>
+            </ul>
+            <p class="mt-6 text-base text-white/80">この授業計画を通じて、子供たちはプログラミングを身近なものとして捉え、未来のデジタル社会で活躍するための基礎を築きます。</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        function openAppsFolder() {
-            document.getElementById('appsModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
 
-        function closeAppsFolder() {
-            document.getElementById('appsModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
+  <script>
+    // アプリフォルダのモーダルを開く関数
+    function openAppsFolder() {
+      document.getElementById('appsModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 背景のスクロールを無効にする
+    }
 
-        // ESCキーでモーダルを閉じる
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeAppsFolder();
-            }
-        });
+    // アプリフォルダのモーダルを閉じる関数
+    function closeAppsFolder() {
+      document.getElementById('appsModal').classList.add('hidden');
+      document.body.style.overflow = ''; // 背景のスクロールを有効にする
+    }
+
+    // ビスケット授業計画のモーダルを開く関数
+    function openBisquitModal() {
+      document.getElementById('bisquitModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 背景のスクロールを無効にする
+    }
+
+    // ビスケット授業計画のモーダルを閉じる関数
+    function closeBisquitModal() {
+      document.getElementById('bisquitModal').classList.add('hidden');
+      document.body.style.overflow = ''; // 背景のスクロールを有効にする
+    }
+  </script>
+</body>
+
+</html>
