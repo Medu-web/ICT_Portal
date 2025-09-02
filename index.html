@@ -22,33 +22,33 @@
     /* カスタムスタイル */
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f0f2f5; /* 明るいライトグレーに変更 */
-      color: #2d3748; /* テキスト色を濃いグレーに変更して視認性向上 */
+      background-color: #f0f2f5;
+      color: #2d3748;
     }
 
     /* メインコンテンツエリアのグラスエフェクト */
     .glass-effect {
-      background-color: rgba(255, 255, 255, 0.7); /* より不透明な白に調整 */
-      backdrop-filter: blur(10px); /* 背景をぼかす */
-      border: 1px solid rgba(0, 0, 0, 0.1); /* 薄い境界線 */
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15); /* 影を調整 */
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
     }
 
     .hover-glow:hover {
-      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4); /* ホバー時の緑色の光 */
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
     }
 
     /* モーダルの背景を調整 */
     #appsModal, #bisquitModal {
-      background-color: rgba(0, 0, 0, 0.5); /* モーダル背景は半透明の暗い色を維持し、コンテンツに集中させる */
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     /* モーダル内のグラスエフェクト */
     #appsModal .glass-effect,
     #bisquitModal .glass-effect {
-        background-color: rgba(255, 255, 255, 0.9); /* モーダルコンテンツはほぼ不透明な白に */
+        background-color: rgba(255, 255, 255, 0.9);
         border: 1px solid rgba(0, 0, 0, 0.15);
-        color: #2d3748; /* モーダル内のテキスト色も濃く */
+        color: #2d3748;
     }
 
     /* モーダル内のタイトルやテキストの色を調整（モーダル内のglass-effect適用箇所） */
@@ -60,57 +60,74 @@
     #bisquitModal .glass-effect p,
     #bisquitModal .glass-effect ul,
     #bisquitModal .glass-effect li {
-        color: #2d3748; /* モーダル内のテキスト色を濃いグレーに */
+        color: #2d3748;
     }
     #appsModal .glass-effect .text-white,
-    #bisquitModal .glass-effect .text-white { /* 元々text-whiteが指定されている要素も調整 */
+    #bisquitModal .glass-effect .text-white {
         color: #2d3748 !important;
     }
-    #appsModal .glass-effect .border-white\/20 { /* ボーダー色も調整 */
+    #appsModal .glass-effect .border-white\/20 {
         border-color: rgba(0, 0, 0, 0.1) !important;
     }
     #appsModal .glass-effect button,
     #bisquitModal .glass-effect button {
-        color: #4a5568 !important; /* 閉じるボタンの色 */
+        color: #4a5568 !important;
     }
     #appsModal .glass-effect button:hover,
     #bisquitModal .glass-effect button:hover {
-        color: #e53e3e !important; /* 閉じるボタンのホバー色 */
+        color: #e53e3e !important;
     }
 
     /* モーダル内のカード色を調整 */
     #appsModal .glass-effect a.block,
     #appsModal .glass-effect div.block {
-      background-color: #edf2f7; /* モーダル内のカード背景をライトグレーに */
-      color: #2d3748; /* カード内のテキスト色 */
+      background-color: #edf2f7;
+      color: #2d3748;
       border: 1px solid rgba(0, 0, 0, 0.05);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
     #appsModal .glass-effect a.block:hover,
     #appsModal .glass-effect div.block:hover {
-      background-color: #e2e8f0; /* ホバー時を少し濃く */
+      background-color: #e2e8f0;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
     /* モーダル内のNEWタグの色を調整 */
     #appsModal .glass-effect .absolute.top-2.right-2 {
-      background-color: #e53e3e; /* 赤を維持 */
+      background-color: #e53e3e;
       color: white;
     }
 
     /* カテゴリタグのスタイル */
     .category-tag {
       position: absolute;
-      top: 0.75rem; /* 左上からの距離を調整 */
-      left: 0.75rem; /* 左上からの距離を調整 */
+      top: 0.75rem;
+      left: 0.75rem;
       padding: 0.25rem 0.75rem;
-      border-radius: 9999px; /* 角を丸く */
-      font-size: 0.75rem; /* 文字サイズ */
+      border-radius: 9999px;
+      font-size: 0.75rem;
       font-weight: bold;
-      color: white; /* デフォルトは白 */
+      color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      cursor: pointer; /* クリック可能であることを示す */
-      z-index: 10; /* カードの他の要素より手前に表示 */
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* 新しい詳細ボタンのスタイル */
+    .details-button {
+      background-color: #4a5568; /* ボタンの色をダークグレーに */
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .details-button:hover {
+      background-color: #2d3748; /* ホバーでさらに濃く */
+      transform: translateY(-2px); /* 少し上に移動 */
     }
   </style>
 
@@ -133,80 +150,87 @@
     <!-- リンクのグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="content-grid">
       <!-- アプリフォルダ -->
-      <div onclick="openAppsFolder()"
-        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden"
+      <div
+        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="教育アプリ">
-        <span class="category-tag bg-blue-700" onclick="event.stopPropagation(); filterContent('教育アプリ')">教育アプリ</span>
+        <span class="category-tag bg-blue-700" onclick="filterContent('教育アプリ')">教育アプリ</span>
         <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
         <div class="text-3xl mb-2">📱</div>
         <div class="text-lg">アプリ</div>
         <div class="text-sm opacity-80">学習アプリ集</div>
-        <div class="flex -space-x-2 mt-3">
+        <div class="flex -space-x-2 mt-3 mb-4">
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
         </div>
+        <button onclick="openAppsFolder()" class="details-button">詳細</button>
       </div>
 
       <!-- StudXStyle by MEXT -->
-      <a href="https://www.mext.go.jp/studxstyle/" target="_blank"
+      <div
         class="block bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="GIGAスクール構想,教育改革">
-        <span class="category-tag bg-orange-700" onclick="event.stopPropagation(); filterContent('GIGAスクール構想')">GIGAスクール構想</span>
+        <span class="category-tag bg-orange-700" onclick="filterContent('GIGAスクール構想')">GIGAスクール構想</span>
         <div class="text-2xl mb-2">🏫</div>
         <div class="lg">スタディーエックス　スタイル<br>StuDX Style</div>
         <div class="text-sm opacity-80">文科省の情報発信サイト</div>
-      </a>
+        <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="details-button inline-block">詳細</a>
+      </div>
 
       <!-- ICTインフォグラフィック -->
-      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
+      <div
         class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="教育改革,提言">
-        <span class="category-tag bg-purple-700" onclick="event.stopPropagation(); filterContent('教育改革')">教育改革</span>
-        <span class="category-tag bg-purple-800" style="left: 0.75rem; top: 2.75rem;" onclick="event.stopPropagation(); filterContent('提言')">提言</span>
+        <span class="category-tag bg-purple-700" onclick="filterContent('教育改革')">教育改革</span>
+        <span class="category-tag bg-purple-800" style="left: 0.75rem; top: 2.75rem;" onclick="filterContent('提言')">提言</span>
         <div class="text-2xl mb-2">🚀</div>
         <div class="text-lg">教育ICT環境改革</div>
         <div class="text-sm opacity-80">未来の教育提案</div>
-      </a>
+        <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="details-button inline-block">詳細</a>
+      </div>
 
       <!-- ローマ字表記の課題 -->
-      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
+      <div
         class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="提言,言語教育">
-        <span class="category-tag bg-green-700" onclick="event.stopPropagation(); filterContent('提言')">提言</span>
-        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;" onclick="event.stopPropagation(); filterContent('言語教育')">言語教育</span>
+        <span class="category-tag bg-green-700" onclick="filterContent('提言')">提言</span>
+        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;" onclick="filterContent('言語教育')">言語教育</span>
         <div class="text-2xl mb-2">🔤</div>
         <div class="text-lg">ローマ字表記の課題</div>
         <div class="text-sm opacity-80">言語教育の改善</div>
-      </a>
+        <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="details-button inline-block">詳細</a>
+      </div>
 
       <!-- micro:bit購入プラン -->
-      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
+      <div
         class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="プログラミング">
-        <span class="category-tag bg-yellow-700" onclick="event.stopPropagation(); filterContent('プログラミング')">プログラミング</span>
+        <span class="category-tag bg-yellow-700" onclick="filterContent('プログラミング')">プログラミング</span>
         <div class="text-2xl mb-2">🤖</div>
         <div class="text-lg">micro:bit購入プラン</div>
         <div class="text-sm opacity-80">プログラミング教育</div>
-      </a>
+        <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="details-button inline-block">詳細</a>
+      </div>
 
       <!-- AI教育コンテンツハブ -->
-      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
+      <div
         class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="AI教育">
-        <span class="category-tag bg-red-700" onclick="event.stopPropagation(); filterContent('AI教育')">AI教育</span>
+        <span class="category-tag bg-red-700" onclick="filterContent('AI教育')">AI教育</span>
         <div class="text-2xl mb-2">🧠</div>
         <div class="text-lg">AI教育コンテンツハブ</div>
         <div class="text-sm opacity-80">人工知能との学び</div>
-      </a>
+        <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="details-button inline-block">詳細</a>
+      </div>
 
       <!-- ビスケット授業計画 -->
-      <div onclick="openBisquitModal()"
-        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow cursor-pointer relative overflow-hidden"
+      <div
+        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
         data-categories="授業計画">
-        <span class="category-tag bg-pink-700" onclick="event.stopPropagation(); filterContent('授業計画')">授業計画</span>
+        <span class="category-tag bg-pink-700" onclick="filterContent('授業計画')">授業計画</span>
         <div class="text-2xl mb-2">📝</div>
         <div class="text-lg">ビスケット授業計画</div>
         <div class="text-sm opacity-80">プログラミング入門</div>
+        <button onclick="openBisquitModal()" class="details-button">詳細</button>
       </div>
     </div>
 
