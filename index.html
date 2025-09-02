@@ -109,7 +109,6 @@
       font-weight: bold;
       color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
       z-index: 10;
     }
 
@@ -129,6 +128,38 @@
       background-color: #2d3748; /* ホバーでさらに濃く */
       transform: translateY(-2px); /* 少し上に移動 */
     }
+
+    /* カテゴリフィルタボタンのスタイル */
+    .filter-button {
+      background-color: #cbd5e0; /* 薄いグレー */
+      color: #4a5568;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .filter-button:hover {
+      background-color: #a0aec0; /* ホバーで濃く */
+      transform: translateY(-2px);
+    }
+
+    .filter-button.active {
+      background-color: #4a5568; /* 選択中の色 */
+      color: white;
+    }
+
+    /* カード全体をリンクにするためのスタイル */
+    .content-card-link {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .content-card-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
   </style>
 
   <title>ICTコンテンツハブ</title>
@@ -144,16 +175,19 @@
     <h1 class="text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">✨ ICTコンテンツハブ</h1>
     <p class="text-xl text-gray-700 mb-6 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
 
-    <!-- 全て表示ボタン -->
-    <button onclick="filterContent('all')" class="mb-8 px-6 py-2 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-lg shadow-md transition-colors duration-200">全て表示</button>
+    <!-- カテゴリフィルターボタンのコンテナ -->
+    <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8">
+      <!-- すべて表示ボタン (初期非表示) -->
+      <button id="show-all-button" onclick="filterContent('all')" class="px-6 py-2 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-lg shadow-md transition-colors duration-200 hidden">すべて表示</button>
+    </div>
 
     <!-- リンクのグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="content-grid">
       <!-- アプリフォルダ -->
-      <div
-        class="block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a onclick="openAppsFolder()"
+        class="content-card-link block bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="教育アプリ">
-        <span class="category-tag bg-blue-700" onclick="filterContent('教育アプリ')">教育アプリ</span>
+        <span class="category-tag bg-blue-700">教育アプリ</span>
         <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
         <div class="text-3xl mb-2">📱</div>
         <div class="text-lg">アプリ</div>
@@ -162,76 +196,69 @@
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
         </div>
-        <button onclick="openAppsFolder()" class="action-button">アプリを見る</button>
-      </div>
+      </a>
 
       <!-- StudXStyle by MEXT -->
-      <div
-        class="block bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a href="https://www.mext.go.jp/studxstyle/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="GIGAスクール構想,教育改革">
-        <span class="category-tag bg-orange-700" onclick="filterContent('GIGAスクール構想')">GIGAスクール構想</span>
+        <span class="category-tag bg-orange-700">GIGAスクール構想</span>
         <div class="text-2xl mb-2">🏫</div>
         <div class="lg">スタディーエックス　スタイル<br>StuDX Style</div>
         <div class="text-sm opacity-80">文科省の情報発信サイト</div>
-        <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="action-button inline-block">サイトへ</a>
-      </div>
+      </a>
 
       <!-- ICTインフォグラフィック -->
-      <div
-        class="block bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-purple-500 to-purple-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="教育改革,提言">
-        <span class="category-tag bg-purple-700" onclick="filterContent('教育改革')">教育改革</span>
-        <span class="category-tag bg-purple-800" style="left: 0.75rem; top: 2.75rem;" onclick="filterContent('提言')">提言</span>
+        <span class="category-tag bg-purple-700">教育改革</span>
+        <span class="category-tag bg-purple-800" style="left: 0.75rem; top: 2.75rem;">提言</span>
         <div class="text-2xl mb-2">🚀</div>
         <div class="text-lg">教育ICT環境改革</div>
         <div class="text-sm opacity-80">未来の教育提案</div>
-        <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="action-button inline-block">サイトへ</a>
-      </div>
+      </a>
 
       <!-- ローマ字表記の課題 -->
-      <div
-        class="block bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="提言,言語教育">
-        <span class="category-tag bg-green-700" onclick="filterContent('提言')">提言</span>
-        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;" onclick="filterContent('言語教育')">言語教育</span>
+        <span class="category-tag bg-green-700">提言</span>
+        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;">言語教育</span>
         <div class="text-2xl mb-2">🔤</div>
         <div class="text-lg">ローマ字表記の課題</div>
         <div class="text-sm opacity-80">言語教育の改善</div>
-        <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="action-button inline-block">サイトへ</a>
-      </div>
+      </a>
 
       <!-- micro:bit購入プラン -->
-      <div
-        class="block bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="プログラミング">
-        <span class="category-tag bg-yellow-700" onclick="filterContent('プログラミング')">プログラミング</span>
+        <span class="category-tag bg-yellow-700">プログラミング</span>
         <div class="text-2xl mb-2">🤖</div>
         <div class="text-lg">micro:bit購入プラン</div>
         <div class="text-sm opacity-80">プログラミング教育</div>
-        <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="action-button inline-block">サイトへ</a>
-      </div>
+      </a>
 
       <!-- AI教育コンテンツハブ -->
-      <div
-        class="block bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="AI教育">
-        <span class="category-tag bg-red-700" onclick="filterContent('AI教育')">AI教育</span>
+        <span class="category-tag bg-red-700">AI教育</span>
         <div class="text-2xl mb-2">🧠</div>
         <div class="text-lg">AI教育コンテンツハブ</div>
         <div class="text-sm opacity-80">人工知能との学び</div>
-        <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="action-button inline-block">サイトへ</a>
-      </div>
+      </a>
 
       <!-- ビスケット授業計画 -->
-      <div
-        class="block bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-6 px-8 rounded-2xl shadow-xl hover-glow relative overflow-hidden"
+      <a onclick="openBisquitModal()"
+        class="content-card-link block bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="授業計画">
-        <span class="category-tag bg-pink-700" onclick="filterContent('授業計画')">授業計画</span>
+        <span class="category-tag bg-pink-700">授業計画</span>
         <div class="text-2xl mb-2">📝</div>
         <div class="text-lg">ビスケット授業計画</div>
         <div class="text-sm opacity-80">プログラミング入門</div>
-        <button onclick="openBisquitModal()" class="action-button">授業計画を見る</button>
-      </div>
+      </a>
     </div>
 
     <div class="mt-12 text-center">
@@ -258,7 +285,7 @@
               target="_blank"
               class="block bg-gradient-to-br from-blue-100 to-blue-200 hover:from-blue-200 hover:to-blue-300 text-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
               data-categories="算数,百マス">
-              <span class="category-tag bg-blue-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
+              <span class="category-tag bg-blue-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🔢</div>
                 <h3 class="text-lg font-bold mb-2">百マス計算</h3>
@@ -274,7 +301,7 @@
             <!-- 将来追加予定のアプリスロット -->
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="算数,九九">
-              <span class="category-tag bg-purple-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
+              <span class="category-tag bg-purple-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">九九練習</h3>
@@ -285,7 +312,7 @@
 
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="国語,漢字">
-              <span class="category-tag bg-green-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('国語')">国語</span>
+              <span class="category-tag bg-green-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">国語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">漢字練習</h3>
@@ -296,7 +323,7 @@
 
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="英語,英単語">
-              <span class="category-tag bg-red-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('英語')">英語</span>
+              <span class="category-tag bg-red-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">英語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">英単語学習</h3>
@@ -307,7 +334,7 @@
 
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="生活,時計">
-              <span class="category-tag bg-yellow-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('生活')">生活</span>
+              <span class="category-tag bg-yellow-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">生活</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
@@ -318,7 +345,7 @@
 
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="算数,分数">
-              <span class="category-tag bg-indigo-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;" onclick="event.stopPropagation(); filterModalApps('算数')">算数</span>
+              <span class="category-tag bg-indigo-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">分数計算</h3>
@@ -433,14 +460,32 @@
     // メインコンテンツのカテゴリでコンテンツをフィルタリングする関数
     function filterContent(category) {
       const contentGrid = document.getElementById('content-grid');
-      const contentItems = contentGrid.querySelectorAll('.block'); // すべてのコンテンツアイテムを取得
+      const contentItems = contentGrid.querySelectorAll('.content-card-link');
+      const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
+      const showAllButton = document.getElementById('show-all-button');
 
+      // 選択中のフィルターボタンをアクティブにする
+      filterButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.textContent.trim() === category) {
+          button.classList.add('active');
+        }
+      });
+
+      // 「すべて表示」ボタンの表示/非表示を切り替える
+      if (category === 'all') {
+        showAllButton.classList.add('hidden');
+      } else {
+        showAllButton.classList.remove('hidden');
+      }
+
+      // カードの表示/非表示を切り替える
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
-          item.style.display = 'block'; // 表示
+          item.style.display = 'block';
         } else {
-          item.style.display = 'none'; // 非表示
+          item.style.display = 'none';
         }
       });
     }
@@ -448,21 +493,37 @@
     // モーダル内のアプリをカテゴリでフィルタリングする関数
     function filterModalApps(category) {
       const modalAppsGrid = document.getElementById('modal-apps-grid');
-      const appItems = modalAppsGrid.querySelectorAll('.block'); // すべてのアプリアイテムを取得
+      const appItems = modalAppsGrid.querySelectorAll('.block');
 
       appItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
-          item.style.display = 'block'; // 表示
+          item.style.display = 'block';
         } else {
-          item.style.display = 'none'; // 非表示
+          item.style.display = 'none';
         }
       });
     }
 
-    // ページロード時にすべてのメインコンテンツを表示
+    // ページロード時にフィルターボタンを動的に生成し、イベントを設定する
     document.addEventListener('DOMContentLoaded', () => {
-      filterContent('all');
+      const allCategories = new Set();
+      const contentItems = document.querySelectorAll('#content-grid .content-card-link');
+
+      contentItems.forEach(item => {
+        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        categories.forEach(cat => allCategories.add(cat.trim()));
+      });
+
+      const filterButtonsContainer = document.getElementById('filter-buttons');
+
+      allCategories.forEach(category => {
+        const button = document.createElement('button');
+        button.textContent = category;
+        button.classList.add('filter-button');
+        button.onclick = () => filterContent(category);
+        filterButtonsContainer.appendChild(button);
+      });
     });
   </script>
 </body>
