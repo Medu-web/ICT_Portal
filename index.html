@@ -147,7 +147,7 @@
       bottom: 0.5rem;
       left: 0.5rem;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap; /* タグの折り返しを禁止 */
       gap: 0.5rem;
     }
 
@@ -201,7 +201,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
-        data-categories="GIGAスクール構想,教育改革,ポータル">
+        data-categories="GIGAスクール構想,教育改革">
         <div class="card-image-container">
           <img src="https://placehold.co/800x600/fb923c/ffffff?text=StuDX+Style" alt="StuDX Style" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
@@ -214,7 +214,7 @@
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
-        data-categories="DX化,ポータル,特別支援教育,生成AI">
+        data-categories="DX化,特別支援教育">
         <div class="card-image-container">
           <img src="https://placehold.co/800x600/4f46e5/ffffff?text=DX" alt="DX" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
@@ -279,7 +279,7 @@
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
-        data-categories="プログラミング">
+        data-categories="プログラミング,micro:bit">
         <div class="card-image-container">
           <img src="https://placehold.co/800x600/eab308/ffffff?text=micro:bit" alt="micro:bit" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
@@ -292,7 +292,7 @@
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
-        data-categories="AI教育,生成AI,AIチャットボット">
+        data-categories="AI教育,生成AI">
         <div class="card-image-container">
           <img src="https://placehold.co/800x600/ef4444/ffffff?text=AI" alt="AI" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
@@ -444,7 +444,6 @@
       const colors = {
         'GIGAスクール構想': 'bg-orange-700',
         '教育改革': 'bg-orange-800',
-        'ポータル': 'bg-yellow-600',
         'DX化': 'bg-indigo-700',
         '特別支援教育': 'bg-fuchsia-700',
         '生成AI': 'bg-green-700',
@@ -454,11 +453,11 @@
         'ツール': 'bg-teal-600',
         '言語教育': 'bg-green-800',
         'プログラミング': 'bg-yellow-700',
+        'micro:bit': 'bg-amber-700',
         'AI教育': 'bg-red-700',
         '授業計画': 'bg-pink-700',
         '算数': 'bg-cyan-700',
         '百マス': 'bg-cyan-600',
-        '熊本大学': 'bg-rose-700'
       };
       return colors[category] || 'bg-gray-500';
     }
@@ -468,7 +467,7 @@
       const contentItems = document.querySelectorAll('#content-grid .content-card');
 
       contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        const categories = item.dataset.categories ? item.dataset.categories.split(',').slice(0, 2) : []; // タグを最大2つに制限
         const tagsContainer = item.querySelector('.card-tags');
 
         tagsContainer.innerHTML = '';
