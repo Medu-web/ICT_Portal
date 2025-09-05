@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
-  data-a11y-animated-images="system" data-a11y-link-underlines="true">
-
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,59 +25,39 @@
       box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
     }
 
-    #appsModal, #bisquitModal {
+    #bisquitModal {
       background-color: rgba(0, 0, 0, 0.5);
     }
 
-    #appsModal .glass-effect,
     #bisquitModal .glass-effect {
       background-color: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(0, 0, 0, 0.15);
       color: #2d3748;
     }
     
-    #appsModal .glass-effect h2,
     #bisquitModal .glass-effect h2,
     #bisquitModal .glass-effect h3,
     #bisquitModal .glass-effect h4,
-    #appsModal .glass-effect p,
     #bisquitModal .glass-effect p,
     #bisquitModal .glass-effect ul,
     #bisquitModal .glass-effect li {
       color: #2d3748;
     }
     
-    #appsModal .glass-effect .text-white,
     #bisquitModal .glass-effect .text-white {
       color: #2d3748 !important;
     }
 
-    #appsModal .glass-effect .border-white\/20 {
+    #bisquitModal .glass-effect .border-white\/20 {
       border-color: rgba(0, 0, 0, 0.1) !important;
     }
 
-    #appsModal .glass-effect button,
     #bisquitModal .glass-effect button {
       color: #4a5568 !important;
     }
 
-    #appsModal .glass-effect button:hover,
     #bisquitModal .glass-effect button:hover {
       color: #e53e3e !important;
-    }
-
-    #appsModal .glass-effect a.block,
-    #appsModal .glass-effect div.block {
-      background-color: #edf2f7;
-      color: #2d3748;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    #appsModal .glass-effect a.block:hover,
-    #appsModal .glass-effect div.block:hover {
-      background-color: #e2e8f0;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
     .filter-button {
@@ -118,7 +96,7 @@
       transform: translateY(-2px);
     }
 
-    /* 新しいカードデザイン */
+    /* カードデザイン */
     .content-card {
       background-color: white;
       border-radius: 1.5rem;
@@ -126,9 +104,16 @@
       overflow: hidden;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       cursor: pointer;
+      position: relative;
     }
 
-    .content-card:hover {
+    .content-card .card-inner {
+      position: relative;
+      transition: transform .30s ease, box-shadow .30s ease;
+      will-change: transform;
+    }
+
+    .content-card:hover .card-inner {
       transform: translateY(-8px);
       box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
     }
@@ -138,14 +123,10 @@
     }
 
     .card-tags {
-      position: absolute;
-      bottom: 0.5rem;
-      left: 0.5rem;
       display: flex;
       flex-wrap: wrap; 
       gap: 0.5rem;
-      max-height: 100px; /* タグがはみ出さないように最大高さを設定 */
-      overflow: hidden; /* はみ出した分は非表示に */
+      margin-top: 1rem;
     }
 
     .tag-item {
@@ -157,18 +138,21 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.2s, opacity 0.2s;
-      white-space: nowrap; /* タグのテキストを折り返さない */
+      white-space: nowrap;
+      transform-origin: left bottom;
+      display: inline-block;
     }
 
     .tag-item:hover {
-        transform: scale(1.1);
-        opacity: 0.9;
+      transform: scale(1.05);
+      opacity: 0.9;
     }
 
     /* 画像のオーバーレイ */
     .card-image-container {
       position: relative;
     }
+    
     .card-image-container::before {
       content: '';
       position: absolute;
@@ -180,28 +164,6 @@
       z-index: 1;
     }
   </style>
-<style>
-/* ===============================
-   Flicker fix for bottom tags & cards
-   Why: parent .content-card moves (translateY) while child .tag-item scales,
-        so the pointer briefly leaves the element → hover toggles rapidly.
-   Fix: keep the clickable card box static; animate an inner wrapper instead.
-        Also anchor tag scaling at its bottom-left so it stays under the cursor.
-   =============================== */
-.content-card:hover { transform: none !important; }
-.content-card { position: relative; }
-.content-card .card-inner {
-  position: relative;
-  transition: transform .30s ease, box-shadow .30s ease;
-  will-change: transform;
-}
-.content-card:hover .card-inner {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px rgba(0,0,0,.15);
-}
-.tag-item { transform-origin: left bottom; }
-.tag-item:hover { transform: scale(1.05); }
-</style>
 </head>
 
 <body class="p-8 flex flex-col items-center min-h-screen">
@@ -221,143 +183,154 @@
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
         data-categories="GIGAスクール構想,教育改革">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/fb923c/ffffff?text=StuDX+Style" alt="StuDX Style" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
-          <p class="text-sm text-gray-600 mb-4">文科省の情報発信サイト</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/fb923c/ffffff?text=StuDX+Style" alt="StuDX Style" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
+            <p class="text-sm text-gray-600">文科省の情報発信サイト</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
         data-categories="DX化,特別支援教育">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/4f46e5/ffffff?text=DX" alt="DX" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
-          <p class="text-sm text-gray-600 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/4f46e5/ffffff?text=DX" alt="DX" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
+            <p class="text-sm text-gray-600">先生のための授業・教材研究を支援する情報プラットフォーム</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- ICTインフォグラフィック -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
         data-categories="教育改革,提言">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/9333ea/ffffff?text=Infographic" alt="Infographic" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
-          <p class="text-sm text-gray-600 mb-4">未来の教育提案</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/9333ea/ffffff?text=Infographic" alt="Infographic" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
+            <p class="text-sm text-gray-600">未来の教育提案</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/14b8a6/ffffff?text=Touch+Test" alt="Touch Test" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
-          <p class="text-sm text-gray-600 mb-4">タブレットのタッチ動作を確認</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/14b8a6/ffffff?text=Touch+Test" alt="Touch Test" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
+            <p class="text-sm text-gray-600">タブレットのタッチ動作を確認</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- タブレット動作チェックツール キーボードテスト -->
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/4ade80/ffffff?text=Keyboard+Test" alt="Keyboard Test" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
-          <p class="text-sm text-gray-600 mb-4">タブレットのキーボード動作を確認</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/4ade80/ffffff?text=Keyboard+Test" alt="Keyboard Test" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
+            <p class="text-sm text-gray-600">タブレットのキーボード動作を確認</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
         data-categories="提言,言語教育">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/22c55e/ffffff?text=Romanji" alt="Romanji" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
-          <p class="text-sm text-gray-600 mb-4">言語教育の改善</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/22c55e/ffffff?text=Romanji" alt="Romanji" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
+            <p class="text-sm text-gray-600">言語教育の改善</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
         data-categories="プログラミング,micro:bit">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/eab308/ffffff?text=micro:bit" alt="micro:bit" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
-          <p class="text-sm text-gray-600 mb-4">プログラミング教育</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/eab308/ffffff?text=micro:bit" alt="micro:bit" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
+            <p class="text-sm text-gray-600">プログラミング教育</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
         data-categories="AI教育,生成AI">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/ef4444/ffffff?text=AI" alt="AI" class="w-full h-48 object-cover rounded-t-2xl">
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
-          <p class="text-sm text-gray-600 mb-4">人工知能との学び</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/ef4444/ffffff?text=AI" alt="AI" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
+            <p class="text-sm text-gray-600">人工知能との学び</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
 
       <!-- ビスケット授業計画 -->
-      <a onclick="openBisquitModal()" class="content-card"
+      <div class="content-card" onclick="openBisquitModal(event)"
         data-categories="授業計画,プログラミング">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/ec4899/ffffff?text=Bisquit" alt="Bisquit" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/ec4899/ffffff?text=Bisquit" alt="Bisquit" class="w-full h-48 object-cover">
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
+            <p class="text-sm text-gray-600">プログラミング入門</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
-          <p class="text-sm text-gray-600 mb-4">プログラミング入門</p>
-          <div class="card-tags"></div>
-        </div>
-      </a>
+      </div>
 
       <!-- 百マス計算アプリ -->
       <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
         target="_blank" class="content-card"
         data-categories="算数,百マス">
-        <div class="card-image-container">
-          <img src="https://placehold.co/800x600/60a5fa/ffffff?text=Math" alt="Math" class="w-full h-48 object-cover rounded-t-2xl">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
-          <p class="text-sm text-gray-600 mb-4">一桁の足し算・引き算を素早く計算練習</p>
-          <div class="card-tags"></div>
+        <div class="card-inner">
+          <div class="card-image-container">
+            <img src="https://placehold.co/800x600/60a5fa/ffffff?text=Math" alt="Math" class="w-full h-48 object-cover">
+            <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+          </div>
+          <div class="p-5">
+            <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
+            <p class="text-sm text-gray-600">一桁の足し算・引き算を素早く計算練習</p>
+            <div class="card-tags"></div>
+          </div>
         </div>
       </a>
-
-      <!-- タグが多いカードの例 (テスト用) -->
-      
-        <div class="p-5">
-          <h2 class="text-lg font-semibold mb-2">タグが多いカードの例</h2>
-          <p class="text-sm text-gray-600 mb-4">タグの折り返しをテストするためのカードです。</p>
-          <div class="card-tags"></div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-12 text-center">
@@ -420,7 +393,7 @@
               </div>
             </div>
             <div class="mt-8 text-center">
-              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
+              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育つ力</h4>
               <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
                 <li>創造力：自分でアイデアを形にする楽しさ</li>
                 <li>論理的思考力：どうすれば動くか考える力</li>
@@ -436,7 +409,9 @@
   </div>
 
   <script>
-    function openBisquitModal() {
+    function openBisquitModal(event) {
+      event.preventDefault();
+      event.stopPropagation();
       document.getElementById('bisquitModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -451,6 +426,7 @@
       const contentItems = contentGrid.querySelectorAll('.content-card');
       const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
 
+      // フィルターボタンのアクティブ状態を更新
       filterButtons.forEach(button => {
         button.classList.remove('active');
         if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
@@ -458,6 +434,7 @@
         }
       });
 
+      // コンテンツをフィルタリング
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
@@ -509,10 +486,14 @@
           const tagSpan = document.createElement('span');
           tagSpan.textContent = trimmedCat;
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
+          
+          // タグクリック時の処理
           tagSpan.onclick = (e) => {
+            e.preventDefault();
             e.stopPropagation();
             filterContent(trimmedCat);
           };
+          
           tagsContainer.appendChild(tagSpan);
         });
       });
@@ -526,19 +507,25 @@
         button.onclick = () => filterContent(category);
         filterButtonsContainer.appendChild(button);
       });
+
+      // カード内部構造の設定（ホバー効果用）
+      document.querySelectorAll('.content-card').forEach(function(card){
+        // すでにcard-innerがない場合のみ追加
+        if (!card.querySelector(':scope > .card-inner')) {
+          var inner = document.createElement('div');
+          inner.className = 'card-inner';
+          while (card.firstChild) inner.appendChild(card.firstChild);
+          card.appendChild(inner);
+        }
+      });
+    });
+
+    // モーダルの外側クリックで閉じる
+    document.getElementById('bisquitModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeBisquitModal();
+      }
     });
   </script>
-<script>
-(function(){
-  document.querySelectorAll('.content-card').forEach(function(card){
-    if (!card.querySelector(':scope > .card-inner')) {
-      var inner = document.createElement('div');
-      inner.className = 'card-inner';
-      while (card.firstChild) inner.appendChild(card.firstChild);
-      card.appendChild(inner);
-    }
-  });
-})();
-</script>
 </body>
 </html>
