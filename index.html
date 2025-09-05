@@ -1,32 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
+<html lang="ja" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
   data-a11y-animated-images="system" data-a11y-link-underlines="true">
 
 <head>
   <meta charset="utf-8">
-  <link rel="dns-prefetch" href="https://github.githubassets.com">
-  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
-  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
-  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
-  <link rel="preconnect" href="https://github.githubassets.com" crossorigin>
-  <link rel="preconnect" href="https://avatars.githubusercontent.com">
-
-  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/light-6448649c7147.css" />
-  <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/dark-d17b946fc2c5.css" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICTコンテンツハブ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root {
-      --fontStack-monospace: "Monaspace Neon", ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-    /* カスタムスタイル */
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f0f2f5;
-      color: #2d3748;
+      background-color: #f3f4f6;
+      color: #1f2937;
     }
 
-    /* メインコンテンツエリアのグラスエフェクト */
     .glass-effect {
       background-color: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(10px);
@@ -38,20 +27,17 @@
       box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
     }
 
-    /* モーダルの背景を調整 */
     #appsModal, #bisquitModal {
       background-color: rgba(0, 0, 0, 0.5);
     }
 
-    /* モーダル内のグラスエフェクト */
     #appsModal .glass-effect,
     #bisquitModal .glass-effect {
-        background-color: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        color: #2d3748;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      color: #2d3748;
     }
-
-    /* モーダル内のタイトルやテキストの色を調整（モーダル内のglass-effect適用箇所） */
+    
     #appsModal .glass-effect h2,
     #bisquitModal .glass-effect h2,
     #bisquitModal .glass-effect h3,
@@ -60,25 +46,28 @@
     #bisquitModal .glass-effect p,
     #bisquitModal .glass-effect ul,
     #bisquitModal .glass-effect li {
-        color: #2d3748;
+      color: #2d3748;
     }
+    
     #appsModal .glass-effect .text-white,
     #bisquitModal .glass-effect .text-white {
-        color: #2d3748 !important;
-    }
-    #appsModal .glass-effect .border-white\/20 {
-        border-color: rgba(0, 0, 0, 0.1) !important;
-    }
-    #appsModal .glass-effect button,
-    #bisquitModal .glass-effect button {
-        color: #4a5568 !important;
-    }
-    #appsModal .glass-effect button:hover,
-    #bisquitModal .glass-effect button:hover {
-        color: #e53e3e !important;
+      color: #2d3748 !important;
     }
 
-    /* モーダル内のカード色を調整 */
+    #appsModal .glass-effect .border-white\/20 {
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    #appsModal .glass-effect button,
+    #bisquitModal .glass-effect button {
+      color: #4a5568 !important;
+    }
+
+    #appsModal .glass-effect button:hover,
+    #bisquitModal .glass-effect button:hover {
+      color: #e53e3e !important;
+    }
+
     #appsModal .glass-effect a.block,
     #appsModal .glass-effect div.block {
       background-color: #edf2f7;
@@ -86,43 +75,40 @@
       border: 1px solid rgba(0, 0, 0, 0.05);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
+
     #appsModal .glass-effect a.block:hover,
     #appsModal .glass-effect div.block:hover {
       background-color: #e2e8f0;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* モーダル内のNEWタグの色を調整 */
     #appsModal .glass-effect .absolute.top-2.right-2 {
       background-color: #e53e3e;
       color: white;
     }
 
-    /* 新しいタグのスタイル */
-    .tags-container {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      left: 1rem; /* タグがはみ出さないように左端の境界を追加 */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      z-index: 10;
-    }
-
-    .tag-item {
-      padding: 0.25rem 0.75rem;
+    .filter-button {
+      background-color: #cbd5e0;
+      color: #4a5568;
+      padding: 0.5rem 1.25rem;
       border-radius: 9999px;
-      font-size: 0.75rem;
       font-weight: bold;
-      color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
     }
 
-    /* 新しいアクションボタンのスタイル */
+    .filter-button:hover {
+      background-color: #a0aec0;
+      transform: translateY(-2px);
+    }
+
+    .filter-button.active {
+      background-color: #4a5568;
+      color: white;
+    }
+
     .action-button {
-      background-color: #4a5568; /* ボタンの色をダークグレーに */
+      background-color: #4a5568;
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 9999px;
@@ -133,51 +119,73 @@
     }
 
     .action-button:hover {
-      background-color: #2d3748; /* ホバーでさらに濃く */
-      transform: translateY(-2px); /* 少し上に移動 */
-    }
-
-    /* カテゴリフィルタボタンのスタイル */
-    .filter-button {
-      background-color: #cbd5e0; /* 薄いグレー */
-      color: #4a5568;
-      padding: 0.5rem 1.25rem;
-      border-radius: 9999px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.2s;
-    }
-
-    .filter-button:hover {
-      background-color: #a0aec0; /* ホバーで濃く */
+      background-color: #2d3748;
       transform: translateY(-2px);
     }
 
-    .filter-button.active {
-      background-color: #4a5568; /* 選択中の色 */
+    /* 新しいカードデザイン */
+    .content-card {
+      background-color: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .content-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-gradient-overlay {
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+    }
+
+    .card-tags {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-item {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
-    /* カード全体をリンクにするためのスタイル */
-    .content-card-link {
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        min-height: 180px; /* カードの最小高さを設定 */
+    .tag-item:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
     }
 
-    .content-card-link:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    /* 画像のオーバーレイ */
+    .card-image-container {
+      position: relative;
+    }
+    .card-image-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1;
     }
   </style>
-
-  <title>ICTコンテンツハブ (タグ修正版)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="p-8 flex flex-col items-center min-h-screen">
-
   <!-- メインコンテンツのコンテナ -->
   <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
     <!-- タイトル -->
@@ -186,115 +194,153 @@
 
     <!-- カテゴリフィルターボタンのコンテナ -->
     <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8">
-      <!-- 「すべて表示」ボタンを最初から表示 -->
       <button onclick="filterContent('all')" class="filter-button active">すべて表示</button>
     </div>
 
     <!-- リンクのグリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="content-grid">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
       <!-- アプリフォルダ -->
-      <a onclick="openAppsFolder()"
-        class="content-card-link block bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a onclick="openAppsFolder()" class="content-card"
         data-categories="教育アプリ">
-        <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
-        <div class="text-3xl mb-2">📱</div>
-        <div class="text-lg">アプリ</div>
-        <div class="text-sm opacity-80">学習アプリ集</div>
-        <div class="flex -space-x-2 mt-3 mb-4">
-          <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
-          <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/60a5fa/ffffff?text=Apps" alt="Apps" class="w-full h-48 object-cover rounded-t-2xl">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
         </div>
-        <div class="tags-container"></div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">アプリ</h2>
+          <p class="text-sm text-gray-600 mb-4">学習アプリ集</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
-
+      
       <!-- StudXStyle by MEXT -->
-      <a href="https://www.mext.go.jp/studxstyle/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
         data-categories="GIGAスクール構想,教育改革,ポータルサイト">
-        <div class="text-2xl mb-2">🏫</div>
-        <div class="lg">スタディーエックス　スタイル<br>StuDX Style</div>
-        <div class="text-sm opacity-80">文科省の情報発信サイト</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/fb923c/ffffff?text=StuDX+Style" alt="StuDX Style" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
+          <p class="text-sm text-gray-600 mb-4">文科省の情報発信サイト</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- 学校DX化でわくわくをサポート -->
-      <a href="https://www.treasure-max.fun/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-indigo-500 to-sky-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
         data-categories="DX化,ポータルサイト,特別支援教育,生成AI,AIチャットボット,熊本大学">
-        <div class="text-2xl mb-2">💻</div>
-        <div class="text-lg">学校DX化でわくわくをサポート</div>
-        <div class="text-sm opacity-80">先生のための授業・教材研究を支援する情報プラットフォーム</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/4f46e5/ffffff?text=DX" alt="DX" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
+          <p class="text-sm text-gray-600 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- ICTインフォグラフィック -->
-      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-purple-500 to-purple-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
         data-categories="教育改革,提言">
-        <div class="text-2xl mb-2">🚀</div>
-        <div class="text-lg">教育ICT環境改革</div>
-        <div class="text-sm opacity-80">未来の教育提案</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/9333ea/ffffff?text=Infographic" alt="Infographic" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
+          <p class="text-sm text-gray-600 mb-4">未来の教育提案</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
-      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール,タブレット">
-        <div class="text-2xl mb-2">👆</div>
-        <div class="text-lg">タブレット動作チェックツール<br>タッチパネルテスト</div>
-        <div class="text-sm opacity-80">タブレットのタッチ動作を確認</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/14b8a6/ffffff?text=Touch+Test" alt="Touch Test" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
+          <p class="text-sm text-gray-600 mb-4">タブレットのタッチ動作を確認</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- タブレット動作チェックツール キーボードテスト -->
-      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-emerald-500 to-lime-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール,キーボード">
-        <div class="text-2xl mb-2">⌨️</div>
-        <div class="text-lg">タブレット動作チェックツール<br>キーボードテスト</div>
-        <div class="text-sm opacity-80">タブレットのキーボード動作を確認</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/4ade80/ffffff?text=Keyboard+Test" alt="Keyboard Test" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
+          <p class="text-sm text-gray-600 mb-4">タブレットのキーボード動作を確認</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- ローマ字表記の課題 -->
-      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
         data-categories="提言,言語教育">
-        <div class="text-2xl mb-2">🔤</div>
-        <div class="text-lg">ローマ字表記の課題</div>
-        <div class="text-sm opacity-80">言語教育の改善</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/22c55e/ffffff?text=Romanji" alt="Romanji" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
+          <p class="text-sm text-gray-600 mb-4">言語教育の改善</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- micro:bit購入プラン -->
-      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
         data-categories="プログラミング">
-        <div class="text-2xl mb-2">🤖</div>
-        <div class="text-lg">micro:bit購入プラン</div>
-        <div class="text-sm opacity-80">プログラミング教育</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/eab308/ffffff?text=micro:bit" alt="micro:bit" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
+          <p class="text-sm text-gray-600 mb-4">プログラミング教育</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
-      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
-        class="content-card-link block bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
         data-categories="AI教育,生成AI,都立AI">
-        <div class="text-2xl mb-2">🧠</div>
-        <div class="text-lg">AI教育コンテンツハブ</div>
-        <div class="text-sm opacity-80">人工知能との学び</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/ef4444/ffffff?text=AI" alt="AI" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
+          <p class="text-sm text-gray-600 mb-4">人工知能との学び</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
 
       <!-- ビスケット授業計画 -->
-      <a onclick="openBisquitModal()"
-        class="content-card-link block bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+      <a onclick="openBisquitModal()" class="content-card"
         data-categories="授業計画">
-        <div class="text-2xl mb-2">📝</div>
-        <div class="text-lg">ビスケット授業計画</div>
-        <div class="text-sm opacity-80">プログラミング入門</div>
-        <div class="tags-container"></div>
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/ec4899/ffffff?text=Bisquit" alt="Bisquit" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
+          <p class="text-sm text-gray-600 mb-4">プログラミング入門</p>
+          <div class="card-tags"></div>
+        </div>
+      </a>
+
+      <!-- タグが多すぎるカードの例 -->
+      <a href="#" target="_blank" class="content-card"
+        data-categories="AI,プログラミング,教育改革,特別支援教育,DX化,ポータルサイト">
+        <div class="card-image-container">
+          <img src="https://placehold.co/800x600/6b7280/ffffff?text=Extra+Tags" alt="Extra Tags" class="w-full h-48 object-cover rounded-t-2xl">
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タグが多いカードの例</h2>
+          <p class="text-sm text-gray-600 mb-4">タグの折り返しをテストするためのカードです。</p>
+          <div class="card-tags"></div>
+        </div>
       </a>
     </div>
 
@@ -311,10 +357,6 @@
           <h2 class="text-3xl font-bold text-gray-800">📱 学習アプリ</h2>
           <button onclick="closeAppsFolder()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
         </div>
-        <!-- モーダル内の全て表示ボタン -->
-        <div class="text-center mb-4">
-          <button onclick="filterModalApps('all')" class="px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm shadow-md transition-colors duration-200">全て表示</button>
-        </div>
         <div class="p-6">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="modal-apps-grid">
             <!-- 百マス計算アプリ -->
@@ -322,76 +364,53 @@
               target="_blank"
               class="block bg-gradient-to-br from-blue-100 to-blue-200 hover:from-blue-200 hover:to-blue-300 text-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
               data-categories="算数,百マス">
-              <span class="category-tag bg-blue-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🔢</div>
                 <h3 class="text-lg font-bold mb-2">百マス計算</h3>
                 <p class="text-sm opacity-80 mb-3">一桁の足し算・引き算を素早く計算練習</p>
-                <div class="flex justify-center space-x-2 mb-3">
-                  <span class="bg-gray-200 px-2 py-1 rounded text-xs">足し算</span>
-                  <span class="bg-gray-200 px-2 py-1 rounded text-xs">引き算</span>
-                </div>
-                <div class="text-xs opacity-70">難易度: ⭐⭐⭐</div>
               </div>
             </a>
-
-            <!-- 将来追加予定のアプリスロット -->
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="算数,九九">
-              <span class="category-tag bg-purple-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">九九練習</h3>
                 <p class="text-sm opacity-80 mb-3">準備中...</p>
-                <div class="text-xs opacity-70">Coming Soon</div>
               </div>
             </div>
-
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="国語,漢字">
-              <span class="category-tag bg-green-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">国語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">漢字練習</h3>
                 <p class="text-sm opacity-80 mb-3">準備中...</p>
-                <div class="text-xs opacity-70">Coming Soon</div>
               </div>
             </div>
-
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="英語,英単語">
-              <span class="category-tag bg-red-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">英語</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">英単語学習</h3>
                 <p class="text-sm opacity-80 mb-3">準備中...</p>
-                <div class="text-xs opacity-70">Coming Soon</div>
               </div>
             </div>
-
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="生活,時計">
-              <span class="category-tag bg-yellow-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">生活</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">時計の読み方</h3>
                 <p class="text-sm opacity-80 mb-3">準備中...</p>
-                <div class="text-xs opacity-70">Coming Soon</div>
               </div>
             </div>
-
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-700 rounded-2xl p-6 shadow-xl opacity-60 relative overflow-hidden"
               data-categories="算数,分数">
-              <span class="category-tag bg-indigo-600" style="top: 0.5rem; left: 0.5rem; padding: 0.15rem 0.5rem; font-size: 0.65rem;">算数</span>
               <div class="text-center">
                 <div class="text-4xl mb-3">🚧</div>
                 <h3 class="text-lg font-bold mb-2">分数計算</h3>
                 <p class="text-sm opacity-80 mb-3">準備中...</p>
-                <div class="text-xs opacity-70">Coming Soon</div>
               </div>
             </div>
           </div>
-
           <div class="mt-8 text-center">
             <p class="text-gray-600 text-sm">🔄 新しいアプリを随時追加予定です</p>
           </div>
@@ -423,7 +442,6 @@
             </div>
           </div>
           <div id="bisquitContent">
-            <!-- デフォルトの授業計画内容 -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
               <div class="bg-red-500/10 rounded-xl p-6 border border-red-300/30">
                 <h4 class="text-xl font-bold text-red-600 mb-3">ステップ1：10分授業</h4>
@@ -436,7 +454,6 @@
                   <li>• まとめ（1分）</li>
                 </ul>
               </div>
-
               <div class="bg-yellow-500/10 rounded-xl p-6 border border-yellow-300/30">
                 <h4 class="text-xl font-bold text-yellow-600 mb-3">ステップ2：20分授業</h4>
                 <div class="text-4xl mb-3">🧠</div>
@@ -448,7 +465,6 @@
                   <li>• インタラクティブな作品作り</li>
                 </ul>
               </div>
-
               <div class="bg-green-500/10 rounded-xl p-6 border border-green-300/30">
                 <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
                 <div class="text-4xl mb-3">💡</div>
@@ -461,7 +477,6 @@
                 </ul>
               </div>
             </div>
-
             <div class="mt-8 text-center">
               <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
               <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
@@ -478,51 +493,46 @@
     </div>
   </div>
 
-
   <script>
     const API_KEY = ""; // leave as-is
 
-    // アプリフォルダのモーダルを開く関数
     function openAppsFolder() {
       document.getElementById('appsModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // 背景のスクロールを無効にする
-      filterModalApps('all'); // モーダルを開くときにすべてのアプリを表示
+      document.body.style.overflow = 'hidden';
+      filterModalApps('all');
     }
 
-    // アプリフォルダのモーダルを閉じる関数
     function closeAppsFolder() {
       document.getElementById('appsModal').classList.add('hidden');
-      document.body.style.overflow = ''; // 背景のスクロールを有効にする
+      document.body.style.overflow = '';
     }
 
-    // ビスケット授業計画のモーダルを開く関数
     function openBisquitModal() {
       document.getElementById('bisquitModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // 背景のスクロールを無効にする
+      document.body.style.overflow = 'hidden';
     }
 
-    // ビスケット授業計画のモーダルを閉じる関数
     function closeBisquitModal() {
       document.getElementById('bisquitModal').classList.add('hidden');
-      document.body.style.overflow = ''; // 背景のスクロールを有効にする
-      document.getElementById('tts-player').pause();
+      document.body.style.overflow = '';
+      const ttsPlayer = document.getElementById('tts-player');
+      if (!ttsPlayer.paused) {
+        ttsPlayer.pause();
+      }
     }
 
-    // メインコンテンツのカテゴリでコンテンツをフィルタリングする関数
     function filterContent(category) {
       const contentGrid = document.getElementById('content-grid');
-      const contentItems = contentGrid.querySelectorAll('.content-card-link');
+      const contentItems = contentGrid.querySelectorAll('.content-card');
       const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
 
-      // 選択中のフィルターボタンをアクティブにする
       filterButtons.forEach(button => {
         button.classList.remove('active');
-        if (button.textContent.trim() === category) {
+        if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
           button.classList.add('active');
         }
       });
 
-      // カードの表示/非表示を切り替える
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
@@ -533,7 +543,6 @@
       });
     }
 
-    // モーダル内のアプリをカテゴリでフィルタリングする関数
     function filterModalApps(category) {
       const modalAppsGrid = document.getElementById('modal-apps-grid');
       const appItems = modalAppsGrid.querySelectorAll('.block');
@@ -548,7 +557,6 @@
       });
     }
 
-    // タグの色を決定するヘルパー関数
     function getTagColor(category) {
       const colors = {
         '教育アプリ': 'bg-blue-700',
@@ -569,36 +577,49 @@
         'プログラミング': 'bg-yellow-700',
         'AI教育': 'bg-red-700',
         '都立AI': 'bg-pink-700',
-        '授業計画': 'bg-pink-700'
+        '授業計画': 'bg-pink-700',
+        '算数': 'bg-cyan-700',
+        '百マス': 'bg-cyan-600',
+        '九九': 'bg-cyan-500',
+        '国語': 'bg-lime-700',
+        '漢字': 'bg-lime-600',
+        '英語': 'bg-rose-700',
+        '英単語': 'bg-rose-600',
+        '生活': 'bg-amber-700',
+        '時計': 'bg-amber-600',
+        '分数': 'bg-indigo-600',
+        'AI': 'bg-slate-700'
       };
-      return colors[category] || 'bg-gray-500'; // デフォルト色
+      return colors[category] || 'bg-gray-500';
     }
 
-    // ページロード時にフィルターボタンとタグを動的に生成し、イベントを設定する
     document.addEventListener('DOMContentLoaded', () => {
       const allCategories = new Set();
-      const contentItems = document.querySelectorAll('#content-grid .content-card-link');
+      const contentItems = document.querySelectorAll('#content-grid .content-card');
 
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
-        const tagsContainer = item.querySelector('.tags-container');
+        const tagsContainer = item.querySelector('.card-tags');
 
-        // タグを動的に生成
+        // Clear existing tags to prevent duplication on re-render
+        tagsContainer.innerHTML = ''; 
+
         categories.forEach(cat => {
           const trimmedCat = cat.trim();
-          allCategories.add(trimmedCat); // フィルターボタン用にカテゴリを収集
+          allCategories.add(trimmedCat);
 
           const tagSpan = document.createElement('span');
           tagSpan.textContent = trimmedCat;
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
+          tagSpan.onclick = (e) => {
+            e.stopPropagation(); // Prevents the card's link from being triggered
+            filterContent(trimmedCat);
+          };
           tagsContainer.appendChild(tagSpan);
         });
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
-      const showAllButton = filterButtonsContainer.querySelector('.filter-button');
-      
-      // カテゴリフィルタボタンを動的に生成
       allCategories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
@@ -607,12 +628,10 @@
         filterButtonsContainer.appendChild(button);
       });
 
-      // Gemini APIの機能を追加
       document.getElementById('generate-button').addEventListener('click', generateLessonPlan);
       document.getElementById('read-aloud-button').addEventListener('click', readLessonPlan);
     });
 
-    // Gemini APIを使って授業計画のアイデアを生成する関数
     async function generateLessonPlan() {
         const loadingIndicator = document.getElementById('loading-indicator');
         const bisquitContentDiv = document.getElementById('bisquitContent');
@@ -620,7 +639,7 @@
         
         generateButton.disabled = true;
         loadingIndicator.classList.remove('hidden');
-        bisquitContentDiv.innerHTML = ''; // コンテンツをクリア
+        bisquitContentDiv.innerHTML = '';
 
         const systemPrompt = "あなたは小学校のプログラミング教育に精通した専門家です。子供たちが楽しく学べるような、具体的で創造的な授業計画を提案してください。Markdown形式で、見出しや箇条書きを使い、親しみやすい言葉で記述してください。";
         const userQuery = "ビスケットを使った小学校2年生向けのプログラミング授業計画のアイデアを生成してください。論理的思考力、創造力、問題解決能力を育むような内容にしてください。";
@@ -659,7 +678,6 @@
                 const result = await response.json();
                 const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || "アイデアの生成に失敗しました。";
                 
-                // MarkdownをHTMLに変換して表示
                 const htmlContent = marked.parse(text);
                 bisquitContentDiv.innerHTML = `
                     <div class="p-6 text-gray-800">
@@ -667,7 +685,7 @@
                       ${htmlContent}
                     </div>
                 `;
-                break; // 成功した場合はループを抜ける
+                break;
 
             } catch (error) {
                 console.error("生成中にエラーが発生しました:", error);
@@ -679,7 +697,6 @@
         generateButton.disabled = false;
     }
 
-    // Gemini APIを使って授業計画を読み上げる関数
     async function readLessonPlan() {
       const ttsPlayer = document.getElementById('tts-player');
       const bisquitContent = document.getElementById('bisquitContent');
@@ -738,7 +755,7 @@
               const mimeType = result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.mimeType;
 
               if (audioData && mimeType) {
-                  const sampleRate = 16000; // APIからのPCMデータは通常16kHz
+                  const sampleRate = 16000;
                   const pcmData = base64ToArrayBuffer(audioData);
                   const pcm16 = new Int16Array(pcmData);
                   const wavBlob = pcmToWav(pcm16, sampleRate);
@@ -757,7 +774,6 @@
       readAloudButton.disabled = false;
     }
 
-    // Base64 to ArrayBuffer helper function
     function base64ToArrayBuffer(base64) {
         const binaryString = window.atob(base64);
         const len = binaryString.length;
@@ -768,34 +784,28 @@
         return bytes.buffer;
     }
 
-    // PCM to WAV helper function
     function pcmToWav(pcmData, sampleRate) {
-        const dataLength = pcmData.length * 2; // 16-bit PCM
+        const dataLength = pcmData.length * 2;
         const buffer = new ArrayBuffer(44 + dataLength);
         const view = new DataView(buffer);
-
-        // WAVヘッダー
         writeString(view, 0, 'RIFF');
         view.setUint32(4, 36 + dataLength, true);
         writeString(view, 8, 'WAVE');
         writeString(view, 12, 'fmt ');
         view.setUint32(16, 16, true);
         view.setUint16(20, 1, true);
-        view.setUint16(22, 1, true); // Mono
+        view.setUint16(22, 1, true);
         view.setUint32(24, sampleRate, true);
-        view.setUint32(28, sampleRate * 2, true); // Byte rate
-        view.setUint16(32, 2, true); // Block align
-        view.setUint16(34, 16, true); // Bits per sample
+        view.setUint32(28, sampleRate * 2, true);
+        view.setUint16(32, 2, true);
+        view.setUint16(34, 16, true);
         writeString(view, 36, 'data');
         view.setUint32(40, dataLength, true);
-
-        // PCMデータ
         let offset = 44;
         for (let i = 0; i < pcmData.length; i++) {
             view.setInt16(offset, pcmData[i], true);
             offset += 2;
         }
-
         return new Blob([view], { type: 'audio/wav' });
     }
 
@@ -805,7 +815,6 @@
         }
     }
 
-    // Markdownパーサーをロード
     const script = document.createElement('script');
     script.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
     script.onload = () => {
@@ -815,5 +824,4 @@
 
   </script>
 </body>
-
 </html>
