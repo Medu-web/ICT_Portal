@@ -98,18 +98,26 @@
       color: white;
     }
 
-    /* カテゴリタグのスタイル */
-    .category-tag {
+    /* 新しいタグのスタイル */
+    .tags-container {
       position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
+      bottom: 1rem;
+      right: 1rem;
+      left: 1rem; /* タグがはみ出さないように左端の境界を追加 */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .tag-item {
       padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.75rem;
       font-weight: bold;
       color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      z-index: 10;
     }
 
     /* 新しいアクションボタンのスタイル */
@@ -154,6 +162,7 @@
     .content-card-link {
         cursor: pointer;
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        min-height: 180px; /* カードの最小高さを設定 */
     }
 
     .content-card-link:hover {
@@ -162,7 +171,7 @@
     }
   </style>
 
-  <title>ICTコンテンツハブ</title>
+  <title>ICTコンテンツハブ (タグ修正版)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -177,8 +186,8 @@
 
     <!-- カテゴリフィルターボタンのコンテナ -->
     <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8">
-      <!-- すべて表示ボタン (初期非表示) -->
-      <button id="show-all-button" onclick="filterContent('all')" class="px-6 py-2 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-lg shadow-md transition-colors duration-200 hidden">すべて表示</button>
+      <!-- 「すべて表示」ボタンを最初から表示 -->
+      <button onclick="filterContent('all')" class="filter-button active">すべて表示</button>
     </div>
 
     <!-- リンクのグリッド -->
@@ -187,7 +196,6 @@
       <a onclick="openAppsFolder()"
         class="content-card-link block bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="教育アプリ">
-        <span class="category-tag bg-blue-700">教育アプリ</span>
         <div class="absolute top-2 right-2 bg-red-500 text-xs px-2 py-1 rounded-full">NEW</div>
         <div class="text-3xl mb-2">📱</div>
         <div class="text-lg">アプリ</div>
@@ -196,104 +204,97 @@
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">🔢</div>
           <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs">+</div>
         </div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="GIGAスクール構想,教育改革,ポータルサイト">
-        <span class="category-tag bg-orange-700">GIGAスクール構想</span>
         <div class="text-2xl mb-2">🏫</div>
         <div class="lg">スタディーエックス　スタイル<br>StuDX Style</div>
         <div class="text-sm opacity-80">文科省の情報発信サイト</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-indigo-500 to-sky-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="DX化,ポータルサイト,特別支援教育,生成AI,AIチャットボット,熊本大学">
-        <span class="category-tag bg-indigo-700">DX化</span>
-        <span class="category-tag bg-fuchsia-700" style="left: 0.75rem; top: 2.75rem;">特別支援教育</span>
-        <span class="category-tag bg-green-700" style="left: 0.75rem; top: 4.75rem;">生成AI</span>
-        <span class="category-tag bg-sky-700" style="left: 0.75rem; top: 6.75rem;">AIチャットボット</span>
-        <span class="category-tag bg-rose-700" style="left: 0.75rem; top: 8.75rem;">熊本大学</span>
         <div class="text-2xl mb-2">💻</div>
         <div class="text-lg">学校DX化でわくわくをサポート</div>
         <div class="text-sm opacity-80">先生のための授業・教材研究を支援する情報プラットフォーム</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- ICTインフォグラフィック -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-purple-500 to-purple-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="教育改革,提言">
-        <span class="category-tag bg-purple-700">教育改革</span>
-        <span class="category-tag bg-purple-800" style="left: 0.75rem; top: 2.75rem;">提言</span>
         <div class="text-2xl mb-2">🚀</div>
         <div class="text-lg">教育ICT環境改革</div>
         <div class="text-sm opacity-80">未来の教育提案</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="動作確認,ツール,タブレット">
-        <span class="category-tag bg-teal-700">動作確認</span>
         <div class="text-2xl mb-2">👆</div>
         <div class="text-lg">タブレット動作チェックツール<br>タッチパネルテスト</div>
         <div class="text-sm opacity-80">タブレットのタッチ動作を確認</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- タブレット動作チェックツール キーボードテスト -->
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-emerald-500 to-lime-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="動作確認,ツール,キーボード">
-        <span class="category-tag bg-emerald-700">動作確認</span>
         <div class="text-2xl mb-2">⌨️</div>
         <div class="text-lg">タブレット動作チェックツール<br>キーボードテスト</div>
         <div class="text-sm opacity-80">タブレットのキーボード動作を確認</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="提言,言語教育">
-        <span class="category-tag bg-green-700">提言</span>
-        <span class="category-tag bg-green-800" style="left: 0.75rem; top: 2.75rem;">言語教育</span>
         <div class="text-2xl mb-2">🔤</div>
         <div class="text-lg">ローマ字表記の課題</div>
         <div class="text-sm opacity-80">言語教育の改善</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank"
         class="content-card-link block bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="プログラミング">
-        <span class="category-tag bg-yellow-700">プログラミング</span>
         <div class="text-2xl mb-2">🤖</div>
         <div class="text-lg">micro:bit購入プラン</div>
         <div class="text-sm opacity-80">プログラミング教育</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="AI教育,生成AI,都立AI">
-        <span class="category-tag bg-red-700">AI教育</span>
-        <span class="category-tag bg-red-800" style="left: 0.75rem; top: 2.75rem;">生成AI</span>
-        <span class="category-tag bg-pink-700" style="left: 0.75rem; top: 4.75rem;">都立AI</span>
         <div class="text-2xl mb-2">🧠</div>
         <div class="text-lg">AI教育コンテンツハブ</div>
         <div class="text-sm opacity-80">人工知能との学び</div>
+        <div class="tags-container"></div>
       </a>
 
       <!-- ビスケット授業計画 -->
       <a onclick="openBisquitModal()"
         class="content-card-link block bg-gradient-to-r from-pink-500 to-rose-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
         data-categories="授業計画">
-        <span class="category-tag bg-pink-700">授業計画</span>
         <div class="text-2xl mb-2">📝</div>
         <div class="text-lg">ビスケット授業計画</div>
         <div class="text-sm opacity-80">プログラミング入門</div>
+        <div class="tags-container"></div>
       </a>
     </div>
 
@@ -407,59 +408,70 @@
           <h2 class="text-2xl font-bold text-gray-800">ビスケット授業計画ガイド</h2>
           <button onclick="closeBisquitModal()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
         </div>
-        <div id="bisquitContent" class="p-6 text-gray-800">
+        <div class="p-6 text-gray-800">
           <div class="text-center mb-8">
             <h3 class="text-3xl font-bold text-pink-600 mb-4">🎨 プログラミングの魔法を体験！</h3>
             <p class="text-lg">小学2年生がビスケットを使ってプログラミングの基礎から創造的な表現まで、段階的に楽しく学べる授業計画です。</p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <div class="bg-red-500/10 rounded-xl p-6 border border-red-300/30">
-              <h4 class="text-xl font-bold text-red-600 mb-3">ステップ1：10分授業</h4>
-              <div class="text-4xl mb-3">🎯</div>
-              <p class="mb-3"><strong>「動いた！」体験</strong></p>
-              <ul class="text-sm space-y-1 text-gray-700">
-                <li>• 絵を描く（3分）</li>
-                <li>• ルールを作る（4分）</li>
-                <li>• 動かして感動（2分）</li>
-                <li>• まとめ（1分）</li>
-              </ul>
+            <div id="loading-indicator" class="mt-4 hidden">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
+                <p class="mt-2 text-gray-600">アイデアを生成中...</p>
             </div>
-
-            <div class="bg-yellow-500/10 rounded-xl p-6 border border-yellow-300/30">
-              <h4 class="text-xl font-bold text-yellow-600 mb-3">ステップ2：20分授業</h4>
-              <div class="text-4xl mb-3">🧠</div>
-              <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
-              <ul class="text-sm space-y-1 text-gray-700">
-                <li>• 条件分岐の概念</li>
-                <li>• キャラクター同士の相互作用</li>
-                <li>• 論理的思考の第一歩</li>
-                <li>• インタラクティブな作品作り</li>
-              </ul>
-            </div>
-
-            <div class="bg-green-500/10 rounded-xl p-6 border border-green-300/30">
-              <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
-              <div class="text-4xl mb-3">💡</div>
-              <p class="mb-3"><strong>創造的表現と発展</strong></p>
-              <ul class="text-sm space-y-1 text-gray-700">
-                <li>• 自由な発想で作品制作</li>
-                <li>• 発表とフィードバック</li>
-                <li>• 友達の作品から学ぶ</li>
-                <li>• プログラミング的思考の深化</li>
-              </ul>
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <button id="generate-button" class="action-button bg-purple-600 hover:bg-purple-700">✨ 新しい授業アイデアを生成</button>
+                <button id="read-aloud-button" class="action-button bg-teal-600 hover:bg-teal-700">🔊 授業計画を読み上げる</button>
+                <audio id="tts-player" controls class="mt-4 hidden"></audio>
             </div>
           </div>
+          <div id="bisquitContent">
+            <!-- デフォルトの授業計画内容 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div class="bg-red-500/10 rounded-xl p-6 border border-red-300/30">
+                <h4 class="text-xl font-bold text-red-600 mb-3">ステップ1：10分授業</h4>
+                <div class="text-4xl mb-3">🎯</div>
+                <p class="mb-3"><strong>「動いた！」体験</strong></p>
+                <ul class="text-sm space-y-1 text-gray-700">
+                  <li>• 絵を描く（3分）</li>
+                  <li>• ルールを作る（4分）</li>
+                  <li>• 動かして感動（2分）</li>
+                  <li>• まとめ（1分）</li>
+                </ul>
+              </div>
 
-          <div class="mt-8 text-center">
-            <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
-            <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
-              <li>創造力：自分でアイデアを形にする楽しさ</li>
-              <li>論理的思考力：どうすれば動くか考える力</li>
-              <li>問題解決能力：エラーを自分で見つけて直す力</li>
-              <li>表現力：自分の考えをプログラミングで伝える力</li>
-            </ul>
-            <p class="mt-6 text-base text-gray-700">この授業計画を通じて、子供たちはプログラミングを身近なものとして捉え、未来のデジタル社会で活躍するための基礎を築きます。</p>
+              <div class="bg-yellow-500/10 rounded-xl p-6 border border-yellow-300/30">
+                <h4 class="text-xl font-bold text-yellow-600 mb-3">ステップ2：20分授業</h4>
+                <div class="text-4xl mb-3">🧠</div>
+                <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
+                <ul class="text-sm space-y-1 text-gray-700">
+                  <li>• 条件分岐の概念</li>
+                  <li>• キャラクター同士の相互作用</li>
+                  <li>• 論理的思考の第一歩</li>
+                  <li>• インタラクティブな作品作り</li>
+                </ul>
+              </div>
+
+              <div class="bg-green-500/10 rounded-xl p-6 border border-green-300/30">
+                <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
+                <div class="text-4xl mb-3">💡</div>
+                <p class="mb-3"><strong>創造的表現と発展</strong></p>
+                <ul class="text-sm space-y-1 text-gray-700">
+                  <li>• 自由な発想で作品制作</li>
+                  <li>• 発表とフィードバック</li>
+                  <li>• 友達の作品から学ぶ</li>
+                  <li>• プログラミング的思考の深化</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-8 text-center">
+              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
+              <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
+                <li>創造力：自分でアイデアを形にする楽しさ</li>
+                <li>論理的思考力：どうすれば動くか考える力</li>
+                <li>問題解決能力：エラーを自分で見つけて直す力</li>
+                <li>表現力：自分の考えをプログラミングで伝える力</li>
+              </ul>
+              <p class="mt-6 text-base text-gray-700">この授業計画を通じて、子供たちはプログラミングを身近なものとして捉え、未来のデジタル社会で活躍するための基礎を築きます。</p>
+            </div>
           </div>
         </div>
       </div>
@@ -468,6 +480,8 @@
 
 
   <script>
+    const API_KEY = ""; // leave as-is
+
     // アプリフォルダのモーダルを開く関数
     function openAppsFolder() {
       document.getElementById('appsModal').classList.remove('hidden');
@@ -491,6 +505,7 @@
     function closeBisquitModal() {
       document.getElementById('bisquitModal').classList.add('hidden');
       document.body.style.overflow = ''; // 背景のスクロールを有効にする
+      document.getElementById('tts-player').pause();
     }
 
     // メインコンテンツのカテゴリでコンテンツをフィルタリングする関数
@@ -498,7 +513,6 @@
       const contentGrid = document.getElementById('content-grid');
       const contentItems = contentGrid.querySelectorAll('.content-card-link');
       const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
-      const showAllButton = document.getElementById('show-all-button');
 
       // 選択中のフィルターボタンをアクティブにする
       filterButtons.forEach(button => {
@@ -507,13 +521,6 @@
           button.classList.add('active');
         }
       });
-
-      // 「すべて表示」ボタンの表示/非表示を切り替える
-      if (category === 'all') {
-        showAllButton.classList.add('hidden');
-      } else {
-        showAllButton.classList.remove('hidden');
-      }
 
       // カードの表示/非表示を切り替える
       contentItems.forEach(item => {
@@ -541,21 +548,57 @@
       });
     }
 
-    // ページロード時にフィルターボタンを動的に生成し、イベントを設定する
+    // タグの色を決定するヘルパー関数
+    function getTagColor(category) {
+      const colors = {
+        '教育アプリ': 'bg-blue-700',
+        'GIGAスクール構想': 'bg-orange-700',
+        '教育改革': 'bg-orange-800',
+        'ポータルサイト': 'bg-yellow-600',
+        'DX化': 'bg-indigo-700',
+        '特別支援教育': 'bg-fuchsia-700',
+        '生成AI': 'bg-green-700',
+        'AIチャットボット': 'bg-sky-700',
+        '熊本大学': 'bg-rose-700',
+        '提言': 'bg-purple-700',
+        '動作確認': 'bg-teal-700',
+        'ツール': 'bg-teal-600',
+        'タブレット': 'bg-teal-500',
+        'キーボード': 'bg-emerald-500',
+        '言語教育': 'bg-green-800',
+        'プログラミング': 'bg-yellow-700',
+        'AI教育': 'bg-red-700',
+        '都立AI': 'bg-pink-700',
+        '授業計画': 'bg-pink-700'
+      };
+      return colors[category] || 'bg-gray-500'; // デフォルト色
+    }
+
+    // ページロード時にフィルターボタンとタグを動的に生成し、イベントを設定する
     document.addEventListener('DOMContentLoaded', () => {
       const allCategories = new Set();
       const contentItems = document.querySelectorAll('#content-grid .content-card-link');
 
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
-        categories.forEach(cat => allCategories.add(cat.trim()));
+        const tagsContainer = item.querySelector('.tags-container');
+
+        // タグを動的に生成
+        categories.forEach(cat => {
+          const trimmedCat = cat.trim();
+          allCategories.add(trimmedCat); // フィルターボタン用にカテゴリを収集
+
+          const tagSpan = document.createElement('span');
+          tagSpan.textContent = trimmedCat;
+          tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
+          tagsContainer.appendChild(tagSpan);
+        });
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
-
-      // Add a 'Portal Site' category to the filter list.
-      allCategories.add('ポータルサイト');
-
+      const showAllButton = filterButtonsContainer.querySelector('.filter-button');
+      
+      // カテゴリフィルタボタンを動的に生成
       allCategories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
@@ -563,7 +606,213 @@
         button.onclick = () => filterContent(category);
         filterButtonsContainer.appendChild(button);
       });
+
+      // Gemini APIの機能を追加
+      document.getElementById('generate-button').addEventListener('click', generateLessonPlan);
+      document.getElementById('read-aloud-button').addEventListener('click', readLessonPlan);
     });
+
+    // Gemini APIを使って授業計画のアイデアを生成する関数
+    async function generateLessonPlan() {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const bisquitContentDiv = document.getElementById('bisquitContent');
+        const generateButton = document.getElementById('generate-button');
+        
+        generateButton.disabled = true;
+        loadingIndicator.classList.remove('hidden');
+        bisquitContentDiv.innerHTML = ''; // コンテンツをクリア
+
+        const systemPrompt = "あなたは小学校のプログラミング教育に精通した専門家です。子供たちが楽しく学べるような、具体的で創造的な授業計画を提案してください。Markdown形式で、見出しや箇条書きを使い、親しみやすい言葉で記述してください。";
+        const userQuery = "ビスケットを使った小学校2年生向けのプログラミング授業計画のアイデアを生成してください。論理的思考力、創造力、問題解決能力を育むような内容にしてください。";
+
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: {
+                parts: [{ text: systemPrompt }]
+            },
+        };
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+        let retryCount = 0;
+        const maxRetries = 3;
+        const baseDelay = 1000;
+
+        while (retryCount < maxRetries) {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429) {
+                        const delay = baseDelay * Math.pow(2, retryCount);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        retryCount++;
+                        continue;
+                    } else {
+                        throw new Error(`API error: ${response.statusText}`);
+                    }
+                }
+
+                const result = await response.json();
+                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || "アイデアの生成に失敗しました。";
+                
+                // MarkdownをHTMLに変換して表示
+                const htmlContent = marked.parse(text);
+                bisquitContentDiv.innerHTML = `
+                    <div class="p-6 text-gray-800">
+                      <h3 class="text-2xl font-bold text-pink-600 mb-4">✨ 新しい授業計画のアイデア</h3>
+                      ${htmlContent}
+                    </div>
+                `;
+                break; // 成功した場合はループを抜ける
+
+            } catch (error) {
+                console.error("生成中にエラーが発生しました:", error);
+                bisquitContentDiv.innerHTML = `<p class="text-red-500">エラーが発生しました。もう一度お試しください。</p>`;
+                break;
+            }
+        }
+        loadingIndicator.classList.add('hidden');
+        generateButton.disabled = false;
+    }
+
+    // Gemini APIを使って授業計画を読み上げる関数
+    async function readLessonPlan() {
+      const ttsPlayer = document.getElementById('tts-player');
+      const bisquitContent = document.getElementById('bisquitContent');
+      const readAloudButton = document.getElementById('read-aloud-button');
+      
+      const textToRead = bisquitContent.innerText;
+      if (!textToRead) {
+          bisquitContent.innerHTML = `<p class="text-red-500">読み上げるテキストがありません。</p>`;
+          return;
+      }
+
+      readAloudButton.disabled = true;
+      ttsPlayer.classList.remove('hidden');
+      ttsPlayer.src = '';
+      ttsPlayer.pause();
+      
+      const payload = {
+          contents: [{ parts: [{ text: textToRead }] }],
+          generationConfig: {
+              responseModalities: ["AUDIO"],
+              speechConfig: {
+                  voiceConfig: {
+                      prebuiltVoiceConfig: { voiceName: "Kore" }
+                  }
+              }
+          },
+          model: "gemini-2.5-flash-preview-tts"
+      };
+
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
+      let retryCount = 0;
+      const maxRetries = 3;
+      const baseDelay = 1000;
+
+      while (retryCount < maxRetries) {
+          try {
+              const response = await fetch(apiUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+              if (!response.ok) {
+                  if (response.status === 429) {
+                      const delay = baseDelay * Math.pow(2, retryCount);
+                      await new Promise(resolve => setTimeout(resolve, delay));
+                      retryCount++;
+                      continue;
+                  } else {
+                      throw new Error(`API error: ${response.statusText}`);
+                  }
+              }
+
+              const result = await response.json();
+              const audioData = result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+              const mimeType = result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.mimeType;
+
+              if (audioData && mimeType) {
+                  const sampleRate = 16000; // APIからのPCMデータは通常16kHz
+                  const pcmData = base64ToArrayBuffer(audioData);
+                  const pcm16 = new Int16Array(pcmData);
+                  const wavBlob = pcmToWav(pcm16, sampleRate);
+                  ttsPlayer.src = URL.createObjectURL(wavBlob);
+                  ttsPlayer.play();
+              } else {
+                  console.error("音声データの取得に失敗しました。");
+              }
+              break;
+          } catch (error) {
+              console.error("音声読み上げ中にエラーが発生しました:", error);
+              bisquitContent.innerHTML = `<p class="text-red-500">音声読み上げに失敗しました。もう一度お試しください。</p>`;
+              break;
+          }
+      }
+      readAloudButton.disabled = false;
+    }
+
+    // Base64 to ArrayBuffer helper function
+    function base64ToArrayBuffer(base64) {
+        const binaryString = window.atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
+    // PCM to WAV helper function
+    function pcmToWav(pcmData, sampleRate) {
+        const dataLength = pcmData.length * 2; // 16-bit PCM
+        const buffer = new ArrayBuffer(44 + dataLength);
+        const view = new DataView(buffer);
+
+        // WAVヘッダー
+        writeString(view, 0, 'RIFF');
+        view.setUint32(4, 36 + dataLength, true);
+        writeString(view, 8, 'WAVE');
+        writeString(view, 12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, 1, true); // Mono
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * 2, true); // Byte rate
+        view.setUint16(32, 2, true); // Block align
+        view.setUint16(34, 16, true); // Bits per sample
+        writeString(view, 36, 'data');
+        view.setUint32(40, dataLength, true);
+
+        // PCMデータ
+        let offset = 44;
+        for (let i = 0; i < pcmData.length; i++) {
+            view.setInt16(offset, pcmData[i], true);
+            offset += 2;
+        }
+
+        return new Blob([view], { type: 'audio/wav' });
+    }
+
+    function writeString(view, offset, string) {
+        for (let i = 0; i < string.length; i++) {
+            view.setUint8(offset + i, string.charCodeAt(i));
+        }
+    }
+
+    // Markdownパーサーをロード
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
+    script.onload = () => {
+        console.log('Marked.js loaded');
+    };
+    document.head.appendChild(script);
+
   </script>
 </body>
 
