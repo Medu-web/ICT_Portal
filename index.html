@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICTコンテンツポータル</title>
+  <title>ICTポータル</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -82,11 +82,6 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    #appsModal .glass-effect .absolute.top-2.right-2 {
-      background-color: #e53e3e;
-      color: white;
-    }
-
     .filter-button {
       background-color: #cbd5e0;
       color: #4a5568;
@@ -147,8 +142,10 @@
       bottom: 0.5rem;
       left: 0.5rem;
       display: flex;
-      flex-wrap: nowrap; /* タグの折り返しを禁止 */
+      flex-wrap: wrap; 
       gap: 0.5rem;
+      max-height: 100px; /* タグがはみ出さないように最大高さを設定 */
+      overflow: hidden; /* はみ出した分は非表示に */
     }
 
     .tag-item {
@@ -158,9 +155,9 @@
       font-weight: 600;
       color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      white-space: nowrap;
       cursor: pointer;
       transition: transform 0.2s, opacity 0.2s;
+      white-space: nowrap; /* タグのテキストを折り返さない */
     }
 
     .tag-item:hover {
@@ -183,14 +180,36 @@
       z-index: 1;
     }
   </style>
+<style>
+/* ===============================
+   Flicker fix for bottom tags & cards
+   Why: parent .content-card moves (translateY) while child .tag-item scales,
+        so the pointer briefly leaves the element → hover toggles rapidly.
+   Fix: keep the clickable card box static; animate an inner wrapper instead.
+        Also anchor tag scaling at its bottom-left so it stays under the cursor.
+   =============================== */
+.content-card:hover { transform: none !important; }
+.content-card { position: relative; }
+.content-card .card-inner {
+  position: relative;
+  transition: transform .30s ease, box-shadow .30s ease;
+  will-change: transform;
+}
+.content-card:hover .card-inner {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px rgba(0,0,0,.15);
+}
+.tag-item { transform-origin: left bottom; }
+.tag-item:hover { transform: scale(1.05); }
+</style>
 </head>
 
 <body class="p-8 flex flex-col items-center min-h-screen">
   <!-- メインコンテンツのコンテナ -->
   <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
     <!-- タイトル -->
-    <h1 class="text-5xl font-extrabold text-gray-800 mb-4 drop-shadow-lg">✨ ICTコンテンツポータル</h1>
-    <p class="text-xl text-gray-700 mb-6 drop-shadow">革新的な教育体験をお届けします - クリックして探索してください</p>
+    <h1 class="text-5xl font-extrabold text-gray-800 mb-4">✨ ICTコンテンツポータル</h1>
+    <p class="text-xl text-gray-700 mb-6">革新的な教育体験をお届けします - クリックして探索してください</p>
 
     <!-- カテゴリフィルターボタンのコンテナ -->
     <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8">
@@ -330,6 +349,15 @@
           <div class="card-tags"></div>
         </div>
       </a>
+
+      <!-- タグが多いカードの例 (テスト用) -->
+      
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タグが多いカードの例</h2>
+          <p class="text-sm text-gray-600 mb-4">タグの折り返しをテストするためのカードです。</p>
+          <div class="card-tags"></div>
+        </div>
+      </div>
     </div>
 
     <div class="mt-12 text-center">
@@ -458,6 +486,7 @@
         '授業計画': 'bg-pink-700',
         '算数': 'bg-cyan-700',
         '百マス': 'bg-cyan-600',
+        '熊大': 'bg-blue-800',
       };
       return colors[category] || 'bg-gray-500';
     }
@@ -466,11 +495,12 @@
       const allCategories = new Set();
       const contentItems = document.querySelectorAll('#content-grid .content-card');
 
+      // タグを動的に生成し、カテゴリを収集
       contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',').slice(0, 2) : []; // タグを最大2つに制限
+        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         const tagsContainer = item.querySelector('.card-tags');
 
-        tagsContainer.innerHTML = '';
+        tagsContainer.innerHTML = ''; // 既存のタグをクリア
 
         categories.forEach(cat => {
           const trimmedCat = cat.trim();
@@ -488,6 +518,7 @@
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
+      // フィルターボタンを動的に生成
       allCategories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
@@ -497,5 +528,17 @@
       });
     });
   </script>
+<script>
+(function(){
+  document.querySelectorAll('.content-card').forEach(function(card){
+    if (!card.querySelector(':scope > .card-inner')) {
+      var inner = document.createElement('div');
+      inner.className = 'card-inner';
+      while (card.firstChild) inner.appendChild(card.firstChild);
+      card.appendChild(inner);
+    }
+  });
+})();
+</script>
 </body>
 </html>
