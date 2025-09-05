@@ -201,11 +201,22 @@
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank"
         class="content-card-link block bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
-        data-categories="GIGAスクール構想,教育改革">
+        data-categories="GIGAスクール構想,教育改革,ポータルサイト">
         <span class="category-tag bg-orange-700">GIGAスクール構想</span>
         <div class="text-2xl mb-2">🏫</div>
         <div class="lg">スタディーエックス　スタイル<br>StuDX Style</div>
         <div class="text-sm opacity-80">文科省の情報発信サイト</div>
+      </a>
+
+      <!-- 学校DX化でわくわくをサポート -->
+      <a href="https://www.treasure-max.fun/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-indigo-500 to-sky-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+        data-categories="DX化,ポータルサイト,特別支援教育">
+        <span class="category-tag bg-indigo-700">DX化</span>
+        <span class="category-tag bg-fuchsia-700" style="left: 0.75rem; top: 2.75rem;">特別支援教育</span>
+        <div class="text-2xl mb-2">💻</div>
+        <div class="text-lg">学校DX化でわくわくをサポート</div>
+        <div class="text-sm opacity-80">教育のDX化を推進</div>
       </a>
 
       <!-- ICTインフォグラフィック -->
@@ -217,6 +228,26 @@
         <div class="text-2xl mb-2">🚀</div>
         <div class="text-lg">教育ICT環境改革</div>
         <div class="text-sm opacity-80">未来の教育提案</div>
+      </a>
+
+      <!-- タブレット動作チェックツール タッチパネルテスト -->
+      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+        data-categories="動作確認,ツール,タブレット">
+        <span class="category-tag bg-teal-700">動作確認</span>
+        <div class="text-2xl mb-2">👆</div>
+        <div class="text-lg">タブレット動作チェックツール<br>タッチパネルテスト</div>
+        <div class="text-sm opacity-80">タブレットのタッチ動作を確認</div>
+      </a>
+
+      <!-- タブレット動作チェックツール キーボードテスト -->
+      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank"
+        class="content-card-link block bg-gradient-to-r from-emerald-500 to-lime-600 text-white font-bold py-6 px-8 rounded-2xl shadow-xl relative overflow-hidden"
+        data-categories="動作確認,ツール,キーボード">
+        <span class="category-tag bg-emerald-700">動作確認</span>
+        <div class="text-2xl mb-2">⌨️</div>
+        <div class="text-lg">タブレット動作チェックツール<br>キーボードテスト</div>
+        <div class="text-sm opacity-80">タブレットのキーボード動作を確認</div>
       </a>
 
       <!-- ローマ字表記の課題 -->
@@ -516,6 +547,9 @@
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
+
+      // Add a 'Portal Site' category to the filter list.
+      allCategories.add('ポータルサイト');
 
       allCategories.forEach(category => {
         const button = document.createElement('button');
