@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
+  data-a11y-animated-images="system" data-a11y-link-underlines="true">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,39 +27,59 @@
       box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
     }
 
-    #bisquitModal {
+    #appsModal, #bisquitModal {
       background-color: rgba(0, 0, 0, 0.5);
     }
 
+    #appsModal .glass-effect,
     #bisquitModal .glass-effect {
       background-color: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(0, 0, 0, 0.15);
       color: #2d3748;
     }
     
+    #appsModal .glass-effect h2,
     #bisquitModal .glass-effect h2,
     #bisquitModal .glass-effect h3,
     #bisquitModal .glass-effect h4,
+    #appsModal .glass-effect p,
     #bisquitModal .glass-effect p,
     #bisquitModal .glass-effect ul,
     #bisquitModal .glass-effect li {
       color: #2d3748;
     }
     
+    #appsModal .glass-effect .text-white,
     #bisquitModal .glass-effect .text-white {
       color: #2d3748 !important;
     }
 
-    #bisquitModal .glass-effect .border-white\/20 {
+    #appsModal .glass-effect .border-white\/20 {
       border-color: rgba(0, 0, 0, 0.1) !important;
     }
 
+    #appsModal .glass-effect button,
     #bisquitModal .glass-effect button {
       color: #4a5568 !important;
     }
 
+    #appsModal .glass-effect button:hover,
     #bisquitModal .glass-effect button:hover {
       color: #e53e3e !important;
+    }
+
+    #appsModal .glass-effect a.block,
+    #appsModal .glass-effect div.block {
+      background-color: #edf2f7;
+      color: #2d3748;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    #appsModal .glass-effect a.block:hover,
+    #appsModal .glass-effect div.block:hover {
+      background-color: #e2e8f0;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
     .filter-button {
@@ -96,7 +118,7 @@
       transform: translateY(-2px);
     }
 
-    /* カードデザイン */
+    /* 新しいカードデザイン */
     .content-card {
       background-color: white;
       border-radius: 1.5rem;
@@ -104,29 +126,23 @@
       overflow: hidden;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       cursor: pointer;
-      position: relative;
     }
 
-    .content-card .card-inner {
-      position: relative;
-      transition: transform .30s ease, box-shadow .30s ease;
-      will-change: transform;
-    }
-
-    .content-card:hover .card-inner {
+    .content-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
     }
 
-    .card-gradient-overlay {
-      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
-    }
-
     .card-tags {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
       display: flex;
       flex-wrap: wrap; 
       gap: 0.5rem;
-      margin-top: 1rem;
+      max-height: 100px;
+      overflow: hidden;
+      z-index: 20;
     }
 
     .tag-item {
@@ -139,20 +155,25 @@
       cursor: pointer;
       transition: transform 0.2s, opacity 0.2s;
       white-space: nowrap;
-      transform-origin: left bottom;
-      display: inline-block;
     }
 
     .tag-item:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    /* 画像のオーバーレイ */
-    .card-image-container {
-      position: relative;
+        transform: scale(1.1);
+        opacity: 0.9;
     }
     
+    .card-image-container {
+      position: relative;
+      height: 12rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 1rem;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
+      overflow: hidden;
+    }
+
     .card-image-container::before {
       content: '';
       position: absolute;
@@ -162,6 +183,16 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.2);
       z-index: 1;
+    }
+
+    .card-svg {
+      position: relative;
+      z-index: 10;
+      width: 50%;
+      height: 50%;
+      max-width: 100px;
+      max-height: 100px;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
     }
   </style>
 </head>
@@ -183,152 +214,151 @@
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
         data-categories="GIGAスクール構想,教育改革">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/fb923c/ffffff?text=StuDX+Style" alt="StuDX Style" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
-            <p class="text-sm text-gray-600">文科省の情報発信サイト</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-orange-500">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
+          <p class="text-sm text-gray-600 mb-4">文科省の情報発信サイト</p>
         </div>
       </a>
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
         data-categories="DX化,特別支援教育">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/4f46e5/ffffff?text=DX" alt="DX" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
-            <p class="text-sm text-gray-600">先生のための授業・教材研究を支援する情報プラットフォーム</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-indigo-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-4.42 3.58-8 8-8 1.48 0 2.86.41 4.07 1.12L12 10.5l-3.5 3.5 2.5 2.5 3-3 4.29 4.29c-1.11 1.09-2.5 1.81-4.04 2.14V19.93z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
+          <p class="text-sm text-gray-600 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
         </div>
       </a>
 
       <!-- ICTインフォグラフィック -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
         data-categories="教育改革,提言">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/9333ea/ffffff?text=Infographic" alt="Infographic" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
-            <p class="text-sm text-gray-600">未来の教育提案</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-purple-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.63.85 2.93 1.95 3.57 2.95H23v-2.5c0-2.33-4.67-3.5-7-3.5z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
+          <p class="text-sm text-gray-600 mb-4">未来の教育提案</p>
         </div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/14b8a6/ffffff?text=Touch+Test" alt="Touch Test" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
-            <p class="text-sm text-gray-600">タブレットのタッチ動作を確認</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-teal-500">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H6V4h12v14zm-5-10c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
+          <p class="text-sm text-gray-600 mb-4">タブレットのタッチ動作を確認</p>
         </div>
       </a>
 
       <!-- タブレット動作チェックツール キーボードテスト -->
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/4ade80/ffffff?text=Keyboard+Test" alt="Keyboard Test" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
-            <p class="text-sm text-gray-600">タブレットのキーボード動作を確認</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-green-500">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2zm-2 0h2v2H9zm-2 0h2v2H7zm-2 0h2v2H5zm0 4h2v2H5zm2 0h2v2H7zm2 0h2v2H9zm2 0h2v2h-2zm-2 4h6v2h-6z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
+          <p class="text-sm text-gray-600 mb-4">タブレットのキーボード動作を確認</p>
         </div>
       </a>
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
         data-categories="提言,言語教育">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/22c55e/ffffff?text=Romanji" alt="Romanji" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
-            <p class="text-sm text-gray-600">言語教育の改善</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-emerald-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm-1-16h2V8h-2V6zm0 4h2v8h-2v-8z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
+          <p class="text-sm text-gray-600 mb-4">言語教育の改善</p>
         </div>
       </a>
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
         data-categories="プログラミング,micro:bit">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/eab308/ffffff?text=micro:bit" alt="micro:bit" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
-            <p class="text-sm text-gray-600">プログラミング教育</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-yellow-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 6l-6 6h4v8h4V8h-2V6h2zm-4 0V4h6v2h-6zm4 10v-4h-4l6-6v6h-4v4h2v2h-2v-2z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
+          <p class="text-sm text-gray-600 mb-4">プログラミング教育</p>
         </div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
         data-categories="AI教育,生成AI">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/ef4444/ffffff?text=AI" alt="AI" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
-            <p class="text-sm text-gray-600">人工知能との学び</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-red-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-1.99-4L12 8.71 3.99 6 12 3.29 20.01 6zm-2.12 6H6.13c-.62 0-1.13-.51-1.13-1.13V5c0-.62.51-1.13 1.13-1.13h11.75c.62 0 1.13.51 1.13 1.13v5.87c0 .62-.51 1.13-1.13 1.13zM22 14v4c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-1.99-2L12 14.71 3.99 12 12 9.29 20.01 12zm-2.12 2H6.13c-.62 0-1.13-.51-1.13-1.13V9c0-.62.51-1.13 1.13-1.13h11.75c.62 0 1.13.51 1.13 1.13v5.87c0 .62-.51 1.13-1.13 1.13z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
+          <p class="text-sm text-gray-600 mb-4">人工知能との学び</p>
         </div>
       </a>
 
       <!-- ビスケット授業計画 -->
-      <div class="content-card" onclick="openBisquitModal(event)"
+      <a onclick="openBisquitModal()" class="content-card"
         data-categories="授業計画,プログラミング">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/ec4899/ffffff?text=Bisquit" alt="Bisquit" class="w-full h-48 object-cover">
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
-            <p class="text-sm text-gray-600">プログラミング入門</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-pink-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-12.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5z"></path>
+          </svg>
+          <div class="card-tags"></div>
         </div>
-      </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
+          <p class="text-sm text-gray-600 mb-4">プログラミング入門</p>
+        </div>
+      </a>
 
       <!-- 百マス計算アプリ -->
       <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
         target="_blank" class="content-card"
         data-categories="算数,百マス">
-        <div class="card-inner">
-          <div class="card-image-container">
-            <img src="https://placehold.co/800x600/60a5fa/ffffff?text=Math" alt="Math" class="w-full h-48 object-cover">
-            <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-          </div>
-          <div class="p-5">
-            <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
-            <p class="text-sm text-gray-600">一桁の足し算・引き算を素早く計算練習</p>
-            <div class="card-tags"></div>
-          </div>
+        <div class="card-image-container bg-cyan-600">
+          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 16H7V5h10v14zM9 7h2v2H9zm0 4h2v2H9zm0 4h2v2H9zm4-8h2v2h-2zm0 4h2v2h-2zm0 4h2v2h-2z"></path>
+          </svg>
+          <div class="card-tags"></div>
+        </div>
+        <div class="p-5">
+          <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
+          <p class="text-sm text-gray-600 mb-4">一桁の足し算・引き算を素早く計算練習</p>
         </div>
       </a>
     </div>
@@ -393,7 +423,7 @@
               </div>
             </div>
             <div class="mt-8 text-center">
-              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育つ力</h4>
+              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
               <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
                 <li>創造力：自分でアイデアを形にする楽しさ</li>
                 <li>論理的思考力：どうすれば動くか考える力</li>
@@ -409,9 +439,7 @@
   </div>
 
   <script>
-    function openBisquitModal(event) {
-      event.preventDefault();
-      event.stopPropagation();
+    function openBisquitModal() {
       document.getElementById('bisquitModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -426,7 +454,6 @@
       const contentItems = contentGrid.querySelectorAll('.content-card');
       const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
 
-      // フィルターボタンのアクティブ状態を更新
       filterButtons.forEach(button => {
         button.classList.remove('active');
         if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
@@ -434,7 +461,6 @@
         }
       });
 
-      // コンテンツをフィルタリング
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
@@ -456,14 +482,13 @@
         '提言': 'bg-purple-700',
         '動作確認': 'bg-teal-700',
         'ツール': 'bg-teal-600',
-        '言語教育': 'bg-green-800',
+        '言語教育': 'bg-emerald-700',
         'プログラミング': 'bg-yellow-700',
         'micro:bit': 'bg-amber-700',
         'AI教育': 'bg-red-700',
         '授業計画': 'bg-pink-700',
         '算数': 'bg-cyan-700',
         '百マス': 'bg-cyan-600',
-        '熊大': 'bg-blue-800',
       };
       return colors[category] || 'bg-gray-500';
     }
@@ -472,12 +497,11 @@
       const allCategories = new Set();
       const contentItems = document.querySelectorAll('#content-grid .content-card');
 
-      // タグを動的に生成し、カテゴリを収集
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         const tagsContainer = item.querySelector('.card-tags');
 
-        tagsContainer.innerHTML = ''; // 既存のタグをクリア
+        tagsContainer.innerHTML = '';
 
         categories.forEach(cat => {
           const trimmedCat = cat.trim();
@@ -486,20 +510,17 @@
           const tagSpan = document.createElement('span');
           tagSpan.textContent = trimmedCat;
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
-          
-          // タグクリック時の処理
+
+          // 親要素のリンクがクリックされるのを防ぐために、イベントの伝播を停止させます。
           tagSpan.onclick = (e) => {
-            e.preventDefault();
             e.stopPropagation();
             filterContent(trimmedCat);
           };
-          
           tagsContainer.appendChild(tagSpan);
         });
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
-      // フィルターボタンを動的に生成
       allCategories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
@@ -507,24 +528,6 @@
         button.onclick = () => filterContent(category);
         filterButtonsContainer.appendChild(button);
       });
-
-      // カード内部構造の設定（ホバー効果用）
-      document.querySelectorAll('.content-card').forEach(function(card){
-        // すでにcard-innerがない場合のみ追加
-        if (!card.querySelector(':scope > .card-inner')) {
-          var inner = document.createElement('div');
-          inner.className = 'card-inner';
-          while (card.firstChild) inner.appendChild(card.firstChild);
-          card.appendChild(inner);
-        }
-      });
-    });
-
-    // モーダルの外側クリックで閉じる
-    document.getElementById('bisquitModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeBisquitModal();
-      }
     });
   </script>
 </body>
