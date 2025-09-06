@@ -49,12 +49,7 @@
       color: #2d3748;
     }
     
-    #appsModal .glass-effect .text-white,
-    #bisquitModal .glass-effect .text-white {
-      color: #2d3748 !important;
-    }
-
-    #appsModal .glass-effect .border-white\/20 {
+    #appsModal .glass-effect .text-white\/20 {
       border-color: rgba(0, 0, 0, 0.1) !important;
     }
 
@@ -125,12 +120,19 @@
       box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      position: relative;
+      cursor: pointer;
     }
 
+    /*
+     * カードのホバー時には影のみ変更し、位置移動は内部ラッパーで処理します。
+     * translateY は .card-inner に委譲するためここでは指定しません。
+     */
     .content-card:hover {
-      transform: translateY(-8px);
       box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-gradient-overlay {
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
     }
 
     .card-tags {
@@ -140,9 +142,8 @@
       display: flex;
       flex-wrap: wrap; 
       gap: 0.5rem;
-      max-height: 100px;
-      overflow: hidden;
-      z-index: 20;
+      max-height: 100px; /* タグがはみ出さないように最大高さを設定 */
+      overflow: hidden; /* はみ出した分は非表示に */
     }
 
     .tag-item {
@@ -154,26 +155,18 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.2s, opacity 0.2s;
-      white-space: nowrap;
+      white-space: nowrap; /* タグのテキストを折り返さない */
     }
 
     .tag-item:hover {
         transform: scale(1.1);
         opacity: 0.9;
     }
-    
+
+    /* 画像のオーバーレイ */
     .card-image-container {
       position: relative;
-      height: 12rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-top: 1rem;
-      border-top-left-radius: 1.5rem;
-      border-top-right-radius: 1.5rem;
-      overflow: hidden;
     }
-
     .card-image-container::before {
       content: '';
       position: absolute;
@@ -183,28 +176,41 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.2);
       z-index: 1;
+      /* クリック不可にしてリンクの邪魔をしない */
+      pointer-events: none;
     }
 
-    .card-img {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* ====== カードとタグのホバー挙動を改善 ====== */
+    /* カード内側のコンテンツを包むラッパー。ホバー時の移動はここで行う。 */
+    .card-inner {
       transition: transform 0.3s ease-in-out;
+      will-change: transform;
     }
-    .content-card:hover .card-img {
-      transform: scale(1.1);
+    /* カード自体のホバー効果は影のみ変更。位置移動は内側ラッパーへ移動。 */
+    .content-card:hover {
+      /* transform は指定しない */
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
     }
-
-    .card-svg {
-      position: relative;
-      z-index: 10;
-      width: 50%;
-      height: 50%;
-      max-width: 100px;
-      max-height: 100px;
-      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+    /* ホバー時に内側ラッパーを持ち上げる */
+    .content-card:hover .card-inner {
+      transform: translateY(-8px);
+    }
+    /* タグのホバー挙動: 左下を基準に拡大。マウスが外れても点滅しにくい。 */
+    .tag-item {
+      will-change: transform;
+      transform-origin: left bottom;
+    }
+    .tag-item:hover {
+      transform: scale(1.05);
+    }
+    /* 動きが苦手なユーザー向け: アニメーションを無効化 */
+    @media (prefers-reduced-motion: reduce) {
+      .content-card:hover .card-inner {
+        transform: none;
+      }
+      .tag-item:hover {
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -226,15 +232,13 @@
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
         data-categories="GIGAスクール構想,教育改革">
-        <div class="card-image-container bg-orange-500">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/studx.png" alt="StuDX Style" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
           <p class="text-sm text-gray-600 mb-4">文科省の情報発信サイト</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
@@ -242,40 +246,40 @@
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
         data-categories="DX化,特別支援教育">
         <div class="card-image-container">
-          <img src="assets/icons/wakuwaku.jpg" class="card-img" alt="わくわくをサポートの画像" />
-          <div class="card-tags"></div>
+          <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
+          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
           <p class="text-sm text-gray-600 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
-      <!-- ICTインフォグラフィック -->
+      <!-- ICTインフォグラフィック（教育ICT環境改革） -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
         data-categories="教育改革,提言">
         <div class="card-image-container">
-          <img src="assets/icons/kyouiku-ict.jpg" class="card-img" alt="教育ICT環境改革の画像" />
-          <div class="card-tags"></div>
+          <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
+          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
           <p class="text-sm text-gray-600 mb-4">未来の教育提案</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-image-container bg-teal-500">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 16H6V4h12v14zm-5-10c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/touch_test.png" alt="タッチパネルテスト" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
           <p class="text-sm text-gray-600 mb-4">タブレットのタッチ動作を確認</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
@@ -283,12 +287,13 @@
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
         <div class="card-image-container">
-          <img src="assets/icons/keyboard.jpg" class="card-img" alt="キーボードテストの画像" />
-          <div class="card-tags"></div>
+          <!-- 置き換え: assets/icons/keyboard.png を使用 -->
+          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
           <p class="text-sm text-gray-600 mb-4">タブレットのキーボード動作を確認</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
@@ -296,75 +301,71 @@
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
         data-categories="提言,言語教育">
         <div class="card-image-container">
-          <img src="assets/icons/romanji.jpg" class="card-img" alt="ローマ字表記の課題の画像" />
-          <div class="card-tags"></div>
+          <!-- 置き換え: assets/icons/romanji.png を使用 -->
+          <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
           <p class="text-sm text-gray-600 mb-4">言語教育の改善</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
         data-categories="プログラミング,micro:bit">
-        <div class="card-image-container bg-yellow-600">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 6l-6 6h4v8h4V8h-2V6h2zm-4 0V4h6v2h-6zm4 10v-4h-4l6-6v6h-4v4h2v2h-2v-2z"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/romanji.png" alt="micro:bit" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
           <p class="text-sm text-gray-600 mb-4">プログラミング教育</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
         data-categories="AI教育,生成AI">
-        <div class="card-image-container bg-red-600">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-1.99-4L12 8.71 3.99 6 12 3.29 20.01 6zm-2.12 6H6.13c-.62 0-1.13-.51-1.13-1.13V5c0-.62.51-1.13 1.13-1.13h11.75c.62 0 1.13.51 1.13 1.13v5.87c0 .62-.51 1.13-1.13 1.13zM22 14v4c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-1.99-2L12 14.71 3.99 12 12 9.29 20.01 12zm-2.12 2H6.13c-.62 0-1.13-.51-1.13-1.13V9c0-.62.51-1.13 1.13-1.13h11.75c.62 0 1.13.51 1.13 1.13v5.87c0 .62-.51 1.13-1.13 1.13z"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/microbit.png" alt="AI" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
           <p class="text-sm text-gray-600 mb-4">人工知能との学び</p>
+          <div class="card-tags"></div>
         </div>
       </a>
 
       <!-- ビスケット授業計画 -->
-      <div onclick="openBisquitModal()" class="content-card"
+      <a onclick="openBisquitModal()" class="content-card"
         data-categories="授業計画,プログラミング">
-        <div class="card-image-container bg-pink-600">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-12.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5z"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/bisquit.png" alt="ビスケット授業計画" class="w-full h-48 object-cover rounded-t-2xl">
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
           <p class="text-sm text-gray-600 mb-4">プログラミング入門</p>
+          <div class="card-tags"></div>
         </div>
-      </div>
+      </a>
 
       <!-- 百マス計算アプリ -->
       <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
         target="_blank" class="content-card"
         data-categories="算数,百マス">
-        <div class="card-image-container bg-cyan-600">
-          <svg class="card-svg text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 16H7V5h10v14zM9 7h2v2H9zm0 4h2v2H9zm0 4h2v2H9zm4-8h2v2h-2zm0 4h2v2h-2zm0 4h2v2h-2z"></path>
-          </svg>
-          <div class="card-tags"></div>
+        <div class="card-image-container">
+          <img src="portal_images/math.png" alt="百マス計算" class="w-full h-48 object-cover rounded-t-2xl">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
         </div>
         <div class="p-5">
           <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
           <p class="text-sm text-gray-600 mb-4">一桁の足し算・引き算を素早く計算練習</p>
+          <div class="card-tags"></div>
         </div>
       </a>
+
+      <!-- テスト用のタグが多いカードは削除しました -->
     </div>
 
     <div class="mt-12 text-center">
@@ -466,7 +467,7 @@
       });
 
       contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(cat => cat.trim()) : [];
+        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
           item.style.display = 'block';
         } else {
@@ -486,13 +487,14 @@
         '提言': 'bg-purple-700',
         '動作確認': 'bg-teal-700',
         'ツール': 'bg-teal-600',
-        '言語教育': 'bg-emerald-700',
+        '言語教育': 'bg-green-800',
         'プログラミング': 'bg-yellow-700',
         'micro:bit': 'bg-amber-700',
         'AI教育': 'bg-red-700',
         '授業計画': 'bg-pink-700',
         '算数': 'bg-cyan-700',
         '百マス': 'bg-cyan-600',
+        '熊大': 'bg-blue-800',
       };
       return colors[category] || 'bg-gray-500';
     }
@@ -501,11 +503,12 @@
       const allCategories = new Set();
       const contentItems = document.querySelectorAll('#content-grid .content-card');
 
+      // タグを動的に生成し、カテゴリを収集
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         const tagsContainer = item.querySelector('.card-tags');
 
-        tagsContainer.innerHTML = '';
+        tagsContainer.innerHTML = ''; // 既存のタグをクリア
 
         categories.forEach(cat => {
           const trimmedCat = cat.trim();
@@ -514,10 +517,8 @@
           const tagSpan = document.createElement('span');
           tagSpan.textContent = trimmedCat;
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
-
           tagSpan.onclick = (e) => {
-            e.stopPropagation(); // 親要素のクリックイベントが発火するのを防ぐ
-            e.preventDefault(); // デフォルトのリンク動作を無効化する
+            e.stopPropagation();
             filterContent(trimmedCat);
           };
           tagsContainer.appendChild(tagSpan);
@@ -525,12 +526,32 @@
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
+      // フィルターボタンを動的に生成
       allCategories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('filter-button');
         button.onclick = () => filterContent(category);
         filterButtonsContainer.appendChild(button);
+      });
+    });
+  </script>
+
+  <!-- カード内のコンテンツを .card-inner で自動ラップするためのスクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.content-card').forEach(card => {
+        // 既に .card-inner が存在する場合は処理しない
+        if (card.querySelector('.card-inner')) return;
+        const children = Array.from(card.children);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card-inner';
+        children.forEach((child, index) => {
+          // 0番目の要素が画像コンテナの場合は残す
+          if (index === 0 && child.classList.contains('card-image-container')) return;
+          wrapper.appendChild(child);
+        });
+        card.appendChild(wrapper);
       });
     });
   </script>
