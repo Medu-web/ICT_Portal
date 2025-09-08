@@ -163,21 +163,9 @@
         opacity: 0.9;
     }
 
-    /* 画像のオーバーレイ */
-    .card-image-container {
-      position: relative;
-    }
+    /* 画像のオーバーレイを削除 */
     .card-image-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      /* クリック不可にしてリンクの邪魔をしない */
-      pointer-events: none;
+      content: none;
     }
 
     /* ====== カードとタグのホバー挙動を改善 ====== */
@@ -369,7 +357,7 @@
       <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card"
         data-categories="タブレット,パソコンをつかうときの約束 小学1年">
         <div class="card-image-container">
-          <img src="https://medu-web.github.io/promise/assets/promise.png" alt="タブレットのおやくそく" class="w-full h-48 object-cover rounded-t-2xl">
+          <img src="https://medu-web.github.io/promise/assets/promise.png" alt="タブレットのおやくそく" class="w-full h-48 object-contain rounded-t-2xl">
           <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
         </div>
         <div class="p-5">
