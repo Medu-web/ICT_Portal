@@ -121,6 +121,11 @@
       overflow: hidden;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem; /* パディングを追加 */
+      text-align: center;
     }
 
     /*
@@ -134,16 +139,21 @@
     .card-gradient-overlay {
       background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
     }
+    
+    /* アイコン画像をメインにするためのスタイル調整 */
+    .content-card img {
+        height: 8rem; /* 画像の高さを大きく */
+        width: auto; /* 幅は自動調整 */
+        object-fit: contain; /* 画像全体を表示 */
+        margin-bottom: 1rem; /* 画像とテキストの間に余白 */
+    }
 
     .card-tags {
-      position: absolute;
-      bottom: 0.5rem;
-      left: 0.5rem;
       display: flex;
       flex-wrap: wrap; 
+      justify-content: center;
       gap: 0.5rem;
-      max-height: 100px; /* タグがはみ出さないように最大高さを設定 */
-      overflow: hidden; /* はみ出した分は非表示に */
+      margin-top: 1rem; /* タグの余白 */
     }
 
     .tag-item {
@@ -220,154 +230,159 @@
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
         data-categories="GIGAスクール構想,教育改革">
-        <div class="card-image-container">
-          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">スタディーエックス　スタイル<br>StuDX Style</h2>
           <p class="text-sm text-gray-600 mb-4">文科省の情報発信サイト</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
         data-categories="DX化,特別支援教育">
-        <div class="card-image-container">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
-          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-48 object-cover rounded-t-2xl">
+          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">学校DX化でわくわくをサポート</h2>
           <p class="text-sm text-gray-600 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- ICTインフォグラフィック（教育ICT環境改革） -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
         data-categories="教育改革,提言">
-        <div class="card-image-container">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
-          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-48 object-cover rounded-t-2xl">
+          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">教育ICT環境改革</h2>
           <p class="text-sm text-gray-600 mb-4">未来の教育提案</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-image-container">
-          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>タッチパネルテスト</h2>
           <p class="text-sm text-gray-600 mb-4">タブレットのタッチ動作を確認</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- タブレット動作チェックツール キーボードテスト -->
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
         data-categories="動作確認,ツール">
-        <div class="card-image-container">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/keyboard.png を使用 -->
-          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-48 object-cover rounded-t-2xl">
+          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">タブレット動作チェックツール<br>キーボードテスト</h2>
           <p class="text-sm text-gray-600 mb-4">タブレットのキーボード動作を確認</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
         data-categories="提言,言語教育">
-        <div class="card-image-container">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/romanji.png を使用 -->
-          <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-48 object-cover rounded-t-2xl">
+          <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">ローマ字表記の課題</h2>
           <p class="text-sm text-gray-600 mb-4">言語教育の改善</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
         data-categories="プログラミング,micro:bit">
-        <div class="card-image-container">
-          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">micro:bit購入プラン</h2>
           <p class="text-sm text-gray-600 mb-4">プログラミング教育</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
         data-categories="AI教育,生成AI">
-        <div class="card-image-container">
-          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">AI教育コンテンツハブ</h2>
           <p class="text-sm text-gray-600 mb-4">人工知能との学び</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- ビスケット授業計画 -->
       <a onclick="openBisquitModal()" class="content-card"
         data-categories="授業計画,プログラミング">
-        <div class="card-image-container">
-          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">ビスケット授業計画</h2>
           <p class="text-sm text-gray-600 mb-4">プログラミング入門</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- 百マス計算アプリ -->
       <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
         target="_blank" class="content-card"
         data-categories="算数,百マス">
-        <div class="card-image-container">
-          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-48 object-cover rounded-t-2xl">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
           <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
         </div>
-        <div class="p-5">
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">百マス計算</h2>
           <p class="text-sm text-gray-600 mb-4">一桁の足し算・引き算を素早く計算練習</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
 
       <!-- 新しく追加したカード -->
       <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card"
         data-categories="タブレット,パソコンをつかうときの約束 小学1年">
-        <div class="card-image-container">
-          <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-pro-with-google-search.width-1200.jpg" alt="タブレットのおやくそく" class="w-full h-48 object-contain rounded-t-2xl">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+        <div class="loading-indicator text-gray-500">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
         </div>
-        <div class="p-5">
+        <img id="image-promise" src="" alt="タブレットのおやくそく" class="hidden w-full h-full object-contain rounded-t-2xl">
+        <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+      </div>
+        <div class="p-5 flex flex-col items-center">
           <h2 class="text-lg font-semibold mb-2">タブレットのおやくそく</h2>
           <p class="text-sm text-gray-600 mb-4">はじめてのパソコン　小学校1年生との約束</p>
-          <div class="card-tags"></div>
         </div>
+        <div class="card-tags"></div>
       </a>
-
-      <!-- テスト用のタグが多いカードは削除しました -->
+      
     </div>
 
     <div class="mt-12 text-center">
@@ -446,6 +461,81 @@
   </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 画像生成APIを呼び出す関数
+        async function generateImage() {
+            const loadingIndicator = document.querySelector('.loading-indicator');
+            const imageElement = document.getElementById('image-promise');
+            loadingIndicator.classList.remove('hidden');
+            imageElement.classList.add('hidden');
+            
+            const payload = {
+                instances: [{
+                    prompt: "A colorful, friendly illustration for elementary school children about tablet rules, with simple characters and a bright background. The composition should be clear and not cropped."
+                }],
+                parameters: {
+                    "sampleCount": 1
+                }
+            };
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+            
+            // 指数関数的バックオフによるリトライ処理
+            let attempt = 0;
+            const maxAttempts = 5;
+            let response = null;
+            
+            while (attempt < maxAttempts) {
+                try {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.status !== 429) {
+                        break;
+                    }
+                    console.log(`Rate limit exceeded, retrying in ${Math.pow(2, attempt)}s...`);
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+                    attempt++;
+                } catch (error) {
+                    console.error('Fetch failed:', error);
+                    break;
+                }
+            }
+
+            if (!response || !response.ok) {
+                console.error('Failed to fetch image after multiple retries.');
+                loadingIndicator.classList.add('hidden');
+                imageElement.src = 'https://placehold.co/128x128/eeeeee/333333?text=Error';
+                imageElement.classList.remove('hidden');
+                return;
+            }
+
+            const result = await response.json();
+            const base64Data = result?.predictions?.[0]?.bytesBase64Encoded;
+
+            if (base64Data) {
+                const imageUrl = `data:image/png;base64,${base64Data}`;
+                imageElement.src = imageUrl;
+                loadingIndicator.classList.add('hidden');
+                imageElement.classList.remove('hidden');
+            } else {
+                console.error('Image data not found in the response.');
+                loadingIndicator.classList.add('hidden');
+                imageElement.src = 'https://placehold.co/128x128/eeeeee/333333?text=Error';
+                imageElement.classList.remove('hidden');
+            }
+        }
+
+        // ページ読み込み完了後に画像生成を開始
+        window.onload = function() {
+            generateImage();
+        }
+    });
+  
     function openBisquitModal() {
       document.getElementById('bisquitModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -471,7 +561,7 @@
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
         if (category === 'all' || categories.includes(category)) {
-          item.style.display = 'block';
+          item.style.display = 'flex';
         } else {
           item.style.display = 'none';
         }
