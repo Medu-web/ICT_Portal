@@ -542,6 +542,7 @@
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
           tagSpan.onclick = (e) => {
             e.stopPropagation();
+            e.preventDefault();
             filterContent(trimmedCat);
           };
           tagsContainer.appendChild(tagSpan);
