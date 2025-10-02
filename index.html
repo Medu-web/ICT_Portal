@@ -358,7 +358,7 @@
         <div class="card-tags"></div>
       </a>
 
-      <!-- 新しく追加したカード -->
+      <!-- タブレットのお約束 -->
       <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
@@ -366,6 +366,36 @@
         </div>
         <div class="p-5 flex flex-col items-center">
           <p class="text-base text-gray-700 mb-4">はじめてのパソコン　小学校1年生との約束</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+
+      <!-- AI Mode On - GIGA Tablets (NEW) -->
+      <!-- タイトルとタグを更新: 「Google検索のAIモードについて」, 「提言」 -->
+      <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
+         data-categories="提言">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
+          <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- 説明文をタイトルに合わせて更新 -->
+          <p class="text-base text-gray-700 mb-4">Google検索のAIモードについて</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+
+      <!-- 生成AIパスポート (NEW) -->
+      <!-- タイトルとタグを維持: 「生成AIパスポート」, 「生成AI, AI教育」 -->
+      <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
+         data-categories="生成AI,AI教育">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/ai_passport.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <p class="text-base text-gray-700 mb-4">安全かつ効果的に生成AIを使うための利用ガイド</p>
         </div>
         <div class="card-tags"></div>
       </a>
@@ -453,7 +483,9 @@
       async function generateImage() {
         // 画像はローカルパス assets/icons/promise.png から取得するため、画像生成は不要になりました。
         const imageElement = document.getElementById('image-promise');
-        imageElement.classList.remove('hidden');
+        if (imageElement) {
+            imageElement.classList.remove('hidden');
+        }
       }
 
       // ページ読み込み完了後に画像生成を開始
@@ -486,7 +518,7 @@
       });
 
       contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
         if (category === 'all' || categories.includes(category)) {
           item.style.display = 'flex';
         } else {
@@ -526,7 +558,7 @@
 
       // タグを動的に生成し、カテゴリを収集
       contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',') : [];
+        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
         const tagsContainer = item.querySelector('.card-tags');
 
         if (!tagsContainer) return; // tagsContainer が存在しない場合はスキップ
@@ -541,8 +573,9 @@
           tagSpan.textContent = trimmedCat;
           tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
           tagSpan.onclick = (e) => {
+            // 親要素のリンクへのイベント伝播とデフォルトの動作を停止
             e.stopPropagation();
-            e.preventDefault();
+            e.preventDefault(); 
             filterContent(trimmedCat);
           };
           tagsContainer.appendChild(tagSpan);
@@ -550,14 +583,22 @@
       });
 
       const filterButtonsContainer = document.getElementById('filter-buttons');
-      // フィルターボタンを動的に生成
+      // フィルターボタンを動的に生成 (既存の「すべて表示」ボタンの後に挿入)
+      const existingButtons = Array.from(filterButtonsContainer.querySelectorAll('.filter-button'));
+      
       allCategories.forEach(category => {
-        const button = document.createElement('button');
-        button.textContent = category;
-        button.classList.add('filter-button');
-        button.onclick = () => filterContent(category);
-        filterButtonsContainer.appendChild(button);
+        // すでにボタンが存在しないか確認
+        if (!existingButtons.some(button => button.textContent.trim() === category)) {
+          const button = document.createElement('button');
+          button.textContent = category;
+          button.classList.add('filter-button');
+          button.onclick = () => filterContent(category);
+          filterButtonsContainer.appendChild(button);
+        }
       });
+
+      // 初回表示時にすべてのコンテンツを表示
+      filterContent('all');
     });
   </script>
 
