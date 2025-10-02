@@ -87,6 +87,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.2s, transform 0.2s;
+      white-space: nowrap; /* ボタンテキストの折り返しを防ぐ */
     }
 
     .filter-button:hover {
@@ -226,15 +227,22 @@
     <p class="text-xl text-gray-700 mb-6">今日からはじめる - クリックして探索してください</p>
 
     <!-- カテゴリフィルターボタンのコンテナ -->
-    <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8">
+    <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-4">
       <button onclick="filterContent('all')" class="filter-button active">すべて表示</button>
+    </div>
+    
+    <!-- ソートコントロールのコンテナ -->
+    <div id="sort-controls" class="flex justify-center items-center gap-4 mb-8">
+        <!-- 初期は新しい順でソートされます -->
+        <button id="sort-date-button" onclick="toggleSortDirection()" class="filter-button">📅 更新順 (新しい順)</button>
     </div>
 
     <!-- リンクのグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
+      
       <!-- StudXStyle by MEXT -->
       <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
-        data-categories="GIGAスクール構想,教育改革">
+        data-categories="GIGAスクール構想,教育改革" data-updated="2025-01-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
         </div>
@@ -247,7 +255,7 @@
 
       <!-- 学校DX化でわくわくをサポート -->
       <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
-        data-categories="DX化,特別支援教育">
+        data-categories="DX化,特別支援教育" data-updated="2025-03-25">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
           <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
@@ -261,7 +269,7 @@
 
       <!-- ICTインフォグラフィック（教育ICT環境改革） -->
       <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
-        data-categories="教育改革,提言">
+        data-categories="教育改革,提言" data-updated="2025-04-10">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
           <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
@@ -275,7 +283,7 @@
 
       <!-- タブレット動作チェックツール タッチパネルテスト -->
       <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール">
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
         </div>
@@ -288,7 +296,7 @@
 
       <!-- タブレット動作チェックツール キーボードテスト -->
       <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール">
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/keyboard.png を使用 -->
           <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
@@ -302,7 +310,7 @@
 
       <!-- ローマ字表記の課題 -->
       <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
-        data-categories="提言,言語教育">
+        data-categories="提言,言語教育" data-updated="2025-06-10">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 置き換え: assets/icons/romanji.png を使用 -->
           <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-full object-contain">
@@ -316,7 +324,7 @@
 
       <!-- micro:bit購入プラン -->
       <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
-        data-categories="プログラミング,micro:bit">
+        data-categories="プログラミング,micro:bit" data-updated="2025-07-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
         </div>
@@ -329,7 +337,7 @@
 
       <!-- AI教育コンテンツハブ -->
       <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
-        data-categories="AI教育,生成AI">
+        data-categories="AI教育,生成AI" data-updated="2025-08-15">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
         </div>
@@ -342,7 +350,7 @@
 
       <!-- ビスケット授業計画 -->
       <a onclick="openBisquitModal()" class="content-card"
-        data-categories="授業計画,プログラミング">
+        data-categories="授業計画,プログラミング" data-updated="2025-08-20">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
         </div>
@@ -356,7 +364,7 @@
       <!-- 百マス計算アプリ -->
       <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
         target="_blank" class="content-card"
-        data-categories="算数,百マス">
+        data-categories="算数,百マス" data-updated="2025-09-29">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
           <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
@@ -369,7 +377,7 @@
       </a>
 
       <!-- タブレットのお約束 -->
-      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年">
+      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年" data-updated="2025-09-30">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
           <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
@@ -383,7 +391,7 @@
 
       <!-- AI Mode On - GIGA Tablets (NEW) -->
       <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
-         data-categories="提言">
+         data-categories="提言" data-updated="2025-10-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
           <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
@@ -400,7 +408,7 @@
 
       <!-- 生成AIパスポート (NEW) -->
       <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
-         data-categories="生成AI,AI教育,提言">
+         data-categories="生成AI,AI教育,提言" data-updated="2025-10-02">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
           <!-- 画像パスをassets/icons/ai_passport.pngからassets/icons/GeneratedAI.pngに変更 -->
           <img src="assets/icons/GeneratedAI.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
@@ -467,7 +475,7 @@
                 <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
                 <div class="text-4xl mb-3">💡</div>
                 <p class="mb-3"><strong>創造的表現と発展</strong></p>
-                <ul class="text-sm space-y-1 text-gray-700">
+                <ul class="list-disc list-inside text-sm space-y-1 text-gray-700">
                   <li>• 自由な発想で作品制作</li>
                   <li>• 発表とフィードバック</li>
                   <li>• 友達の作品から学ぶ</li>
@@ -492,6 +500,9 @@
   </div>
 
   <script>
+    // グローバル変数としてソート状態を定義
+    let currentSortDirection = 'desc'; // 'desc' (新しい順) or 'asc' (古い順)
+
     document.addEventListener('DOMContentLoaded', () => {
       // 画像生成APIを呼び出す関数
       async function generateImage() {
@@ -519,18 +530,24 @@
       document.body.style.overflow = '';
     }
 
+    /**
+     * 現在のカテゴリフィルターを適用します。
+     * @param {string} category - フィルタリングするカテゴリ ('all'を含む)
+     */
     function filterContent(category) {
       const contentGrid = document.getElementById('content-grid');
       const contentItems = contentGrid.querySelectorAll('.content-card');
       const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
 
+      // フィルターボタンのアクティブ状態を更新
       filterButtons.forEach(button => {
         button.classList.remove('active');
         if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
           button.classList.add('active');
         }
       });
-
+      
+      // コンテンツの表示/非表示を切り替え
       contentItems.forEach(item => {
         const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
         if (category === 'all' || categories.includes(category)) {
@@ -540,6 +557,55 @@
         }
       });
     }
+
+    /**
+     * 現在のソート方向に基づいて、コンテンツカードを並べ替えます。
+     * @param {string} direction - 'asc' (古い順) または 'desc' (新しい順)
+     */
+    function sortContent(direction) {
+        const contentGrid = document.getElementById('content-grid');
+        const contentItems = Array.from(contentGrid.querySelectorAll('.content-card'));
+
+        contentItems.sort((a, b) => {
+            // data-updated 属性 (YYYY-MM-DD形式) をDateオブジェクトに変換
+            const dateA = a.dataset.updated ? new Date(a.dataset.updated) : new Date(0);
+            const dateB = b.dataset.updated ? new Date(b.dataset.updated) : new Date(0);
+
+            if (direction === 'asc') {
+                return dateA - dateB; // 古い順 (昇順)
+            } else {
+                return dateB - dateA; // 新しい順 (降順)
+            }
+        });
+
+        // DOM要素をソートされた順序で再配置
+        contentItems.forEach(item => {
+            contentGrid.appendChild(item);
+        });
+    }
+
+    /**
+     * ソート方向を切り替え、ボタンのテキストを更新し、ソートを実行します。
+     */
+    function toggleSortDirection() {
+        const sortButton = document.getElementById('sort-date-button');
+        
+        if (currentSortDirection === 'desc') {
+            currentSortDirection = 'asc';
+            sortButton.textContent = '📅 更新順 (古い順)';
+            sortContent('asc');
+        } else {
+            currentSortDirection = 'desc';
+            sortButton.textContent = '📅 更新順 (新しい順)';
+            sortContent('desc');
+        }
+        
+        // ソート後、現在のフィルターを再適用して表示を更新（表示順序は変わらないが、念のため）
+        const activeFilterButton = document.querySelector('#filter-buttons .filter-button.active');
+        const currentCategory = activeFilterButton ? activeFilterButton.textContent.trim() : 'all';
+        filterContent(currentCategory);
+    }
+
 
     function getTagColor(category) {
       const colors = {
@@ -611,7 +677,8 @@
         }
       });
 
-      // 初回表示時にすべてのコンテンツを表示
+      // 初回表示時に、新しい順でソートを実行し、すべて表示を適用
+      sortContent(currentSortDirection);
       filterContent('all');
     });
   </script>
