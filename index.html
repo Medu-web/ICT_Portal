@@ -1,722 +1,746 @@
 <!DOCTYPE html>
 <html lang="ja" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
-  data-a11y-animated-images="system" data-a11y-link-underlines="true">
+  data-a11y-animated-images="system" data-a11y-link-underlines="true">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICTポータル</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICTポータル</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-    body {
-      font-family: 'Inter', sans-serif;
-      /* 背景色を淡いブルーに変更 */
-      background-color: #e0f2fe;
-      color: #1f2937;
-    }
+    body {
+      font-family: 'Inter', sans-serif;
+      /* 背景色を淡いブルーに変更 */
+      background-color: #e0f2fe;
+      color: #1f2937;
+    }
 
-    .glass-effect {
-      /* 背景色を不透明度のある淡いグレーに変更 */
-      background-color: rgba(240, 249, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-    }
+    .glass-effect {
+      /* 背景色を不透明度のある淡いグレーに変更 */
+      background-color: rgba(240, 249, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    }
 
-    .hover-glow:hover {
-      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
-    }
+    .hover-glow:hover {
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
+    }
 
-    #appsModal, #bisquitModal {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
+    #appsModal, #bisquitModal {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
-    #appsModal .glass-effect,
-    #bisquitModal .glass-effect {
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      color: #2d3748;
-    }
-    
-    #appsModal .glass-effect h2,
-    #bisquitModal .glass-effect h2,
-    #bisquitModal .glass-effect h3,
-    #bisquitModal .glass-effect h4,
-    #appsModal .glass-effect p,
-    #bisquitModal .glass-effect p,
-    #bisquitModal .glass-effect ul,
-    #bisquitModal .glass-effect li {
-      color: #2d3748;
-    }
-    
-    #appsModal .glass-effect .text-white\/20 {
-      border-color: rgba(0, 0, 0, 0.1) !important;
-    }
+    #appsModal .glass-effect,
+    #bisquitModal .glass-effect {
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      color: #2d3748;
+    }
+    
+    #appsModal .glass-effect h2,
+    #bisquitModal .glass-effect h2,
+    #bisquitModal .glass-effect h3,
+    #bisquitModal .glass-effect h4,
+    #appsModal .glass-effect p,
+    #bisquitModal .glass-effect p,
+    #bisquitModal .glass-effect ul,
+    #bisquitModal .glass-effect li {
+      color: #2d3748;
+    }
+    
+    #appsModal .glass-effect .text-white\/20 {
+      border-color: rgba(0, 0, 0, 0.1) !important;
+    }
 
-    #appsModal .glass-effect button,
-    #bisquitModal .glass-effect button {
-      color: #4a5568 !important;
-    }
+    #appsModal .glass-effect button,
+    #bisquitModal .glass-effect button {
+      color: #4a5568 !important;
+    }
 
-    #appsModal .glass-effect button:hover,
-    #bisquitModal .glass-effect button:hover {
-      color: #e53e3e !important;
-    }
+    #appsModal .glass-effect button:hover,
+    #bisquitModal .glass-effect button:hover {
+      color: #e53e3e !important;
+    }
 
-    #appsModal .glass-effect a.block,
-    #appsModal .glass-effect div.block {
-      background-color: #edf2f7;
-      color: #2d3748;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
+    #appsModal .glass-effect a.block,
+    #appsModal .glass-effect div.block {
+      background-color: #edf2f7;
+      color: #2d3748;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
 
-    #appsModal .glass-effect a.block:hover,
-    #appsModal .glass-effect div.block:hover {
-      background-color: #e2e8f0;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    }
+    #appsModal .glass-effect a.block:hover,
+    #appsModal .glass-effect div.block:hover {
+      background-color: #e2e8f0;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
 
-    .filter-button {
-      background-color: #cbd5e0;
-      color: #4a5568;
-      padding: 0.5rem 1.25rem;
-      border-radius: 9999px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.2s;
-      white-space: nowrap; /* ボタンテキストの折り返しを防ぐ */
-    }
+    .filter-button {
+      background-color: #cbd5e0;
+      color: #4a5568;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      white-space: nowrap; /* ボタンテキストの折り返しを防ぐ */
+    }
 
-    .filter-button:hover {
-      background-color: #a0aec0;
-      transform: translateY(-2px);
-    }
+    .filter-button:hover {
+      background-color: #a0aec0;
+      transform: translateY(-2px);
+    }
 
-    .filter-button.active {
-      background-color: #4a5568;
-      color: white;
-    }
+    .filter-button.active {
+      background-color: #4a5568;
+      color: white;
+    }
 
-    .action-button {
-      background-color: #4a5568;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      transition: background-color 0.2s, transform 0.2s;
-    }
+    .action-button {
+      background-color: #4a5568;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background-color 0.2s, transform 0.2s;
+    }
 
-    .action-button:hover {
-      background-color: #2d3748;
-      transform: translateY(-2px);
-    }
+    .action-button:hover {
+      background-color: #2d3748;
+      transform: translateY(-2px);
+    }
 
-    /* 新しいカードデザイン */
-    .content-card {
-      /* 背景色を淡いグレーに変更 */
-      background-color: #f0f4f8;
-      border-radius: 1.5rem;
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem; /* パディングを追加 */
-      text-align: center;
-    }
+    /* 新しいカードデザイン */
+    .content-card {
+      /* 背景色を淡いグレーに変更 */
+      background-color: #f0f4f8;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem; /* パディングを追加 */
+      text-align: center;
+    }
 
-    /*
-     * カードのホバー時には影のみ変更し、位置移動は内部ラッパーで処理します。
-     * translateY は .card-inner に委譲するためここでは指定しません。
-     */
-    .content-card:hover {
-      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* アイコン画像をメインにするためのスタイル調整 */
-    .content-card img {
-        height: 12rem; /* 画像の高さをより大きく */
-        width: auto; /* 幅は自動調整 */
-        object-fit: contain; /* 画像全体を表示 */
-        margin-bottom: 1rem; /* 画像とテキストの間に余白 */
-    }
-    
-    /* 画像のコンテナサイズも大きくする */
-    .card-image-container {
-      width: 16rem;
-      height: 16rem;
-    }
+    /*
+     * カードのホバー時には影のみ変更し、位置移動は内部ラッパーで処理します。
+     * translateY は .card-inner に委譲するためここでは指定しません。
+     */
+    .content-card:hover {
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* アイコン画像をメインにするためのスタイル調整 */
+    .content-card img {
+        height: 12rem; /* 画像の高さをより大きく */
+        width: auto; /* 幅は自動調整 */
+        object-fit: contain; /* 画像全体を表示 */
+        margin-bottom: 1rem; /* 画像とテキストの間に余白 */
+    }
+    
+    /* 画像のコンテナサイズも大きくする */
+    .card-image-container {
+      width: 16rem;
+      height: 16rem;
+    }
 
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap; 
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem; /* タグの余白 */
-    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem; /* タグの余白 */
+    }
 
-    .tag-item {
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: transform 0.2s, opacity 0.2s;
-      white-space: nowrap; /* タグのテキストを折り返さない */
-    }
+    .tag-item {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+      white-space: nowrap; /* タグのテキストを折り返さない */
+    }
 
-    .tag-item:hover {
-        transform: scale(1.1);
-        opacity: 0.9;
-    }
+    .tag-item:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
 
-    /* 画像のオーバーレイを削除 */
-    .card-image-container::before {
-      content: none;
-    }
-
-    /* ====== カードとタグのホバー挙動を改善 ====== */
-    /* カード内側のコンテンツを包むラッパー。ホバー時の移動はここで行う。 */
-    .card-inner {
-      transition: transform 0.3s ease-in-out;
-      will-change: transform;
-    }
-    /* カード自体のホバー効果は影のみ変更。位置移動は内側ラッパーへ移動。 */
-    .content-card:hover {
-      /* transform は指定しない */
-      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-    }
-    /* ホバー時に内側ラッパーを持ち上げる */
-    .content-card:hover .card-inner {
-      transform: translateY(-8px);
-    }
-    /* タグのホバー挙動: 左下を基準に拡大。マウスが外れても点滅しにくい。 */
-    .tag-item {
-      will-change: transform;
-      transform-origin: left bottom;
-    }
-    .tag-item:hover {
-      transform: scale(1.05);
-    }
-    /* 動きが苦手なユーザー向け: アニメーションを無効化 */
-    @media (prefers-reduced-motion: reduce) {
-      .content-card:hover .card-inner {
-        transform: none;
-      }
-      .tag-item:hover {
-        transform: none;
-      }
-    }
-  </style>
+    /* ====== カードとタグのホバー挙動を改善 ====== */
+    /* カード内側のコンテンツを包むラッパー。ホバー時の移動はここで行う。 */
+    .card-inner {
+      transition: transform 0.3s ease-in-out;
+      will-change: transform;
+    }
+    /* カード自体のホバー効果は影のみ変更。位置移動は内側ラッパーへ移動。 */
+    .content-card:hover {
+      /* transform は指定しない */
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    }
+    /* ホバー時に内側ラッパーを持ち上げる */
+    .content-card:hover .card-inner {
+      transform: translateY(-8px);
+    }
+    /* タグのホバー挙動: 左下を基準に拡大。マウスが外れても点滅しにくい。 */
+    .tag-item {
+      will-change: transform;
+      transform-origin: left bottom;
+    }
+    .tag-item:hover {
+      transform: scale(1.05);
+    }
+    /* 動きが苦手なユーザー向け: アニメーションを無効化 */
+    @media (prefers-reduced-motion: reduce) {
+      .content-card:hover .card-inner {
+        transform: none;
+      }
+      .tag-item:hover {
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
 <body class="p-8 flex flex-col items-center min-h-screen">
-  <!-- メインコンテンツのコンテナ -->
-  <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
-    <!-- タイトル -->
-    <h1 class="text-5xl font-extrabold text-gray-800 mb-4">✨ ICTポータル</h1>
-    <p class="text-xl text-gray-700 mb-6">今日からはじめる - クリックして探索してください</p>
+  <!-- メインコンテンツのコンテナ -->
+  <div class="glass-effect p-8 rounded-3xl w-full max-w-4xl text-center">
+    <!-- タイトル -->
+    <h1 class="text-5xl font-extrabold text-gray-800 mb-4">✨ ICTポータル</h1>
+    <p class="text-xl text-gray-700 mb-6">今日からはじめる - クリックして探索してください</p>
 
-    <!-- カテゴリフィルターボタンのコンテナ -->
-    <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-4">
-      <button onclick="filterContent('all')" class="filter-button active">すべて表示</button>
-    </div>
-    
-    <!-- ソートコントロールのコンテナ -->
-    <div id="sort-controls" class="flex justify-center items-center gap-4 mb-8">
-        <!-- 初期は新しい順でソートされます -->
-        <button id="sort-date-button" onclick="toggleSortDirection()" class="filter-button">📅 更新順 (新しい順)</button>
-    </div>
+    <!-- カテゴリフィルターボタンのコンテナ -->
+    <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-4">
+      <button onclick="filterContent('all')" class="filter-button active">すべて表示</button>
+    </div>
+    
+    <!-- ソートコントロールのコンテナ -->
+    <div id="sort-controls" class="flex justify-center items-center gap-4 mb-8">
+        <!-- 初期は新しい順でソートされます -->
+        <button id="sort-date-button" onclick="toggleSortDirection()" class="filter-button">📅 更新順 (新しい順)</button>
+    </div>
 
-    <!-- リンクのグリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
-      
-      <!-- プログラミングポータル (NEW) -->
-      <a href="https://medu-web.github.io/Programming_Portal/" target="_blank" class="content-card" 
-         data-categories="プログラミング,教育改革" data-updated="2025-10-03">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- プレースホルダー画像 -->
-          <img src="https://placehold.co/128x128/6D28D9/ffffff?text=Code+Portal" alt="プログラミングポータル" onerror="this.onerror=null;this.src='https://placehold.co/128x128/6D28D9/ffffff?text=Code+Portal';" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <!-- タイトルを明示的に追加 -->
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">プログラミングポータル</h3>
-          <!-- 説明文をより具体的なものに変更 -->
-          <p class="text-base text-gray-700 mb-4">小学校のプログラミング教育に役立つ情報集</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+    <!-- リンクのグリッド -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
+      
+      <!-- プログラミングポータル (NEW) -->
+      <a href="https://medu-web.github.io/Programming_Portal/" target="_blank" class="content-card" 
+         data-categories="プログラミング,教育改革" data-updated="2025-10-03">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- プレースホルダー画像 -->
+          <img src="https://placehold.co/128x128/6D28D9/ffffff?text=Code+Portal" alt="プログラミングポータル" onerror="this.onerror=null;this.src='https://placehold.co/128x128/6D28D9/ffffff?text=Code+Portal';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">プログラミングポータル</h3>
+          <!-- 説明文をより具体的なものに変更 -->
+          <p class="text-base text-gray-700 mb-4">小学校のプログラミング教育に役立つ情報集</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- StudXStyle by MEXT -->
-      <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
-        data-categories="GIGAスクール構想,教育改革" data-updated="2025-01-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">StudXStyle by MEXT</h3>
-          <p class="text-base text-gray-700 mb-4">文科省の情報発信サイト</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- StudXStyle by MEXT -->
+      <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
+        data-categories="GIGAスクール構想,教育改革" data-updated="2025-01-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">StudXStyle by MEXT</h3>
+          <p class="text-base text-gray-700 mb-4">文科省の情報発信サイト</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- 学校DX化でわくわくをサポート -->
-      <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
-        data-categories="DX化,特別支援教育" data-updated="2025-03-25">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
-          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">学校DX化でわくわくをサポート</h3>
-          <p class="text-base text-gray-700 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- 学校DX化でわくわくをサポート -->
+      <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
+        data-categories="DX化,特別支援教育" data-updated="2025-03-25">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
+          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">学校DX化でわくわくをサポート</h3>
+          <p class="text-base text-gray-700 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- ICTインフォグラフィック（教育ICT環境改革） -->
-      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
-        data-categories="教育改革,提言" data-updated="2025-04-10">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
-          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">ICTインフォグラフィック</h3>
-          <p class="text-base text-gray-700 mb-4">未来の教育提案</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- ICTインフォグラフィック（教育ICT環境改革） -->
+      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
+        data-categories="教育改革,提言" data-updated="2025-04-10">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
+          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">ICTインフォグラフィック</h3>
+          <p class="text-base text-gray-700 mb-4">未来の教育提案</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- タブレット動作チェックツール タッチパネルテスト -->
-      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール" data-updated="2025-05-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">タッチパネルテスト</h3>
-          <p class="text-base text-gray-700 mb-4">タブレットのタッチ動作を確認</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- タブレット動作チェックツール タッチパネルテスト -->
+      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">タッチパネルテスト</h3>
+          <p class="text-base text-gray-700 mb-4">タブレットのタッチ動作を確認</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- タブレット動作チェックツール キーボードテスト -->
-      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール" data-updated="2025-05-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/keyboard.png を使用 -->
-          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">キーボードテスト</h3>
-          <p class="text-base text-gray-700 mb-4">タブレットのキーボード動作を確認</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- タブレット動作チェックツール キーボードテスト -->
+      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 置き換え: assets/icons/keyboard.png を使用 -->
+          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">キーボードテスト</h3>
+          <p class="text-base text-gray-700 mb-4">タブレットのキーボード動作を確認</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- ローマ字表記の課題 -->
-      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
-        data-categories="提言,言語教育" data-updated="2025-06-10">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/romanji.png を使用 -->
-          <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">ローマ字表記の課題</h3>
-          <p class="text-base text-gray-700 mb-4">言語教育の改善</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- ローマ字表記の課題 -->
+      <a href="https://medu-web.github.io/Issues-with-Romanized-spelling/" target="_blank" class="content-card"
+        data-categories="提言,言語教育" data-updated="2025-06-10">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 置き換え: assets/icons/romanji.png を使用 -->
+          <img src="assets/icons/romanji.png" alt="ローマ字表記の課題" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">ローマ字表記の課題</h3>
+          <p class="text-base text-gray-700 mb-4">言語教育の改善</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- micro:bit購入プラン -->
-      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
-        data-categories="プログラミング,micro:bit" data-updated="2025-07-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">micro:bit購入プラン</h3>
-          <p class="text-base text-gray-700 mb-4">プログラミング教育</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- micro:bit購入プラン -->
+      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
+        data-categories="プログラミング,micro:bit" data-updated="2025-07-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">micro:bit購入プラン</h3>
+          <p class="text-base text-gray-700 mb-4">プログラミング教育</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- AI教育コンテンツハブ -->
-      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
-        data-categories="AI教育,生成AI" data-updated="2025-08-15">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">AI教育コンテンツハブ</h3>
-          <p class="text-base text-gray-700 mb-4">人工知能との学び</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- AI教育コンテンツハブ -->
+      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
+        data-categories="AI教育,生成AI" data-updated="2025-08-15">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">AI教育コンテンツハブ</h3>
+          <p class="text-base text-gray-700 mb-4">人工知能との学び</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- ビスケット授業計画 -->
-      <a onclick="openBisquitModal()" class="content-card"
-        data-categories="授業計画,プログラミング" data-updated="2025-08-20">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">ビスケット授業計画</h3>
-          <p class="text-base text-gray-700 mb-4">プログラミング入門</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- ビスケット授業計画 -->
+      <a onclick="openBisquitModal()" class="content-card"
+        data-categories="授業計画,プログラミング" data-updated="2025-08-20">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">ビスケット授業計画</h3>
+          <p class="text-base text-gray-700 mb-4">プログラミング入門</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- 百マス計算アプリ -->
-      <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
-        target="_blank" class="content-card"
-        data-categories="算数,百マス" data-updated="2025-09-29">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">百マス計算アプリ</h3>
-          <p class="text-base text-gray-700 mb-4">一桁の足し算・引き算を素早く計算練習</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- 百マス計算アプリ -->
+      <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
+        target="_blank" class="content-card"
+        data-categories="算数,百マス" data-updated="2025-09-29">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">百マス計算アプリ</h3>
+          <p class="text-base text-gray-700 mb-4">一桁の足し算・引き算を素早く計算練習</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- タブレットのお約束 -->
-      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年" data-updated="2025-09-30">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">タブレットのお約束</h3>
-          <p class="text-base text-gray-700 mb-4">はじめてのパソコン　小学校1年生との約束</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- タブレットのお約束 -->
+      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年" data-updated="2025-09-30">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">タブレットのお約束</h3>
+          <p class="text-base text-gray-700 mb-4">はじめてのパソコン　小学校1年生との約束</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- AI Mode On - GIGA Tablets (NEW) -->
-      <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
-         data-categories="提言" data-updated="2025-10-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
-          <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <!-- タイトルを明示的に追加 -->
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Google検索のAIモードについて</h3>
-          <!-- 説明文をより具体的なものに変更 -->
-          <p class="text-base text-gray-700 mb-4">GIGAタブレットでのAI活用に関する提言</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
+      <!-- AI Mode On - GIGA Tablets (NEW) -->
+      <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
+         data-categories="提言" data-updated="2025-10-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
+          <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Google検索のAIモードについて</h3>
+          <!-- 説明文をより具体的なものに変更 -->
+          <p class="text-base text-gray-700 mb-4">GIGAタブレットでのAI活用に関する提言</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-      <!-- 生成AIパスポート (NEW) -->
-      <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
-         data-categories="生成AI,AI教育,提言" data-updated="2025-10-02">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 画像パスをassets/icons/ai_passport.pngからassets/icons/GeneratedAI.pngに変更 -->
-          <img src="assets/icons/GeneratedAI.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <!-- タイトルを明示的に追加 -->
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">生成AIパスポート</h3>
-          <p class="text-base text-gray-700 mb-4">安全かつ効果的に生成AIを使うための利用ガイド</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
-      
-    </div>
+      <!-- 生成AIパスポート (NEW) -->
+      <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
+         data-categories="生成AI,AI教育,提言" data-updated="2025-10-02">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 画像パスをassets/icons/ai_passport.pngからassets/icons/GeneratedAI.pngに変更 -->
+          <img src="assets/icons/GeneratedAI.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">生成AIパスポート</h3>
+          <p class="text-base text-gray-700 mb-4">安全かつ効果的に生成AIを使うための利用ガイド</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
 
-    <div class="mt-12 text-center">
-      <p class="text-gray-600 text-sm">© 2025 ICTコンテンツポータル. All rights reserved.</p>
-    </div>
-  </div>
+      <!-- Google Workspace活用 (NEW) - 追加されたカード -->
+      <a href="https://medu-web.github.io/Google-Workspace-for-Education/" target="_blank" class="content-card" 
+         data-categories="GIGAスクール構想,DX化,ツール" data-updated="2025-10-04">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- 置き換え: assets/icons/google_workspace.png を使用 -->
+          <img src="assets/icons/google_workspace.png" alt="Google Workspace活用" onerror="this.onerror=null;this.src='https://placehold.co/128x128/4285F4/ffffff?text=G+W+S';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Google Workspace活用</h3>
+          <p class="text-base text-gray-700 mb-4">GIGAタブレットでの効果的な活用法</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+      
+      <!-- 生成AIの年齢制限 (NEW) - 追加するカード -->
+      <a href="https://medu-web.github.io/Generative-AI-age-requirements/" target="_blank" class="content-card" 
+         data-categories="生成AI,提言" data-updated="2025-10-06">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- プレースホルダー画像 (オレンジがかった色で設定) -->
+          <img src="https://placehold.co/128x128/CC5500/ffffff?text=AI+Age" alt="生成AIの年齢制限" onerror="this.onerror=null;this.src='https://placehold.co/128x128/CC5500/ffffff?text=AI+Age';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">生成AIの年齢制限</h3>
+          <p class="text-base text-gray-700 mb-4">安全な生成AI利用のための年齢制限に関する考察</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+      
+    </div>
 
-  <!-- ビスケット授業計画用のモーダル -->
-  <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen p-4">
-      <div class="glass-effect rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center p-6 border-b border-white/20">
-          <h2 class="text-2xl font-bold text-gray-800">ビスケット授業計画ガイド</h2>
-          <button onclick="closeBisquitModal()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
-        </div>
-        <div class="p-6 text-gray-800">
-          <div class="text-center mb-8">
-            <h3 class="text-3xl font-bold text-pink-600 mb-4">🎨 プログラミングの魔法を体験！</h3>
-            <p class="text-lg">小学2年生がビスケットを使ってプログラミングの基礎から創造的な表現まで、段階的に楽しく学べる授業計画です。</p>
-            <p class="text-sm text-gray-600 mt-4">※このデモでは、セキュリティ上の制限により「新しい授業アイデアの生成」と「授業計画の読み上げ」機能は動作しません。</p>
-            <div class="flex flex-wrap justify-center gap-4 mt-6">
-                <button disabled class="action-button bg-gray-400 cursor-not-allowed">✨ 新しい授業アイデアを生成 (デモ)</button>
-                <button disabled class="action-button bg-gray-400 cursor-not-allowed">🔊 授業計画を読み上げる (デモ)</button>
-            </div>
-          </div>
-          <div id="bisquitContent">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-              <div class="bg-red-500/10 rounded-xl p-6 border border-red-300/30">
-                <h4 class="text-xl font-bold text-red-600 mb-3">ステップ1：10分授業</h4>
-                <div class="text-4xl mb-3">🎯</div>
-                <p class="mb-3"><strong>「動いた！」体験</strong></p>
-                <ul class="text-sm space-y-1 text-gray-700">
-                  <li>• 絵を描く（3分）</li>
-                  <li>• ルールを作る（4分）</li>
-                  <li>• 動かして感動（2分）</li>
-                  <li>• まとめ（1分）</li>
-                </ul>
-              </div>
-              <div class="bg-yellow-500/10 rounded-xl p-6 border border-yellow-300/30">
-                <h4 class="text-xl font-bold text-yellow-600 mb-3">ステップ2：20分授業</h4>
-                <div class="text-4xl mb-3">🧠</div>
-                <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
-                <ul class="text-sm space-y-1 text-gray-700">
-                  <li>• 条件分岐の概念</li>
-                  <li>• キャラクター同士の相互作用</li>
-                  <li>• 論理的思考の第一歩</li>
-                  <li>• インタラクティブな作品作り</li>
-                </ul>
-              </div>
-              <div class="bg-green-500/10 rounded-xl p-6 border border-green-300/30">
-                <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
-                <div class="text-4xl mb-3">💡</div>
-                <p class="mb-3"><strong>創造的表現と発展</strong></p>
-                <ul class="list-disc list-inside text-sm space-y-1 text-gray-700">
-                  <li>• 自由な発想で作品制作</li>
-                  <li>• 発表とフィードバック</li>
-                  <li>• 友達の作品から学ぶ</li>
-                  <li>• プログラミング的思考の深化</li>
-                </ul>
-              </div>
-            </div>
-            <div class="mt-8 text-center">
-              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
-              <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
-                <li>創造力：自分でアイデアを形にする楽しさ</li>
-                <li>論理的思考力：どうすれば動くか考える力</li>
-                <li>問題解決能力：エラーを自分で見つけて直す力</li>
-                <li>表現力：自分の考えをプログラミングで伝える力</li>
-              </ul>
-              <p class="mt-6 text-base text-gray-700">この授業計画を通じて、子供たちはプログラミングを身近なものとして捉え、未来のデジタル社会で活躍するための基礎を築きます。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="mt-12 text-center">
+      <p class="text-gray-600 text-sm">© 2025 ICTコンテンツポータル. All rights reserved.</p>
+      </div>
+  </div>
 
-  <script>
-    // グローバル変数としてソート状態を定義
-    let currentSortDirection = 'desc'; // 'desc' (新しい順) or 'asc' (古い順)
+  <!-- ビスケット授業計画用のモーダル -->
+  <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-effect rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center p-6 border-b border-white/20">
+          <h2 class="text-2xl font-bold text-gray-800">ビスケット授業計画ガイド</h2>
+          <button onclick="closeBisquitModal()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
+        </div>
+        <div class="p-6 text-gray-800">
+          <div class="text-center mb-8">
+            <h3 class="text-3xl font-bold text-pink-600 mb-4">🎨 プログラミングの魔法を体験！</h3>
+            <p class="text-lg">小学2年生がビスケットを使ってプログラミングの基礎から創造的な表現まで、段階的に楽しく学べる授業計画です。</p>
+            <p class="text-sm text-gray-600 mt-4">※このデモでは、セキュリティ上の制限により「新しい授業アイデアの生成」と「授業計画の読み上げ」機能は動作しません。</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <button disabled class="action-button bg-gray-400 cursor-not-allowed">✨ 新しい授業アイデアを生成 (デモ)</button>
+                <button disabled class="action-button bg-gray-400 cursor-not-allowed">🔊 授業計画を読み上げる (デモ)</button>
+            </div>
+          </div>
+          <div id="bisquitContent">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div class="bg-red-500/10 rounded-xl p-6 border border-red-300/30">
+                <h4 class="text-xl font-bold text-red-600 mb-3">ステップ1：10分授業</h4>
+                <div class="text-4xl mb-3">🎯</div>
+                <p class="mb-3"><strong>「動いた！」体験</strong></p>
+                <ul class="text-sm space-y-1 text-gray-700">
+                  <li>• 絵を描く（3分）</li>
+                  <li>• ルールを作る（4分）</li>
+                  <li>• 動かして感動（2分）</li>
+                  <li>• まとめ（1分）</li>
+                </ul>
+              </div>
+              <div class="bg-yellow-500/10 rounded-xl p-6 border border-yellow-300/30">
+                <h4 class="text-xl font-bold text-yellow-600 mb-3">ステップ2：20分授業</h4>
+                <div class="text-4xl mb-3">🧠</div>
+                <p class="mb-3"><strong>「もし〜なら」の論理</strong></p>
+                <ul class="text-sm space-y-1 text-gray-700">
+                  <li>• 条件分岐の概念</li>
+                  <li>• キャラクター同士の相互作用</li>
+                  <li>• 論理的思考の第一歩</li>
+                  <li>• インタラクティブな作品作り</li>
+                </ul>
+              </div>
+              <div class="bg-green-500/10 rounded-xl p-6 border border-green-300/30">
+                <h4 class="text-xl font-bold text-green-600 mb-3">ステップ3：45分授業</h4>
+                <div class="text-4xl mb-3">💡</div>
+                <p class="mb-3"><strong>創造的表現と発展</strong></p>
+                <ul class="list-disc list-inside text-sm space-y-1 text-gray-700">
+                  <li>• 自由な発想で作品制作</li>
+                  <li>• 発表とフィードバック</li>
+                  <li>• 友達の作品から学ぶ</li>
+                  <li>• プログラミング的思考の深化</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-8 text-center">
+              <h4 class="text-2xl font-bold text-blue-600 mb-4">🌟 ビスケットで育む力</h4>
+              <ul class="list-disc list-inside text-lg space-y-2 max-w-2xl mx-auto text-gray-700">
+                <li>創造力：自分でアイデアを形にする楽しさ</li>
+                <li>論理的思考力：どうすれば動くか考える力</li>
+                <li>問題解決能力：エラーを自分で見つけて直す力</li>
+                <li>表現力：自分の考えをプログラミングで伝える力</li>
+              </ul>
+              <p class="mt-6 text-base text-gray-700">この授業計画を通じて、子供たちはプログラミングを身近なものとして捉え、未来のデジタル社会で活躍するための基礎を築きます。</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // 画像生成APIを呼び出す関数
-      async function generateImage() {
-        // 画像はローカルパス assets/icons/promise.png から取得するため、画像生成は不要になりました。
-        const imageElement = document.getElementById('image-promise');
-        if (imageElement) {
-            imageElement.classList.remove('hidden');
-        }
-      }
+  <script>
+    // グローバル変数としてソート状態を定義
+    let currentSortDirection = 'desc'; // 'desc' (新しい順) or 'asc' (古い順)
 
-      // ページ読み込み完了後に画像生成を開始
-      window.onload = function() {
-        // ローカル画像を使用するため、ダミーの関数呼び出し
-        generateImage();
-      }
-    });
+    document.addEventListener('DOMContentLoaded', () => {
+      // 画像生成APIを呼び出す関数
+      async function generateImage() {
+        // 画像はローカルパス assets/icons/promise.png から取得するため、画像生成は不要になりました。
+        const imageElement = document.getElementById('image-promise');
+        if (imageElement) {
+            imageElement.classList.remove('hidden');
+        }
+      }
 
-    function openBisquitModal() {
-      document.getElementById('bisquitModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
+      // ページ読み込み完了後に画像生成を開始
+      window.onload = function() {
+        // ローカル画像を使用するため、ダミーの関数呼び出し
+        generateImage();
+      }
+    });
 
-    function closeBisquitModal() {
-      document.getElementById('bisquitModal').classList.add('hidden');
-      document.body.style.overflow = '';
-    }
+    function openBisquitModal() {
+      document.getElementById('bisquitModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
 
-    /**
-     * 現在のカテゴリフィルターを適用します。
-     * @param {string} category - フィルタリングするカテゴリ ('all'を含む)
-     */
-    function filterContent(category) {
-      const contentGrid = document.getElementById('content-grid');
-      const contentItems = contentGrid.querySelectorAll('.content-card');
-      const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
+    function closeBisquitModal() {
+      document.getElementById('bisquitModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
 
-      // フィルターボタンのアクティブ状態を更新
-      filterButtons.forEach(button => {
-        button.classList.remove('active');
-        if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
-          button.classList.add('active');
-        }
-      });
-      
-      // コンテンツの表示/非表示を切り替え
-      contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
-        if (category === 'all' || categories.includes(category)) {
-          item.style.display = 'flex';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
+    /**
+     * 現在のカテゴリフィルターを適用します。
+     * @param {string} category - フィルタリングするカテゴリ ('all'を含む)
+     */
+    function filterContent(category) {
+      const contentGrid = document.getElementById('content-grid');
+      const contentItems = contentGrid.querySelectorAll('.content-card');
+      const filterButtons = document.querySelectorAll('#filter-buttons .filter-button');
 
-    /**
-     * 現在のソート方向に基づいて、コンテンツカードを並べ替えます。
-     * @param {string} direction - 'asc' (古い順) または 'desc' (新しい順)
-     */
-    function sortContent(direction) {
-        const contentGrid = document.getElementById('content-grid');
-        const contentItems = Array.from(contentGrid.querySelectorAll('.content-card'));
+      // フィルターボタンのアクティブ状態を更新
+      filterButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
+          button.classList.add('active');
+        }
+      });
+      
+      // コンテンツの表示/非表示を切り替え
+      contentItems.forEach(item => {
+        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
+        if (category === 'all' || categories.some(c => c === category)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
 
-        contentItems.sort((a, b) => {
-            // data-updated 属性 (YYYY-MM-DD形式) をDateオブジェクトに変換
-            const dateA = a.dataset.updated ? new Date(a.dataset.updated) : new Date(0);
-            const dateB = b.dataset.updated ? new Date(b.dataset.updated) : new Date(0);
+    /**
+     * 現在のソート方向に基づいて、コンテンツカードを並べ替えます。
+     * @param {string} direction - 'asc' (古い順) または 'desc' (新しい順)
+     */
+    function sortContent(direction) {
+        const contentGrid = document.getElementById('content-grid');
+        const contentItems = Array.from(contentGrid.querySelectorAll('.content-card'));
 
-            if (direction === 'asc') {
-                return dateA - dateB; // 古い順 (昇順)
-            } else {
-                return dateB - dateA; // 新しい順 (降順)
-            }
-        });
+        contentItems.sort((a, b) => {
+            // data-updated 属性 (YYYY-MM-DD形式) をDateオブジェクトに変換
+            const dateA = a.dataset.updated ? new Date(a.dataset.updated) : new Date(0);
+            const dateB = b.dataset.updated ? new Date(b.dataset.updated) : new Date(0);
 
-        // DOM要素をソートされた順序で再配置
-        contentItems.forEach(item => {
-            contentGrid.appendChild(item);
-        });
-    }
+            if (direction === 'asc') {
+                return dateA - dateB; // 古い順 (昇順)
+            } else {
+                return dateB - dateA; // 新しい順 (降順)
+            }
+        });
 
-    /**
-     * ソート方向を切り替え、ボタンのテキストを更新し、ソートを実行します。
-     */
-    function toggleSortDirection() {
-        const sortButton = document.getElementById('sort-date-button');
-        
-        if (currentSortDirection === 'desc') {
-            currentSortDirection = 'asc';
-            sortButton.textContent = '📅 更新順 (古い順)';
-            sortContent('asc');
-        } else {
-            currentSortDirection = 'desc';
-            sortButton.textContent = '📅 更新順 (新しい順)';
-            sortContent('desc');
-        }
-        
-        // ソート後、現在のフィルターを再適用して表示を更新（表示順序は変わらないが、念のため）
-        const activeFilterButton = document.querySelector('#filter-buttons .filter-button.active');
-        const currentCategory = activeFilterButton ? activeFilterButton.textContent.trim() : 'all';
-        filterContent(currentCategory);
-    }
+        // DOM要素をソートされた順序で再配置
+        contentItems.forEach(item => {
+            contentGrid.appendChild(item);
+        });
+    }
+
+    /**
+     * ソート方向を切り替え、ボタンのテキストを更新し、ソートを実行します。
+     */
+    function toggleSortDirection() {
+        const sortButton = document.getElementById('sort-date-button');
+        
+        if (currentSortDirection === 'desc') {
+            currentSortDirection = 'asc';
+            sortButton.textContent = '📅 更新順 (古い順)';
+            sortContent('asc');
+        } else {
+            currentSortDirection = 'desc';
+            sortButton.textContent = '📅 更新順 (新しい順)';
+            sortContent('desc');
+        }
+        
+        // ソート後、現在のフィルターを再適用して表示を更新（表示順序は変わらないが、念のため）
+        const activeFilterButton = document.querySelector('#filter-buttons .filter-button.active');
+        const currentCategory = activeFilterButton ? activeFilterButton.textContent.trim() : 'all';
+        filterContent(currentCategory);
+    }
 
 
-    function getTagColor(category) {
-      const colors = {
-        'GIGAスクール構想': 'bg-orange-700',
-        '教育改革': 'bg-orange-800',
-        'DX化': 'bg-indigo-700',
-        '特別支援教育': 'bg-fuchsia-700',
-        '生成AI': 'bg-green-700',
-        'AIチャットボット': 'bg-sky-700',
-        '提言': 'bg-purple-700',
-        '動作確認': 'bg-teal-700',
-        'ツール': 'bg-teal-600',
-        '言語教育': 'bg-green-800',
-        'プログラミング': 'bg-yellow-700',
-        'micro:bit': 'bg-amber-700',
-        'AI教育': 'bg-red-700',
-        '授業計画': 'bg-pink-700',
-        '算数': 'bg-cyan-700',
-        '百マス': 'bg-cyan-600',
-        '熊大': 'bg-blue-800',
-        'タブレット': 'bg-red-800',
-        'パソコンをつかうときの約束 小学1年': 'bg-orange-600',
-      };
-      return colors[category] || 'bg-gray-500';
-    }
+    function getTagColor(category) {
+      const colors = {
+        'GIGAスクール構想': 'bg-orange-700',
+        '教育改革': 'bg-orange-800',
+        'DX化': 'bg-indigo-700',
+        '特別支援教育': 'bg-fuchsia-700',
+        '生成AI': 'bg-green-700',
+        'AIチャットボット': 'bg-sky-700',
+        '提言': 'bg-purple-700',
+        '動作確認': 'bg-teal-700',
+        'ツール': 'bg-teal-600',
+        '言語教育': 'bg-green-800',
+        'プログラミング': 'bg-yellow-700',
+        'micro:bit': 'bg-amber-700',
+        'AI教育': 'bg-red-700',
+        '授業計画': 'bg-pink-700',
+        '算数': 'bg-cyan-700',
+        '百マス': 'bg-cyan-600',
+        '熊大': 'bg-blue-800',
+        'タブレット': 'bg-red-800',
+        'パソコンをつかうときの約束 小学1年': 'bg-orange-600',
+      };
+      return colors[category] || 'bg-gray-500';
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const allCategories = new Set();
-      const contentItems = document.querySelectorAll('#content-grid .content-card');
+    document.addEventListener('DOMContentLoaded', () => {
+      const allCategories = new Set();
+      const contentItems = document.querySelectorAll('#content-grid .content-card');
 
-      // タグを動的に生成し、カテゴリを収集
-      contentItems.forEach(item => {
-        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
-        const tagsContainer = item.querySelector('.card-tags');
+      // タグを動的に生成し、カテゴリを収集
+      contentItems.forEach(item => {
+        const categories = item.dataset.categories ? item.dataset.categories.split(',').map(c => c.trim()) : [];
+        const tagsContainer = item.querySelector('.card-tags');
 
-        if (!tagsContainer) return; // tagsContainer が存在しない場合はスキップ
+        if (!tagsContainer) return; // tagsContainer が存在しない場合はスキップ
 
-        tagsContainer.innerHTML = ''; // 既存のタグをクリア
+        tagsContainer.innerHTML = ''; // 既存のタグをクリア
 
-        categories.forEach(cat => {
-          const trimmedCat = cat.trim();
-          allCategories.add(trimmedCat);
+        categories.forEach(cat => {
+          const trimmedCat = cat.trim();
+          allCategories.add(trimmedCat);
 
-          const tagSpan = document.createElement('span');
-          tagSpan.textContent = trimmedCat;
-          tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
-          tagSpan.onclick = (e) => {
-            // 親要素のリンクへのイベント伝播とデフォルトの動作を停止
-            e.stopPropagation();
-            e.preventDefault(); 
-            filterContent(trimmedCat);
-          };
-          tagsContainer.appendChild(tagSpan);
-        });
-      });
+          const tagSpan = document.createElement('span');
+          tagSpan.textContent = trimmedCat;
+          tagSpan.classList.add('tag-item', getTagColor(trimmedCat));
+          tagSpan.onclick = (e) => {
+            // 親要素のリンクへのイベント伝播とデフォルトの動作を停止
+            e.stopPropagation();
+            e.preventDefault(); 
+            filterContent(trimmedCat);
+          };
+          tagsContainer.appendChild(tagSpan);
+        });
+      });
 
-      const filterButtonsContainer = document.getElementById('filter-buttons');
-      // フィルターボタンを動的に生成 (既存の「すべて表示」ボタンの後に挿入)
-      const existingButtons = Array.from(filterButtonsContainer.querySelectorAll('.filter-button'));
-      
-      allCategories.forEach(category => {
-        // すでにボタンが存在しないか確認
-        if (!existingButtons.some(button => button.textContent.trim() === category)) {
-          const button = document.createElement('button');
-          button.textContent = category;
-          button.classList.add('filter-button');
-          button.onclick = () => filterContent(category);
-          filterButtonsContainer.appendChild(button);
-        }
-      });
+      const filterButtonsContainer = document.getElementById('filter-buttons');
+      // フィルターボタンを動的に生成 (既存の「すべて表示」ボタンの後に挿入)
+      const existingButtons = Array.from(filterButtonsContainer.querySelectorAll('.filter-button'));
+      
+      allCategories.forEach(category => {
+        // すでにボタンが存在しないか確認
+        if (!existingButtons.some(button => button.textContent.trim() === category)) {
+          const button = document.createElement('button');
+          button.textContent = category;
+          button.classList.add('filter-button');
+          button.onclick = () => filterContent(category);
+          filterButtonsContainer.appendChild(button);
+        }
+      });
 
-      // 初回表示時に、新しい順でソートを実行し、すべて表示を適用
-      sortContent(currentSortDirection);
-      filterContent('all');
-    });
-  </script>
+      // 初回表示時に、新しい順でソートを実行し、すべて表示を適用
+      sortContent(currentSortDirection);
+      filterContent('all');
+    });
+  </script>
 
-  <!-- カード内のコンテンツを .card-inner で自動ラップするためのスクリプト -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.content-card').forEach(card => {
-        // 既に .card-inner が存在する場合は処理しない
-        if (card.querySelector('.card-inner')) return;
-        const children = Array.from(card.children);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'card-inner';
-        children.forEach((child, index) => {
-          // 0番目の要素が画像コンテナの場合は残す
-          if (index === 0 && child.classList.contains('card-image-container')) return;
-          wrapper.appendChild(child);
-        });
-        card.appendChild(wrapper);
-      });
-    });
-  </script>
+  <!-- カード内のコンテンツを .card-inner で自動ラップするためのスクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.content-card').forEach(card => {
+        // 既に .card-inner が存在する場合は処理しない
+        if (card.querySelector('.card-inner')) return;
+        const children = Array.from(card.children);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card-inner';
+        children.forEach((child, index) => {
+          // 0番目の要素が画像コンテナの場合は残す
+          if (index === 0 && child.classList.contains('card-image-container')) return;
+          wrapper.appendChild(child);
+        });
+        card.appendChild(wrapper);
+      });
+    });
+  </script>
 </body>
 </html>
