@@ -29,54 +29,72 @@
       box-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 0 0 30px rgba(74, 222, 128, 0.4);
     }
 
-    #appsModal, #bisquitModal {
+    /* モーダル背景 */
+    #appsModal, #bisquitModal, #typingModal {
       background-color: rgba(0, 0, 0, 0.5);
     }
 
+    /* モーダルコンテンツのスタイル */
     #appsModal .glass-effect,
-    #bisquitModal .glass-effect {
-      background-color: rgba(255, 255, 255, 0.9);
+    #bisquitModal .glass-effect,
+    #typingModal .glass-effect {
+      background-color: rgba(255, 255, 255, 0.95); /* より白くして見やすく */
       border: 1px solid rgba(0, 0, 0, 0.15);
       color: #2d3748;
     }
     
     #appsModal .glass-effect h2,
     #bisquitModal .glass-effect h2,
+    #typingModal .glass-effect h2,
     #bisquitModal .glass-effect h3,
+    #typingModal .glass-effect h3,
     #bisquitModal .glass-effect h4,
+    #typingModal .glass-effect h4,
     #appsModal .glass-effect p,
     #bisquitModal .glass-effect p,
+    #typingModal .glass-effect p,
     #bisquitModal .glass-effect ul,
-    #bisquitModal .glass-effect li {
+    #typingModal .glass-effect ul,
+    #bisquitModal .glass-effect li,
+    #typingModal .glass-effect li {
       color: #2d3748;
     }
     
-    #appsModal .glass-effect .text-white\/20 {
+    #appsModal .glass-effect .text-white\/20,
+    #bisquitModal .glass-effect .text-white\/20,
+    #typingModal .glass-effect .text-white\/20 {
       border-color: rgba(0, 0, 0, 0.1) !important;
     }
 
     #appsModal .glass-effect button,
-    #bisquitModal .glass-effect button {
+    #bisquitModal .glass-effect button,
+    #typingModal .glass-effect button {
       color: #4a5568 !important;
     }
 
     #appsModal .glass-effect button:hover,
-    #bisquitModal .glass-effect button:hover {
+    #bisquitModal .glass-effect button:hover,
+    #typingModal .glass-effect button:hover {
       color: #e53e3e !important;
     }
 
+    /* モーダル内のリンクカード */
     #appsModal .glass-effect a.block,
-    #appsModal .glass-effect div.block {
+    #bisquitModal .glass-effect div.block,
+    #typingModal .glass-effect a.typing-link {
       background-color: #edf2f7;
       color: #2d3748;
       border: 1px solid rgba(0, 0, 0, 0.05);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.2s, box-shadow 0.2s;
     }
 
     #appsModal .glass-effect a.block:hover,
-    #appsModal .glass-effect div.block:hover {
+    #bisquitModal .glass-effect div.block:hover,
+    #typingModal .glass-effect a.typing-link:hover {
       background-color: #e2e8f0;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
     }
 
     .filter-button {
@@ -240,7 +258,24 @@
     <!-- リンクのグリッド -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="content-grid">
       
-      <!-- 生成AIの年齢制限 (NEWLY ADDED) -->
+      <!-- タイピング！ (NEWLY ADDED EXPANDABLE CARD) -->
+      <a onclick="openTypingModal()" class="content-card"
+         data-categories="タイピング,ツール,学習" data-updated="2025-10-05">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- タイピングアイコンのプレースホルダー -->
+          <img src="https://placehold.co/128x128/6B46C1/ffffff?text=Type" alt="タイピング！" onerror="this.onerror=null;this.src='https://placehold.co/128x128/6B46C1/ffffff?text=Type';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">タイピング！</h3>
+          <!-- 説明文をより具体的なものに変更 -->
+          <p class="text-base text-gray-700 mb-4">おすすめタイピングサイトを一括紹介</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+
+      <!-- 生成AIの年齢制限 -->
       <a href="https://medu-web.github.io/Generative-AI-age-requirements/" target="_blank" class="content-card" 
          data-categories="生成AI,提言,AI教育" data-updated="2025-10-04">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
@@ -257,7 +292,7 @@
         <div class="card-tags"></div>
       </a>
       
-      <!-- プログラミングポータル (NEW) -->
+      <!-- プログラミングポータル -->
       <a href="https://medu-web.github.io/Programming_Portal/" target="_blank" class="content-card" 
          data-categories="プログラミング,教育改革" data-updated="2025-10-03">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
@@ -274,70 +309,101 @@
         <div class="card-tags"></div>
       </a>
 
-      <!-- StudXStyle by MEXT -->
-      <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
-        data-categories="GIGAスクール構想,教育改革" data-updated="2025-01-01">
+      <!-- 生成AIパスポート -->
+      <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
+         data-categories="生成AI,AI教育,提言" data-updated="2025-10-02">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
+          <!-- 画像パスをassets/icons/GeneratedAI.pngに変更 -->
+          <img src="assets/icons/GeneratedAI.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">StudXStyle by MEXT</h3>
-          <p class="text-base text-gray-700 mb-4">文科省の情報発信サイト</p>
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">生成AIパスポート</h3>
+          <p class="text-base text-gray-700 mb-4">安全かつ効果的に生成AIを使うための利用ガイド</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+      
+      <!-- AI Mode On - GIGA Tablets -->
+      <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
+         data-categories="提言" data-updated="2025-10-01">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
+          <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <!-- タイトルを明示的に追加 -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Google検索のAIモードについて</h3>
+          <!-- 説明文をより具体的なものに変更 -->
+          <p class="text-base text-gray-700 mb-4">GIGAタブレットでのAI活用に関する提言</p>
+        </div>
+        <div class="card-tags"></div>
+      </a>
+      
+      <!-- タブレットのお約束 -->
+      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年" data-updated="2025-09-30">
+        <div class="card-image-container w-32 h-32 flex items-center justify-center">
+          <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
+          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+        </div>
+        <div class="p-5 flex flex-col items-center">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">タブレットのお約束</h3>
+          <p class="text-base text-gray-700 mb-4">はじめてのパソコン　小学校1年生との約束</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- 学校DX化でわくわくをサポート -->
-      <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
-        data-categories="DX化,特別支援教育" data-updated="2025-03-25">
+      <!-- 百マス計算アプリ -->
+      <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
+        target="_blank" class="content-card"
+        data-categories="算数,百マス" data-updated="2025-09-29">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
-          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
+          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">学校DX化でわくわくをサポート</h3>
-          <p class="text-base text-gray-700 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">百マス計算アプリ</h3>
+          <p class="text-base text-gray-700 mb-4">一桁の足し算・引き算を素早く計算練習</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- ICTインフォグラフィック（教育ICT環境改革） -->
-      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
-        data-categories="教育改革,提言" data-updated="2025-04-10">
+      <!-- ビスケット授業計画 -->
+      <a onclick="openBisquitModal()" class="content-card"
+        data-categories="授業計画,プログラミング" data-updated="2025-08-20">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
-          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
+          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">ICTインフォグラフィック</h3>
-          <p class="text-base text-gray-700 mb-4">未来の教育提案</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">ビスケット授業計画</h3>
+          <p class="text-base text-gray-700 mb-4">プログラミング入門</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- タブレット動作チェックツール タッチパネルテスト -->
-      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール" data-updated="2025-05-01">
+      <!-- AI教育コンテンツハブ -->
+      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
+        data-categories="AI教育,生成AI" data-updated="2025-08-15">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
+          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">タッチパネルテスト</h3>
-          <p class="text-base text-gray-700 mb-4">タブレットのタッチ動作を確認</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">AI教育コンテンツハブ</h3>
+          <p class="text-base text-gray-700 mb-4">人工知能との学び</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- タブレット動作チェックツール キーボードテスト -->
-      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
-        data-categories="動作確認,ツール" data-updated="2025-05-01">
+      <!-- micro:bit購入プラン -->
+      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
+        data-categories="プログラミング,micro:bit" data-updated="2025-07-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 置き換え: assets/icons/keyboard.png を使用 -->
-          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
+          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">キーボードテスト</h3>
-          <p class="text-base text-gray-700 mb-4">タブレットのキーボード動作を確認</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">micro:bit購入プラン</h3>
+          <p class="text-base text-gray-700 mb-4">プログラミング教育</p>
         </div>
         <div class="card-tags"></div>
       </a>
@@ -356,102 +422,70 @@
         <div class="card-tags"></div>
       </a>
 
-      <!-- micro:bit購入プラン -->
-      <a href="https://medu-web.github.io/microbit/microbit.html" target="_blank" class="content-card"
-        data-categories="プログラミング,micro:bit" data-updated="2025-07-01">
+      <!-- タブレット動作チェックツール キーボードテスト -->
+      <a href="https://www.onlinemictest.com/ja/keyboard-test/" target="_blank" class="content-card"
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/microbit.png" alt="micro:bit" class="w-full h-full object-contain">
+          <!-- 置き換え: assets/icons/keyboard.png を使用 -->
+          <img src="assets/icons/keyboard.png" alt="キーボードテスト" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">micro:bit購入プラン</h3>
-          <p class="text-base text-gray-700 mb-4">プログラミング教育</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">キーボードテスト</h3>
+          <p class="text-base text-gray-700 mb-4">タブレットのキーボード動作を確認</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- AI教育コンテンツハブ -->
-      <a href="https://medu-web.github.io/AI-Educational-Content-Hub/" target="_blank" class="content-card"
-        data-categories="AI教育,生成AI" data-updated="2025-08-15">
+      <!-- タブレット動作チェックツール タッチパネルテスト -->
+      <a href="https://www.onlinemictest.com/ja/touch-screen-test/" target="_blank" class="content-card"
+        data-categories="動作確認,ツール" data-updated="2025-05-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/aicontents.png" alt="AI" class="w-full h-full object-contain">
+          <img src="assets/icons/touchpanel.png" alt="タッチパネルテスト" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">AI教育コンテンツハブ</h3>
-          <p class="text-base text-gray-700 mb-4">人工知能との学び</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">タッチパネルテスト</h3>
+          <p class="text-base text-gray-700 mb-4">タブレットのタッチ動作を確認</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- ビスケット授業計画 -->
-      <a onclick="openBisquitModal()" class="content-card"
-        data-categories="授業計画,プログラミング" data-updated="2025-08-20">
+      <!-- ICTインフォグラフィック（教育ICT環境改革） -->
+      <a href="https://medu-web.github.io/my-ict-infographic/" target="_blank" class="content-card"
+        data-categories="教育改革,提言" data-updated="2025-04-10">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/viscuit.png" alt="ビスケット授業計画" class="w-full h-full object-contain">
+          <!-- 置き換え: assets/icons/kyouiku-ict.png を使用 -->
+          <img src="assets/icons/kyouiku-ict.png" alt="教育ICT環境改革" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">ビスケット授業計画</h3>
-          <p class="text-base text-gray-700 mb-4">プログラミング入門</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">ICTインフォグラフィック</h3>
+          <p class="text-base text-gray-700 mb-4">未来の教育提案</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- 百マス計算アプリ -->
-      <a href="https://medu-web.github.io/100-grid-calculation-single-digit-addition-and-subtraction/"
-        target="_blank" class="content-card"
-        data-categories="算数,百マス" data-updated="2025-09-29">
+      <!-- 学校DX化でわくわくをサポート -->
+      <a href="https://www.treasure-max.fun/" target="_blank" class="content-card"
+        data-categories="DX化,特別支援教育" data-updated="2025-03-25">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img src="assets/icons/hyakumasu.png" alt="百マス計算" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+          <!-- 置き換え: assets/icons/wakuwaku.png を使用 -->
+          <img src="assets/icons/wakuwaku.png" alt="学校DX化でわくわくをサポート" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">百マス計算アプリ</h3>
-          <p class="text-base text-gray-700 mb-4">一桁の足し算・引き算を素早く計算練習</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">学校DX化でわくわくをサポート</h3>
+          <p class="text-base text-gray-700 mb-4">先生のための授業・教材研究を支援する情報プラットフォーム</p>
         </div>
         <div class="card-tags"></div>
       </a>
 
-      <!-- タブレットのお約束 -->
-      <a href="https://medu-web.github.io/promise/" target="_blank" class="content-card" data-categories="タブレット,パソコンをつかうときの約束 小学1年" data-updated="2025-09-30">
+      <!-- StudXStyle by MEXT -->
+      <a href="https://www.mext.go.jp/studxstyle/" target="_blank" class="content-card"
+        data-categories="GIGAスクール構想,教育改革" data-updated="2025-01-01">
         <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <img id="image-promise" src="assets/icons/promise.png" alt="タブレットのおやくそく" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
+          <img src="assets/icons/studx.png" alt="StuDX Style" class="w-full h-full object-contain">
         </div>
         <div class="p-5 flex flex-col items-center">
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">タブレットのお約束</h3>
-          <p class="text-base text-gray-700 mb-4">はじめてのパソコン　小学校1年生との約束</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
-
-      <!-- AI Mode On - GIGA Tablets (NEW) -->
-      <a href="https://medu-web.github.io/AI-mode-on-GIGA-tablets/" target="_blank" class="content-card" 
-         data-categories="提言" data-updated="2025-10-01">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- リンク先はAI Mode Onなので画像はai_mode.pngを維持 -->
-          <img src="assets/icons/ai_mode.png" alt="Google検索のAIモードについて" onerror="this.onerror=null;this.src='https://placehold.co/128x128/9CA3AF/ffffff?text=AI+Mode';" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <!-- タイトルを明示的に追加 -->
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Google検索のAIモードについて</h3>
-          <!-- 説明文をより具体的なものに変更 -->
-          <p class="text-base text-gray-700 mb-4">GIGAタブレットでのAI活用に関する提言</p>
-        </div>
-        <div class="card-tags"></div>
-      </a>
-
-      <!-- 生成AIパスポート (NEW) -->
-      <a href="https://medu-web.github.io/Generative-AI-Passport/" target="_blank" class="content-card" 
-         data-categories="生成AI,AI教育,提言" data-updated="2025-10-02">
-        <div class="card-image-container w-32 h-32 flex items-center justify-center">
-          <!-- 画像パスをassets/icons/ai_passport.pngからassets/icons/GeneratedAI.pngに変更 -->
-          <img src="assets/icons/GeneratedAI.png" alt="生成AIパスポート" onerror="this.onerror=null;this.src='https://placehold.co/128x128/3B82F6/ffffff?text=AI+Pass';" class="w-full h-full object-contain">
-          <div class="absolute top-2 right-2 bg-red-500 text-xs text-white px-2 py-1 rounded-full shadow-md">NEW</div>
-        </div>
-        <div class="p-5 flex flex-col items-center">
-          <!-- タイトルを明示的に追加 -->
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">生成AIパスポート</h3>
-          <p class="text-base text-gray-700 mb-4">安全かつ効果的に生成AIを使うための利用ガイド</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">StudXStyle by MEXT</h3>
+          <p class="text-base text-gray-700 mb-4">文科省の情報発信サイト</p>
         </div>
         <div class="card-tags"></div>
       </a>
@@ -463,9 +497,10 @@
     </div>
   </div>
 
-  <!-- ビスケット授業計画用のモーダル -->
-  <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto">
+  <!-- ビスケット授業計画用のモーダル (背景クリックで閉じる機能の修正を適用) -->
+  <div id="bisquitModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto" onclick="handleModalClick(event, 'bisquitModal')">
     <div class="flex items-center justify-center min-h-screen p-4">
+      <!-- glass-effectがコンテンツボックス -->
       <div class="glass-effect rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-center p-6 border-b border-white/20">
           <h2 class="text-2xl font-bold text-gray-800">ビスケット授業計画ガイド</h2>
@@ -533,6 +568,77 @@
     </div>
   </div>
 
+  <!-- タイピング！用のモーダル (背景クリックで閉じる機能の修正を適用) -->
+  <div id="typingModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 overflow-y-auto" onclick="handleModalClick(event, 'typingModal')">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <!-- glass-effectがコンテンツボックス -->
+      <div class="glass-effect rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center p-6 border-b border-white/20">
+          <h2 class="text-2xl font-bold text-gray-800">⌨️ タイピングサイト一覧</h2>
+          <button onclick="closeTypingModal()" class="text-gray-600 hover:text-red-500 text-3xl">&times;</button>
+        </div>
+        <div class="p-6 text-gray-800">
+          <p class="text-lg text-center mb-6">目的やレベルに合わせて、最適なタイピング練習サイトを選びましょう。</p>
+          
+          <!-- シンプル・ゲーム性低いセクション -->
+          <h3 class="text-2xl font-bold text-blue-600 mb-4 mt-6 border-b pb-2">【シンプル・ゲーム性は低い】</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <a href="https://seipsg.main.jp/schooltyping/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">スクールタイピング</div>
+              <p class="text-sm text-gray-600">基本的な練習に特化したサイト。</p>
+            </a>
+            
+            <a href="https://n-typing.com/free/course#:~:text=14-,%E2%96%A0%E3%81%93%E3%81%A8%E3%81%B0%EF%BC%92%E6%96%87…" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">ナレッジタイピング （ことば 2文字）</div>
+              <p class="text-sm text-gray-600">短い単語から集中して練習したい時に。</p>
+            </a>
+            
+            <a href="https://typing.playgram.jp/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">プレイグラムタイピング</div>
+              <p class="text-sm text-gray-600">基礎から段階的に学べるシンプルな構成。</p>
+            </a>
+            
+            <a href="https://tomosplus.jp/apps/romhy/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">あかねこローマ字スキル　タイピングチャレンジ</div>
+              <p class="text-sm text-gray-600">ローマ字学習と並行して取り組める。</p>
+            </a>
+            
+            <a href="https://typing.kidai.co.jp/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">文章入力練習（長文）</div>
+              <p class="text-sm text-gray-600">長い文章の入力練習をしたい上級者向け。</p>
+            </a>
+          </div>
+
+          <!-- ゲーム性そこそこセクション -->
+          <h3 class="text-2xl font-bold text-yellow-600 mb-4 mt-8 border-b pb-2">【ゲーム性はそこそこ有り】</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <a href="https://typingland.higopage.com/play/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">タイピングランド</div>
+              <p class="text-sm text-gray-600">かわいいキャラクターと一緒に順番に学べます。継続して学べるのが特徴。</p>
+            </a>
+          </div>
+
+          <!-- ゲーム性高いセクション -->
+          <h3 class="text-2xl font-bold text-red-600 mb-4 mt-8 border-b pb-2">【ゲーム性が高い】</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <a href="https://pokedebi.com/game/momotype/" target="_blank" class="typing-link block p-4 rounded-xl hover:shadow-lg transition duration-200 transform">
+              <div class="font-semibold text-lg text-gray-900">ココアの桃太郎タイピング</div>
+              <p class="text-sm text-gray-600">ゲーム感覚で楽しく、飽きずに練習できます。</p>
+            </a>
+          </div>
+          
+        </div>
+        <div class="p-6 border-t border-white/20 text-center">
+            <button onclick="closeTypingModal()" class="action-button bg-blue-600 hover:bg-blue-700">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <script>
     // グローバル変数としてソート状態を定義
     let currentSortDirection = 'desc'; // 'desc' (新しい順) or 'asc' (古い順)
@@ -553,14 +659,61 @@
         generateImage();
       }
     });
+    
+    /**
+     * モーダルの背景クリックを処理する
+     * クリックされた要素がモーダルのコンテンツボックス (glass-effect) の外側にある場合にのみモーダルを閉じます。
+     * @param {Event} event - クリックイベント
+     * @param {string} modalId - 閉じるべきモーダルのID
+     */
+    function handleModalClick(event, modalId) {
+      const modalElement = document.getElementById(modalId);
+      
+      // モーダルコンテンツボックス (.glass-effect) を取得
+      // この要素とその子孫要素へのクリックは無視します。
+      const contentBox = modalElement.querySelector('.glass-effect');
+      
+      // クリックされた要素 (event.target) がコンテンツボックス自身、またはコンテンツボックスの子孫要素ではない場合、
+      // つまり、背景をクリックした場合にモーダルを閉じます。
+      if (contentBox && !contentBox.contains(event.target)) {
+          if (modalId === 'bisquitModal') {
+            closeBisquitModal();
+          } else if (modalId === 'typingModal') {
+            closeTypingModal();
+          }
+      }
+    }
 
+
+    /**
+     * ビスケット授業計画モーダルを開く
+     */
     function openBisquitModal() {
       document.getElementById('bisquitModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
 
+    /**
+     * ビスケット授業計画モーダルを閉じる
+     */
     function closeBisquitModal() {
       document.getElementById('bisquitModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    /**
+     * タイピングモーダルを開く (NEW)
+     */
+    function openTypingModal() {
+      document.getElementById('typingModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * タイピングモーダルを閉じる (NEW)
+     */
+    function closeTypingModal() {
+      document.getElementById('typingModal').classList.add('hidden');
       document.body.style.overflow = '';
     }
 
@@ -576,6 +729,7 @@
       // フィルターボタンのアクティブ状態を更新
       filterButtons.forEach(button => {
         button.classList.remove('active');
+        // ボタンのテキストとカテゴリが一致するか、または「すべて表示」で category が 'all' の場合にアクティブにする
         if (button.textContent.trim() === category || (category === 'all' && button.textContent.trim() === 'すべて表示')) {
           button.classList.add('active');
         }
@@ -662,6 +816,8 @@
         '熊大': 'bg-blue-800',
         'タブレット': 'bg-red-800',
         'パソコンをつかうときの約束 小学1年': 'bg-orange-600',
+        'タイピング': 'bg-violet-700', // NEW
+        '学習': 'bg-indigo-500' // NEW
       };
       return colors[category] || 'bg-gray-500';
     }
